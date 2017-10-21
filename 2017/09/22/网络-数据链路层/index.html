@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          网络-数据链路层 - 艹! BUGs
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite-url/2017/09/22/网络-数据链路层/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('undefined')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#网络" title="网络">网络</a>
+                            
+                        </div>
+                        <h1>网络-数据链路层</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Young Ken on
+                            2017-09-22
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">艹! BUGs</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="数据链路层">数据链路层</span></h2>
+<p>数据链路层就把信息块从A机器传到B机器，B机器把这个信息块取出来。</p>
+<h3><span id="数据链路层的设计问题">数据链路层的设计问题</span></h3>
+<p>数据要完成了一些功能，包括：</p>
+<ul>
+<li>给上层提供接口</li>
+<li>出来传输错误</li>
+<li>防止接收端被发送方淹没</li>
+</ul>
+<h4><span id="提供给网络的服务">提供给网络的服务</span></h4>
+<p>数据链路层的主要职责是向上层（网络层）提供服务，它提供的服务主要有三种：</p>
+<ul>
+<li>无确认的无连接服务</li>
+</ul>
+<p>这样的服务发送端只管发送数据，不管接收端是否接收到数据。当然了，逻辑链接也不用建立。使用场景**（1）错率非常低的场景（2）语音传输，因为实时比丢失更重要**。</p>
+<ul>
+<li>有确认的无链接服务</li>
+</ul>
+<p>这样的服务比上一个可靠点，这样的服务依旧没有逻辑链接，但是会确认帧是否到达目的地，典型应用WIFI。</p>
+<ul>
+<li>有确认的有链接服务</li>
+</ul>
+<p>发送端和接收端要建立链接，并且为每个帧编号，并且有一个定时器，发送帧的时候，定时器启动，在定时范围内没有收到接收方发回的反馈，发送方认为这个帧丢了，那么从新发送这个帧。</p>
+<h4><span id="成帧">成帧</span></h4>
+<p>什么是成帧，网络层给链路层一坨数据，说把这坨数据发送给XX机器，链路层要把这坨数据拆分成帧，这个过程叫做<strong>成帧</strong>，成帧的关键就找到帧的头和尾巴。</p>
+<p>成帧的方法有几个</p>
+<ul>
+<li>字节计数法</li>
+</ul>
+<p>现在这个方法很少用了。</p>
+<ul>
+<li>字节填充的标志字节</li>
+</ul>
+<p>我们都知道一行的结尾是‘/n’,但是我的为本里就有‘/n’怎办，这时候转义字符就登场了。标志字符同样的原理。</p>
+<p>找个特殊字符当做帧的头和尾巴，比如我们想用FLAG做帧的头和尾巴，当解析帧的时候，看到遇到FLAG就认为是头，再来一个是尾巴，但是我的帧包含了FLAG字符，有个转义字符ESC。</p>
+<p>原来的字符是A FLAG B 加上转义字符就变成 A <strong>ESC</strong> FLAG B。</p>
+<ul>
+<li>比特填充的标志比特</li>
+</ul>
+<p>听上去好上个一样呢，对了，原理相同，上个是字符，这个个是比特。</p>
+<h4><span id="差错控制">差错控制</span></h4>
+<p>这个下面会非常详细的说，也比较好理解，就是怎么确保每个帧都到达发送端采用的策略。</p>
+<h4><span id="流量控制">流量控制</span></h4>
+<p>当发送方是个无比强大的机器，接收方只是个Android手机，这个是尴尬了，Android手机不能处理如此大数据。解决方案通常有两种，一个是<strong>基于反馈流量控制</strong>简单理解就是接收方反馈信息告诉发送方我的状态。第二种：<strong>基于速度的流量控制</strong>也就是直接限制发送发的流量。</p>
+<h3><span id="错误检测和纠正">错误检测和纠正</span></h3>
+<p>虽然现在的光纤错误率比较低，但是无线链路和老的回路错误率还是比较高的。所有进行纠错和纠正还是非常必要的。在网络传输中处理错误通常有两种方式，第一个叫做<strong>纠错码</strong>和<strong>验错码</strong>，这两种方式都是在发送信息上加载一些信息，来达到检查错误的原理。</p>
+<h4><span id="纠错码">纠错码</span></h4>
+<p>纠错码有四种，分别是：</p>
+<ul>
+<li>海明码</li>
+</ul>
+<p>海明码（Hamming Code）是一个可以有多个校验位，具有检测并纠正一位错误代码的纠错码，所以它也仅用于信道特性比较好的环境中，如以太局域网中，因为如果信道特性不好的情况下，出现的错误通常不是一位。</p>
+<p>​    海明码的检错、纠错基本思想是将有效信息按某种规律分成若干组，每组安排一个校验位进行奇偶性测试，然后产生多位检测信息，并从中得出具体的出错位置，最后通过对错误位取反（也是原来是1就变成0，原来是0就变成1）来将其纠正。</p>
+<p>具体看这个博客讲的帧的非常明白</p>
+<ul>
+<li>卷积码</li>
+</ul>
+<p>属于一种纠错码（error-correcting code）。相对于分组码，卷积码维持信道的记忆效应（memory property）。卷积码的由来，是因为输入的原始消息数据会和编码器（encoder）的冲激响应（impulse response）做卷积运算。有兴趣的同学可以找点资料。</p>
+<ul>
+<li>里得所罗门码</li>
+<li>低密度奇偶校验码</li>
+</ul>
+<h4><span id="检错码">检错码</span></h4>
+<p>相比于无线链路来说，光纤很少出错，这样就不需要纠错码，只需要检错就行了。</p>
+<p>检错码包括：</p>
+<ul>
+<li>奇偶</li>
+</ul>
+<p>是检测传输过程中有无错误的一种方式，原理比较简单，就是每7位数，在后面追加一位校验码。</p>
+<p>偶检验方式1011010有偶数个1在末尾加0</p>
+<p>奇检验方式1011010有奇数个1在末尾加1</p>
+<p>优点简单，但是缺点很明显，就是错误检率是0.5。</p>
+<ul>
+<li>检验和</li>
+</ul>
+<p>另一种常见的校验方式是累加和校验。所谓累加和校验实现方式有很多种，最常用的一种是在一次通讯数据包的最后加入一个字节的校验数据。这个字节内容为前面数据包中全部数据的忽略进位的按字节累加和。比如下面的例子：</p>
+<p>我们要传输的信息为： 6、23、4</p>
+<p>加上校验和后的数据包：6、23、4、33</p>
+<ul>
+<li>循环冗余校验</li>
+</ul>
+<p>简单总结一下，当物理层不是很稳定，错误率很高的情况下，用纠错码，这样如果数据错误，有可能被恢复，但是缺点比较明显，传输的数据变多了，需要大量运算才能完成纠错。物理层比较稳定就可以用检错码，数据错了从新传就可以了，因为错误率低，没有多传输很多帧。</p>
+<h3><span id="基本数据链路层协议">基本数据链路层协议</span></h3>
+<p>重点来了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#defaylt MAX_PKT 1024</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> seq_nr; <span class="comment">//帧的编号</span></div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span><span class="keyword">unsigned</span> <span class="keyword">char</span> data[MAX_PKT];&#125; packet;<span class="comment">// 帧的实际数据</span></div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></div><div class="line">  frame_kind kind; </div><div class="line">  seq_nr seq;<span class="comment">//序号</span></div><div class="line">  seq_nr ack;<span class="comment">//确认</span></div><div class="line">  packet info;</div><div class="line">&#125; frame; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">wait_for_event</span><span class="params">(event_type *e)</span></span>; <span class="comment">//等待事件发生</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">to_network_layer</span><span class="params">(packet *p)</span></span>;<span class="comment">//从网络接收包</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">from_network_layer</span><span class="params">(packet *p)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">to_physicak_layer</span><span class="params">(frame *f)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">from_physicak_layer</span><span class="params">(frame *f)</span></span>;<span class="comment">//从物理层得到数据</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">stop_timer</span><span class="params">(seq_nr k)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">start_timer</span><span class="params">(seq_nr k)</span></span>;</div></pre></td></tr></table></figure>
+<p>一个网络协议的基本信息头,这个文件是protocol.h</p>
+<h4><span id="乌托邦试的单工协议">乌托邦试的单工协议</span></h4>
+<p>来个最简单的协议，不考虑任何情况，只把数据从发送端发到接收端，接收端进行接收。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;frame_arrival&#125; event_type;</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"protocol.h"</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">sender</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">  frame s;</div><div class="line">  packet buffer;</div><div class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">    from_network_layer(&amp;buffer);</div><div class="line">    s.info = buffer;</div><div class="line">    to_physicak_layer(&amp;s);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">receiver</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">  frame r;</div><div class="line">  event_type event;</div><div class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">    wait_for_event(&amp;event);</div><div class="line">    from_physicak_layer(&amp;r);</div><div class="line">    to_network_layer(&amp;r.info);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>发送方运行在源机器上，接收端运行在目标机器上。</p>
+<h4><span id="无错信道上的单工停-等式协议">无错信道上的单工停-等式协议</span></h4>
+<p>现在假设接收方被发送方淹没，上面已经提到了，这总情况有两个解决方案，我们采用第二种。也就接收方不断和发送方进行信息同步。具体就是当接收方接收到一个帧之后，会给发送方发送一个哑帧，告诉发送方可以继续发送数据了。</p>
+<p>发送方发送一帧，等待对方确认后再发送，这样的协议叫做<strong>停-等式协议</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;frame_arrival&#125; event_type;</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"protocol.h"</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">sender</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">  frame s;</div><div class="line">  packet buffer;</div><div class="line">  event_type event;</div><div class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">    from_network_layer(&amp;buffer);</div><div class="line">    s.info = buffer;</div><div class="line">    to_physicak_layer(&amp;s);</div><div class="line">    wait_for_event(&amp;event);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">receiver</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">  frame r,s;</div><div class="line">  event_type event;</div><div class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">    wait_for_event(&amp;event);</div><div class="line">    from_physicak_layer(&amp;r);</div><div class="line">    to_network_layer(&amp;r.info);</div><div class="line">    to_physicak_layer(&amp;s);<span class="comment">//**接收完数据发送一个哑帧**。</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4><span id="有错信道上的单工停-等式协议">有错信道上的单工停-等式协议</span></h4>
+<p>上面都不是常规情况，常规情况是通讯信道出错，也就是帧损坏或者丢失。</p>
+<p>想一下这个也好解决，在发送端启动一个定时器，如果在超时时间内没有接到确认帧（在接收方接收到帧，会给发送方发送一个帧，告诉发送方我接收这个帧了，这个帧叫做<strong>确认帧</strong>）。那么发送发补发这个帧，直到发送方接收到确认帧为止。</p>
+<p>这个情况看着好像问题都解决了，但是我们忽略了一个重要的点，确认帧和其他的帧都是一样的，也会丢的，如确认帧丢了会怎么样，发送端定时器超时，补发这个帧，实际情况这个帧已将被接收方接收了，这个帧就被从复发送了，这次网络传输失败了。</p>
+<p>其实也有解决方案，每个帧加一个序号，这个序号是2取模（1或者0），当接收方接收到时0的时候，期待下一个帧是1，如这个时候确认帧丢失，发送方超时，从新发送0，接收方发现这个帧已将存在，从新发送确认帧，期待下一个帧是1，不断从复知道成功能。</p>
+<p>在这个协议中，发送方在前移到下一个数据之前必须等待一个确认，这样的协议叫做<strong>自动重复请求</strong>（ARQ）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span>&#123;frame_arrival, cksun_err, timeout&#125; event_type;</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"protocol.h"</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">sender</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">  seq_nr next_frame_to_send;</div><div class="line">  farme s;</div><div class="line">  packet buffer;</div><div class="line">  event_type event;</div><div class="line">  next_frame_to_send = <span class="number">0</span>;</div><div class="line">  from_network_layer(&amp;buffer);<span class="comment">//从网络层接收数据</span></div><div class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">    s.info = buffer;</div><div class="line">    s.seq = next_frame_to_send;</div><div class="line">    to_physicak_layer(&amp;s);</div><div class="line">    start_time(s.seq);</div><div class="line">    wait_for_event(&amp;event);</div><div class="line">    <span class="keyword">if</span>(event==frame_arrival) &#123;</div><div class="line">      from_physicak_layer(&amp;s);</div><div class="line">      <span class="keyword">if</span>(s.ack == next_frame_to_send) &#123;</div><div class="line">        stop_time(s.act);</div><div class="line">        from_network_layer(&amp;buffer);</div><div class="line">        inc(next_frame_to_send);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">receiver</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">  seq_nr frame_expected;</div><div class="line">  frame r,s;</div><div class="line">  event_type event;</div><div class="line">  frame_expected = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">    wait_for_event(&amp;event);</div><div class="line">    <span class="keyword">if</span>(event == frame_arrival) &#123;</div><div class="line">      from_physical_layer(&amp;r);</div><div class="line">      <span class="keyword">if</span>(s.seq == frame_expected) &#123;</div><div class="line">        to_network_layout(&amp;r.info);</div><div class="line">        inc(frame_expected);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><span id="滑动窗口协议">滑动窗口协议</span></h3>
+<p>前面的协议，A机器给B机器发送一个帧，B机器给A机器发送确认帧，这样B机器有点浪费了，其实B机器也可以给A机器发送数据的，如果这样，那么确认帧是不是可以搭数据帧的便车（在数据帧的头部多一个字段，发送成功帧的帧号），答案是可以的，这样暂时延缓确认已便将确认信息搭载在下一个出境数据帧的技术叫做<strong>捎带确认</strong>。那么问题来了，如果确认帧只是搭出境帧的便车，A机器很可能就会超时，从新发送数据。这是时候就需要策略了。如果确认帧发现在一定时间内还没有便车，那么就要自己出发了，防止A机器超时。</p>
+<p>无论什么协议都要保证网络断发送的数据要从A机器完整的无错的到达B机器。</p>
+<p>滑动窗口的本质就是任何发送方和接收方都维护了一组序号，分别表示允许对应发送和接收的帧。</p>
+<h4><span id="1位滑动窗口的协议">1位滑动窗口的协议</span></h4>
+<p>当滑动窗口是1的时候，滑动窗口退化成了停-等协议。但是停-等协议中我们强行规定，接收端只能接收数据，并且只能发送确认帧，如果这个限制去掉，那么A可以给B发送，B也可以给A发送。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span>&#123;frame_arrival, cksun_err, timeout&#125; event_type;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">protocol</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">  seq_nr next_frame_to_send;</div><div class="line">  seq_nr frame_expected;</div><div class="line">  frame r, s;</div><div class="line">  packet buffer;</div><div class="line">  event_type event;</div><div class="line">  next_frame_to_send = <span class="number">0</span>;</div><div class="line">  frame_expected = <span class="number">0</span>;</div><div class="line">  from_network_layer(&amp;buffer);<span class="comment">//从网络层得到数据</span></div><div class="line">  s.info = buffer;</div><div class="line">  s.seq = next_frame_to_send;</div><div class="line">  s.ack = <span class="number">1</span> - frame_expected;</div><div class="line">  to_physical_layer(&amp;s);<span class="comment">//发送数据给物理层</span></div><div class="line">  start_timer(s.seq);</div><div class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">    wait_for_event(&amp;event);<span class="comment">//等待错误超时等</span></div><div class="line">    <span class="keyword">if</span>(event == frame_arrival) &#123;<span class="comment">//一个帧没有受损</span></div><div class="line">      from_physical_layer(&amp;r);<span class="comment">//从物理层读取数据</span></div><div class="line">      <span class="keyword">if</span>(s.seq == frame_expected) &#123;</div><div class="line">        to_network_layer(&amp;r.info);<span class="comment">//把数据给网络</span></div><div class="line">        inc(frame_expected);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span>(r.ack == next_frame_to_send) &#123;</div><div class="line">        stop_time(r.ack);</div><div class="line">        from_network_layer(&amp;buffer);</div><div class="line">        inc(next_frame_to_send);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    s.info = buffer;</div><div class="line">    s.seq = next_frame_to_send;</div><div class="line">    s.ack = <span class="number">1</span> - frame_expected;</div><div class="line">    to_physical_layer(&amp;s);</div><div class="line">    start_timer(s.seq);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4><span id="回退n协议">回退N协议</span></h4>
+<p>之前的模型是比较理想的，我们完全没有考虑网络延时的情况，也就是发送的数据很短的时间就能到达接收方，接收方很快就能返回确认帧。真实的情况是网络之间传输数据是有延时的。如果我们每次只发一帧(这帧的数据等于带宽)，那么整个网络的利用率是0.5，那么怎么样才能提高利用率呢，连续发送多个帧。</p>
+<p>这样连续发送多个包的技术叫做<strong>管道化</strong>。</p>
+<p>同时发送多个帧就设计到丢帧等情况，如果接收窗口大小为1。我要发送0-7个帧，当接收到3号帧的时候，发现2号帧还没有来，那么对不起，2-7帧都需要从新传。这个方式叫做<strong>回退N</strong>（go back N）。</p>
+<p>当接收窗口很大的时候，我要发送0-7帧，当接收到3号帧的时候，没号2帧丢失，那么接收方继续接收其他帧，针对2号帧发一个<strong>否定确认</strong>(接收方发现错误，要求发送方从新传)。如果否认确定丢失，方式方超时，从新补发2号帧。这样的方式叫做<strong>选择重传</strong>。</p>
+<h4><span id="选择重传协议">选择重传协议</span></h4>
+<p>发送方的窗口大小从0到最大值，接收端的窗口大小是一个固定值，如果帧在between中就接收这个帧。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_SEQ 7</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NR_BUFS ((MAX_SEQ + 1) / 2)</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;frame_arrival, cksum_err, timeout, network_layer_ready, ack_timeout&#125; event_type;</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"protocol.h"</span></span></div><div class="line"></div><div class="line"><span class="keyword">bool</span> no_nak = <span class="literal">true</span>;</div><div class="line">seq_nr oldest_frame = MAX_SEQ + <span class="number">1</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">bool</span> <span class="title">between</span><span class="params">(seq_nr a, seq_nr b, seq_nr c)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> (((a &lt;= b) &amp;&amp; (b &lt; c)) || ((c &lt; a) &amp;&amp; (a &lt;= b)) || ((b &lt; c) &amp;&amp; (c &lt; a)));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">send_frame</span><span class="params">(frame_kind fk, seq_nr frame_nr, seq_nr frame_expected, packet buffer[])</span></span>&#123;</div><div class="line">    frame s;</div><div class="line">    s.kind = fk;</div><div class="line">    <span class="keyword">if</span>(fk == data) s.info = buffer[frame_nr % NR_BUFS];</div><div class="line">    s.seq = frame_nr;</div><div class="line">    s.ack = (frame_expected + MAX_SEQ) % (MAX_SEQ + <span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span>(fk == nak) no_nak = <span class="literal">false</span>;</div><div class="line">    to_physical_layer(&amp;s);</div><div class="line">    <span class="keyword">if</span>(fk == data) start_timer(frame_nr % NR_BUFS);</div><div class="line">    stop_ack_timer();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">protocol6</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">    seq_nr ack_expected;</div><div class="line">    seq_nr next_frame_to_send;</div><div class="line">    seq_nr frame_expected;</div><div class="line">    seq_nr too_far;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    frame r;</div><div class="line">    packet out_buf[NR_BUFS];</div><div class="line">    packet in_buf[NR_BUFS];</div><div class="line">    <span class="keyword">bool</span> arrived[NR_BUFS];</div><div class="line">    seq_nr nbuffered;</div><div class="line">    event_type = event;</div><div class="line"></div><div class="line">    enable_network_layer();</div><div class="line">    ack_expected = <span class="number">0</span>;</div><div class="line">    next_frame_to_send = <span class="number">0</span>;</div><div class="line">    frame_expected = <span class="number">0</span>;</div><div class="line">    too_far = NR_BUFS;</div><div class="line">    nbuffered = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;NR_BUFS; ++i) arrived[i] = <span class="literal">false</span>;</div><div class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</div><div class="line">        wait_for_event(&amp;event);</div><div class="line">        <span class="keyword">switch</span>(event)&#123;</div><div class="line">            <span class="keyword">case</span> network_layer_ready:</div><div class="line">                nbuffered = nbuffered + <span class="number">1</span>;</div><div class="line">                from_network_layer(&amp;out_buf[next_frame_to_send % NR_BUFS]);</div><div class="line">                send_frame(data, next_frame_to_send, frame_expected, out_buf);</div><div class="line">                inc(next_frame_to_send);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> frame_arrival:</div><div class="line">                from_physical_layer(&amp;r);</div><div class="line">                <span class="keyword">if</span>(r.kind == data)&#123;</div><div class="line">                    <span class="keyword">if</span>((r.seq != frame_expected) &amp;&amp; no_nak)&#123;</div><div class="line">                        send_frame(nak, <span class="number">0</span>, frame_expected, out_buf);</div><div class="line">                    &#125;</div><div class="line">                    <span class="keyword">else</span>&#123;</div><div class="line">                        start_ack_timer();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span>(between(frame_expected, r.seq, too_far) &amp;&amp; arrived[r.seq % NR_BUFS] == <span class="literal">false</span>)&#123;</div><div class="line">                    arrived[r.seq % NR_BUFS] = <span class="literal">true</span>;</div><div class="line">                    in_buf[r.seq % NR_BUFS] = r.info;</div><div class="line">                    <span class="keyword">while</span>(arrived[frame_expected % NR_BUFS])&#123;</div><div class="line">                        to_network_layer(&amp;in_buf[frame_expected % NR_BUFS]);</div><div class="line">                        no_nak = <span class="literal">true</span>;</div><div class="line">                        arrived[frame_expected % NR_BUFS] = <span class="literal">false</span>;</div><div class="line">                        inc(frame_expected);</div><div class="line">                        inc(too_far);</div><div class="line">                        start_ack_timer();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span>((r.kind == nak) &amp;&amp; between(ack_expected, (r.ack + <span class="number">1</span>) % (MAX_SEQ + <span class="number">1</span>), next_frame_to_send))</div><div class="line">                    send_frame(data, (r.ack+<span class="number">1</span>) % (MAX_SEQ + <span class="number">1</span>), frame_expected, out_buf);</div><div class="line"></div><div class="line">                <span class="keyword">while</span>(between(ack_expected, r.ack, next_frame_to_send))&#123;</div><div class="line">                    nbuffered = nbuffered - <span class="number">1</span>;</div><div class="line">                    stop_timer(ack_expected % NR_BUFS);</div><div class="line">                    inc(ack_expected);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> cksum_err:</div><div class="line">                <span class="keyword">if</span>(no_nak) send_frame(nak, <span class="number">0</span>, frame_expected, out_buf);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> timeout:</div><div class="line">                send_frame(data, oldest_frame, frame_expected, out_buf);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> ack_timeout:</div><div class="line">                send_frame(ack, <span class="number">0</span>, frame_expected, out_buf);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(nbuffered &lt; NR_BUFS) enable_network_layer();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们可以不将序号空间分开看看到底会发生什么<br>
+假设n取3,2的三次方为8,序号空间即0~7<br>
+S:sender  R:receiver</p>
+<ol>
+<li>S 发送了0,1,2,3,4,5,6 号帧</li>
+<li>R 接受上述帧并且捎带发送 ACK of 6,但是丢失了</li>
+<li>S的0号帧首先超时，S 重发发送0号帧</li>
+<li>R收到0号帧，但是因为之前它已经接受0~6,发送了ACK of 6，它会认为0号帧是一个新的帧，而在0号帧之前的一个7号帧丢失。因为是选择重传协议，R会接受0号帧( the old)作为新帧(暂时放在缓存区)，并通过发送NAK of 7通知S重发7号帧。</li>
+<li>S 发送7号帧</li>
+<li>R接受了7和0号帧，并且发送ACK of 0</li>
+</ol>
+<p>这就出现了问题：1、R接受错误的0号帧作为新的帧 2、S在发送完7号帧之后收到了ACK of 0，而不是ACK of 7，此时对于S而言，它的0号帧早已在ACK of 6中确认。.出现这个问题的主要原因是我们不能区别新旧帧，现在我们将序号空间一分为二，首先发送0~3，继续走上面的步骤。走到步骤4.的时候R不会接受0作为新帧，因为R知道新的帧是4而不是0。这样就避免了上面的问题。<br>
+仅仅避免这个问题其实怎么分是都是可以的，我们可以将序号空间三等分，四等分。。。，但是为了尽可能利用资源，均分为两个部分最佳。</p>
+<p>总结一下：</p>
+<ul>
+<li>我们只想通讯，也就是只想把数据从发送方传输到接收方，这样我们做了乌托邦协议。</li>
+<li>但是好景不长，因为接收端经常被数据淹没，这个时候我们就要用到停-等协议，也就是没有接到确认帧不会发送新数据。</li>
+<li>但是好景不长，因为确认帧丢失了，我们不得不建立补发机制。</li>
+<li>但是好景不长，每台机器只能发送这样太浪费了，我们要求每个机器既能发送也能接收，我们用了一个新的协议，滑动窗口协议。最简单的滑动窗口是发送方和接收方都有一个窗口。</li>
+<li>但是好景不长，每次只发一个包真的太浪费网络流量了，这样我们要求每次都发送连续的几个帧，这个急速滑动窗口的最终形态。</li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/09/27/网络-网络层/" data-toggle="tooltip" data-placement="top" title="网络-网络层">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/09/21/网络-物理层/" data-toggle="tooltip" data-placement="top" title="网络-物理层">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#网络" title="网络">网络</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2017/09/22/网络-数据链路层/";
+    var disqus_url = "http://yoursite-url/2017/09/22/网络-数据链路层/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Young_Ken_0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/5653027877?is_all=1">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/Young-Ken">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Young Ken 2017 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite-url/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-107286104-1';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '5a9691721772988ee44a878d8dd9065b';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite-url/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
