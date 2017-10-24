@@ -220,23 +220,20 @@
                 <blockquote>
 <p>对于一维数据的分析，最常见的就是计算平均数(Mean)、方差(Variance)和标准差(Standard Deviation)。</p>
 </blockquote>
-<h3><span id="平均数">平均数</span></h3>
-<blockquote>
+<h3><span id="平均数">平均数</span></h3><blockquote>
 <p>为集中趋势的最常用测度值，目的是确定一组数据的均衡点</p>
 </blockquote>
 <p><img src="/2017/09/19/平均数，方差，标准差/mean.png" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy</div><div class="line"></div><div class="line">a = numpy.array([<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>])</div><div class="line"><span class="keyword">print</span> numpy.mean(a)</div></pre></td></tr></table></figure>
-<h3><span id="方差">方差</span></h3>
-<blockquote>
+<h3><span id="方差">方差</span></h3><blockquote>
 <p>方差可以让你得出数据的偏差度有多大。方差是概率分布中一个重要的描述符号，表示数据偏离平均值的程度。</p>
 </blockquote>
-<p><img src="/2017/09/19/平均数，方差，标准差/%E5%B9%B3%E5%9D%87%E6%95%B0%EF%BC%8C%E6%96%B9%E5%B7%AE%EF%BC%8C%E6%A0%87%E5%87%86%E5%B7%AE%5Cvar1.png" alt=""></p>
+<p><img src="/2017/09/19/平均数，方差，标准差/var1.png" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy</div><div class="line"></div><div class="line">a = numpy.array([<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>])</div><div class="line"><span class="keyword">print</span> numpy.var(a)</div></pre></td></tr></table></figure>
-<h3><span id="标准差">标准差</span></h3>
-<blockquote>
+<h3><span id="标准差">标准差</span></h3><blockquote>
 <p>标准差是方差的开方。</p>
 </blockquote>
-<p><img src="/2017/09/19/平均数，方差，标准差/%E5%B9%B3%E5%9D%87%E6%95%B0%EF%BC%8C%E6%96%B9%E5%B7%AE%EF%BC%8C%E6%A0%87%E5%87%86%E5%B7%AE%5Cvar.png" alt=""></p>
+<p><img src="/2017/09/19/平均数，方差，标准差/var.png" alt=""></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy</div><div class="line"></div><div class="line">a = numpy.array([<span class="number">1</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>])</div><div class="line"><span class="keyword">print</span> numpy.std(a)</div></pre></td></tr></table></figure>
 
                 

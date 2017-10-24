@@ -219,45 +219,16 @@
 
                 <p>有很多人喜欢用计数器 i++，这样很方便，在单线程下没有一点问题，每次都是你想要的结果，但是放到多线程中，结果就会出乎意料。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> values;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        Test test = <span class="keyword">new</span> Test();</div><div class="line">       <span class="keyword">while</span> (<span class="keyword">true</span>)</div><div class="line">       &#123;</div><div class="line">           <span class="keyword">new</span> TestThread(test).start();</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//这里被多线程调用</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValues</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(values);</div><div class="line">        <span class="keyword">return</span> values++;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="keyword">private</span> Test test;</div><div class="line">    TestThread(Test test)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">this</span>.test = test;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.run();</div><div class="line">        test.getValues();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>输出结果：<br>
-0<br>
-1<br>
-2<br>
-3<br>
-4<br>
-5<br>
-6<br>
-7<br>
-8<br>
-9<br>
-9<br>
-11<br>
-12<br>
-13**<br>
-14<br>
-14<br>
-14<br>
-**<br>
-15<br>
-16<br>
-19<br>
-20<br>
-21<br>
-22<br>
-23<br>
-很容易看出来结果不对，出现了3次14。为什么会出现这样的结果？<br>
-value++这样简单的操作其实包括三个步骤</p>
+<p>输出结果：<br>0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>9<br>11<br>12<br>13<strong><br>14<br>14<br>14
+</strong><br>15<br>16<br>19<br>20<br>21<br>22<br>23<br>很容易看出来结果不对，出现了3次14。为什么会出现这样的结果？<br>value++这样简单的操作其实包括三个步骤</p>
 <ul>
 <li>取出value</li>
 <li>将value加1</li>
-<li>最后把value附上新的计算值<br>
-<img src="/2016/09/03/线程安全问题/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%5Cixc.png" alt=""><br>
-那么怎么解决这样的问题，简单的方式有两种</li>
-<li>把getValue()变成线性安全的方法，添加synchronized。</li>
+<li>最后把value附上新的计算值<br><img src="/2016/09/03/线程安全问题/ixc.png" alt=""><br>那么怎么解决这样的问题，简单的方式有两种</li>
+<li>把getValue()变成线性安全的方法，添加synchronized。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">getValues</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> values++;</div><div class="line">    &#125;</div><div class="line"><span class="comment">//把value变成线程安全的Int，AtomicInteger。</span></div><div class="line"> <span class="keyword">public</span> AtomicInteger inter = <span class="keyword">new</span> AtomicInteger();</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">getValues</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> values++;</div><div class="line">    &#125;</div><div class="line"><span class="comment">//把value变成线程安全的Int，AtomicInteger。</span></div><div class="line"> <span class="keyword">public</span> AtomicInteger inter = <span class="keyword">new</span> AtomicInteger();</div></pre></td></tr></table></figure>
-<p>那么问题来了，两个方法哪个性能更高。<br>
-运行了100000次，时间几乎一样，但是大部分时间AtomicInteger快了一点点,大家可以亲自测试一下。</p>
+<p>那么问题来了，两个方法哪个性能更高。<br>运行了100000次，时间几乎一样，但是大部分时间AtomicInteger快了一点点,大家可以亲自测试一下。</p>
 
                 
 

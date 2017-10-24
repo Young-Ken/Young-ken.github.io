@@ -224,13 +224,11 @@
             
         </h3>
         <div class="post-content-preview">
-            控件系统
-控件就是继承自view的控件和WidowManager，代表Button，ViewGroup等等。
-深入理解WindowManager
-让用更简单的把控件添加到窗口上。
+            控件系统控件就是继承自view的控件和WidowManager，代表Button，ViewGroup等等。
+深入理解WindowManager让用更简单的把控件添加到窗口上。
 123public interface WindowManager extends ViewManager &#123;  &#125;
 WindowManager是个接口，继承ViewManager。
-12345......
+1234567......
         </div>
     </a>
     
@@ -260,11 +258,9 @@ WindowManager是个接口，继承ViewManager。
             
         </h3>
         <div class="post-content-preview">
-            WindowManagerService 分析
-windowManagerService（简称WMS）是Android中比较重要的概念，它是管理系统中所有的窗体，管理他们的大小，位置，绘制层数等问题。
-addWindow分析
-从方法命名可以看出，Manager是管理窗体的，addWindow是添加窗体的方法。
-123456789101112131415161718public int add......
+            WindowManagerService 分析windowManagerService（简称WMS）是Android中比较重要的概念，它是管理系统中所有的窗体，管理他们的大小，位置，绘制层数等问题。
+addWindow分析从方法命名可以看出，Manager是管理窗体的，addWindow是添加窗体的方法。
+123456789101112131415161718public int addWi......
         </div>
     </a>
     
@@ -292,10 +288,8 @@ addWindow分析
             
         </h3>
         <div class="post-content-preview">
-            创建Activity
-在zygote fork一个子进程，这个就是App的进程，这个App的入口函数就是ActivityThread的main函数。
-performLaunchActivity 分析
-1234567891011121314151617181920212223242526272829303132333435private Activity performLaunchActivi......
+            创建Activity在zygote fork一个子进程，这个就是App的进程，这个App的入口函数就是ActivityThread的main函数。
+performLaunchActivity 分析1234567891011121314151617181920212223242526272829303132333435private Activity performLaunchActivity......
         </div>
     </a>
     
@@ -325,10 +319,8 @@ performLaunchActivity 分析
             
         </h3>
         <div class="post-content-preview">
-            SystemServer详解
-SystemServer是zygote fork来的，SystemServer正如其名，和系统服务有着重要关系。Android系统中几乎所有的核心Service都在这个进程中，如ActivityManagerService、PowerManagerService和WindowManagerService等。
-startSystemServcer
-请看上一篇文章“......
+            SystemServer详解SystemServer是zygote fork来的，SystemServer正如其名，和系统服务有着重要关系。Android系统中几乎所有的核心Service都在这个进程中，如ActivityManagerService、PowerManagerService和WindowManagerService等。
+startSystemServcer请看上一篇文章“An......
         </div>
     </a>
     
@@ -358,11 +350,9 @@ startSystemServcer
             
         </h3>
         <div class="post-content-preview">
-            Zygote
-Zygote 中文的意思是“受精卵”，是Native的应用程序，与驱动内核没有关系，它是由inti fork从来的。
-app_main
-frameworks/base/cmds/app_process/app_main.cpp
-12345678910111213141516171819202122232425262728293031323334int main(int argc......
+            ZygoteZygote 中文的意思是“受精卵”，是Native的应用程序，与驱动内核没有关系，它是由inti fork从来的。
+app_mainframeworks/base/cmds/app_process/app_main.cpp
+12345678910111213141516171819202122232425262728293031323334int main(int argc, ......
         </div>
     </a>
     
@@ -393,11 +383,10 @@ frameworks/base/cmds/app_process/app_main.cpp
         </h3>
         <div class="post-content-preview">
             Binder 为什么出现？
-
 binder 是Android系统进程的通讯方式。
 
 Liunx IPC有system V IPC，socket等方式，但是因为socket因为效率低，开销大不。而System V IPC 会导全局的内核资源泄漏。还有一点就是出于安全考虑。
-这个时候Binder就出现了，Binder采用的是Client-Server的通讯方式，一个进行作为Server提供服务（......
+这个时候Binder就出现了，Binder采用的是Client-Server的通讯方式，一个进行作为Server提供服务（地......
         </div>
     </a>
     
@@ -427,14 +416,11 @@ Liunx IPC有system V IPC，socket等方式，但是因为socket因为效率低�
             
         </h3>
         <div class="post-content-preview">
-            集中趋势
-评价数
-
+            集中趋势评价数
 平均数（Mean）、均值是统计中的一个重要概念。为集中趋势的最常用测度值，目的是确定一组数据的均衡点。
 
 中位数
-
-中位数（又称中值，英语：Median），统计学中的专有名词，代表一个样本、种群或概率分布中的一个数值，其可将数值集合划分为相等的上下两部分。对于有限的数集，可以通过把所有观察值高低排序后找出正中间的一个作为中位数。如果观察值有偶数个，则中位数不唯一，通常取最......
+中位数（又称中值，英语：Median），统计学中的专有名词，代表一个样本、种群或概率分布中的一个数值，其可将数值集合划分为相等的上下两部分。对于有限的数集，可以通过把所有观察值高低排序后找出正中间的一个作为中位数。如果观察值有偶数个，则中位数不唯一，通常取最中间的......
         </div>
     </a>
     
@@ -462,18 +448,13 @@ Liunx IPC有system V IPC，socket等方式，但是因为socket因为效率低�
             
         </h3>
         <div class="post-content-preview">
-            概述
-引言
-
+            概述引言
 TCP/IP是起源于美国政府资助的一个项目，到90年代发展成为计算机最常用的组网形式。
 
 分层
-
-
 链路层
 
 也被成为数据链路层， 网络接口层 ，通常是设备驱动程序及接口卡
-
 
 
 网络层
@@ -481,17 +462,18 @@ TCP/IP是起源于美国政府资助的一个项目，到90年代发展成为计
 也被称为互联网层，在TCP/IP协议族中，网络层协议包括IP协议，IPMP协议，以及IGMP协议
 
 
-
 运输层
 
 两台主机端对端的通讯。
 
 
-
 应用层
 
 应用层负责处理特定的应用程序细节。
-......
+
+
+
+FTP是......
         </div>
     </a>
     
@@ -520,11 +502,9 @@ TCP/IP是起源于美国政府资助的一个项目，到90年代发展成为计
         </h3>
         <div class="post-content-preview">
             初探 OpenCV
-
 ROI (region of interest)  感兴趣区域
 
 OpenCV 基本数据类型
-
 
 
 名称
@@ -553,9 +533,7 @@ Integer
 
 
 
-
-CvArr,CvMat,IpIImage
-在OpenCv中没......
+CvArr,CvMat,IpIImage在OpenCv中没有向量，......
         </div>
     </a>
     
@@ -583,10 +561,9 @@ CvArr,CvMat,IpIImage
             
         </h3>
         <div class="post-content-preview">
-            Volatile详解
-在java语言中有两种同步机制，分别是同步块和Volatile。这两个方式都是为了保证线程安全的，但是其中的Volatile的同步性能差。
+            Volatile详解在java语言中有两种同步机制，分别是同步块和Volatile。这两个方式都是为了保证线程安全的，但是其中的Volatile的同步性能差。
 Java中Volatile变量可以看做是一种轻量级的synchronized；同synchronized对比，Volatile使用更加简单，运行开销更加小，它的功能只是synchronized的一部分。
-锁主要有两个特性：互斥（mu......
+锁主要有两个特性：互斥（mut......
         </div>
     </a>
     
@@ -700,11 +677,11 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
             
         
             
+        
+            
+        
+            
             <a href="/tags/#统计学" title="统计学" rel="2">统计学</a>
-            
-        
-            
-        
             
         
             
