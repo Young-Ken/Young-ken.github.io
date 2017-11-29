@@ -30,13 +30,6 @@
     </url>
 
     <url>
-        <loc>http://yoursite-url/tags/GIS/</loc>
-        <lastmod>2016-11-15T02:43:01.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://yoursite-url/tags/OpenCV/</loc>
         <lastmod>2017-04-29T02:13:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -214,6 +207,20 @@
     <url>
         <loc>http://yoursite-url/tags/%E7%BD%91%E7%BB%9C/</loc>
         <lastmod>2017-10-31T03:20:11.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/IOS/</loc>
+        <lastmod>2017-11-07T09:20:29.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/GIS/</loc>
+        <lastmod>2017-11-29T03:19:35.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

@@ -7,6 +7,38 @@
     </url>
 
     <url>
+        <loc>http://yoursite-url/2017/11/28/GIS%E5%8F%AA%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4/</loc>
+        <lastmod>2017-11-29T03:19:35.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/2017/11/07/IOS-UIViewController%E8%AF%A6%E8%A7%A3/</loc>
+        <lastmod>2017-11-07T09:20:29.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/2017/11/06/IOS-UI%E5%9F%BA%E7%A1%80/</loc>
+        <lastmod>2017-11-07T02:25:01.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/2017/11/06/IOS%E5%92%8CAndroid%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+        <lastmod>2017-11-06T03:26:47.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite-url/2017/10/16/%E7%BD%91%E7%BB%9C-%E4%BC%A0%E8%BE%93%E5%B1%82/</loc>
         <lastmod>2017-10-31T03:20:11.000Z</lastmod>
         <changefreq>weekly</changefreq>
