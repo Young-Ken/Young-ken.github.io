@@ -220,7 +220,14 @@
 
     <url>
         <loc>http://yoursite-url/tags/GIS/</loc>
-        <lastmod>2017-11-29T03:35:35.000Z</lastmod>
+        <lastmod>2017-11-29T09:59:17.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1/</loc>
+        <lastmod>2017-12-12T09:06:21.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
