@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          计算机如何实现加法 - 艹! BUGs
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite-url/2018/01/12/计算机如何实现加法/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('null')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#计算机怎么样计算的" title="计算机怎么样计算的">计算机怎么样计算的</a>
+                            
+                        </div>
+                        <h1>计算机如何实现加法</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Young Ken on
+                            2018-01-12
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">艹! BUGs</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="计算机如何实现加法">计算机如何实现加法</span></h2><p>这个博客源于媳妇的一个问题，<strong>计算机怎么样计算的？</strong></p>
+<p>当问到这个问题的时候我还是有点措手不及的，不知道从哪里说起，即使说出了答案，答案也不完整，没有逻辑，很多知识更不敢较真，我决定对这个问题深入探索一下，这也是今年的目标，对计算机怎么样计算的这一问题给出答案。</p>
+<h3><span id="基本电路">基本电路</span></h3><p>我们先从电路入手，也就是用两个开关，一个灯泡和电池组成的简单电路。</p>
+<h4><span id="串联电路">串联电路</span></h4><p><img src="/2018/01/12/计算机如何实现加法/yudainl.png" alt=""></p>
+<p>这个电路是两个开关都关闭灯泡才会亮。如果把开关<strong>关闭</strong>定义为<strong>1</strong>，<strong>打开</strong>定义为<strong>0</strong>，下面的表达方式更清楚。</p>
+<p><img src="/2018/01/12/计算机如何实现加法/and1.png" alt=""></p>
+<p>这个好像在哪里见过，我们再换一下表达方式。</p>
+<p><img src="/2018/01/12/计算机如何实现加法/and2.png" alt=""></p>
+<p>这个时候好像明白了，这不是计算机中的<strong>与</strong>操作吗。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="keyword">true</span> &amp;&amp; <span class="keyword">true</span>) &#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4><span id="并联电路">并联电路</span></h4><p><img src="/2018/01/12/计算机如何实现加法/ordl.png" alt=""></p>
+<p>同理，只有一个开关关闭灯泡亮，如果把开关<strong>关闭</strong>定义为<strong>1</strong>，<strong>打开</strong>定义为<strong>0</strong>，可以用下面的方式表达。</p>
+<p><img src="/2018/01/12/计算机如何实现加法/or1.png" alt=""></p>
+<p>我们再换一下表达方式。</p>
+<p><img src="/2018/01/12/计算机如何实现加法/or2.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="keyword">true</span> || <span class="keyword">true</span>) &#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们总结一下，好像我们猜到了什么，是不是通过电路的开关状态和电路的链接方式能表达逻辑关系。答案是肯定的。</p>
+<h3><span id="逻辑门">逻辑门</span></h3><p>通过上面的例子，我们知道，链接方式(串联并联)和开关的状态可以表示逻辑，下面我们探索一下这样的电路能表达什么样的逻辑。</p>
+<h4><span id="and与门">AND（与门）</span></h4><p>我们把开关换一下，换成下面这样，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/lj1.png" alt=""></p>
+<p>开关是个一个小铁柱绕着线圈，当小铁柱通电的时候，会产生吸引力，把开关吸下来，灯泡亮起来。那么串联就是这样的，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/ljcl.png" alt=""></p>
+<p>这样的电路叫做<strong>与门（AND）</strong>，有个专业的符号表示<strong>与门</strong>，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/andmen.png" alt=""></p>
+<p>它的意思是这样的，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/andmen1.png" alt=""></p>
+<p>最终表达的就是，当两个小铁柱都通电的时候输出1。</p>
+<h4><span id="or或门">OR（或门）</span></h4><p>或门（并联）的电路图</p>
+<p><img src="/2018/01/12/计算机如何实现加法/ormen2.png" alt=""></p>
+<p>当其中一个通电的时候，小灯泡就亮了，符号是这样的</p>
+<p><img src="/2018/01/12/计算机如何实现加法/ormen3.png" alt=""></p>
+<p>表达的意思，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/ormen5.png" alt=""></p>
+<h4><span id="not非门">NOT（非门）</span></h4><p>什么是非门呢，我门先看下电路图，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/notmen.png" alt=""></p>
+<p>从上面的图可以看出来，当小铁柱不通电的时候，灯泡是亮的，小铁柱通电之后灯泡反而灭了。非门也有符号表达，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/notmen2.png" alt=""></p>
+<p>表达的意思，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/notmen3.png" alt=""></p>
+<h4><span id="nor或非门">NOR（或非门）</span></h4><p>还是老思路，先看电路图，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/nand1.png" alt=""></p>
+<p>从上面的电路图可以看出来，当两个小磁铁都不通电的时候，小灯泡变亮，当其中一个通电的时候，灯泡熄灭。这样的电路叫做<strong>或非门</strong>。</p>
+<p>符号表达，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/nor1.png" alt=""></p>
+<p>其实就是或取非。</p>
+<h4><span id="nand与非门">NAND（与非门）</span></h4><p>来张电路图，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/nand2.png" alt=""></p>
+<p>从上面的电路图可以看出来，两个都通电之后灯泡灭了，这样的定义叫做<strong>与非门</strong>。</p>
+<p>符号的表达，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/nand4.png" alt=""></p>
+<p>其实就是与取非。</p>
+<h3><span id="真正的加法来了">真正的加法来了</span></h3><p>在进行计算机的加法（二进制加法）运算之前，我们先复习一下10进制加法，78 + 114 = 192。这个值具体怎么来的，计算过程应该是这的，先个位相加，等于12，也就是向十位进1，个位是2。十位相加，7+1+1=9，百位相加1+0=1。我们分析一下，加法运算的规律，最重要的有两点，一是同位相加，二是如果同位相加大于等于10，那么向上一位进1。</p>
+<p>二进制加法也是如此，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia1.png" alt=""></p>
+<p>1+1 等于0，向上一位近1。如我们把加法分成同位相加和进位，二进制加法可以这样表示。</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia3.png" alt=""></p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia4.png" alt=""></p>
+<p>我们计算一个二进制加法，来是试一下，</p>
+<p>  0 1 1 0 0 1 0 1</p>
+<p>+1 0 1 1 0 1 1 0</p>
+<p>———————</p>
+<p>1 0 0 0 1 1 0 1 1</p>
+<p>现在老板想让你设计一个加法计算器，经过你们的商量，你们把他设计成了这样，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia5.png" alt=""></p>
+<p>灯亮表示1，不亮表示0。现在设计电路就交给你了，这时候有没有恍然大悟，我们的逻辑门不就是做这个事情的吗，加法可以分成两部分，一个<strong>和</strong>另一个是<strong>进位</strong>。我们发现<strong>进位</strong>的逻辑门已经有了，就是我门的和<strong>AND（与门）</strong>。<strong>和</strong>有点小古怪，我们的逻辑门没有符合它要求的输出。</p>
+<p>不要着急，我们先思考一下我们已经有的逻辑门，有没有可能组合出<strong>和</strong>这样的结果。</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia6.png" alt=""></p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia7.png" alt=""></p>
+<p>我们发现这两个逻辑门再接上<strong>与门</strong>后就是我们想要的结果。逻辑门的表达方式这样的，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia9.png" alt=""></p>
+<p>是不是有点小兴奋呢。其实这个逻辑门已经存在了叫做<strong>XOR（异或门）</strong>，符号表达是</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia11.png" alt=""></p>
+<p>输出结果是这样的，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia12.png" alt=""></p>
+<p>这就是我们要的<strong>和</strong>，现在我能可以继续设计了。先解决一个位的加法运算，</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia14.png" alt=""></p>
+<p>我们用一个符号表达上面的图形，我们把他叫做<strong>半加器</strong>。</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia20.png" alt=""></p>
+<p>这个设计就能满足我们的设计，A输入和B输入分别输入值得时候，会对应相应的和输出和进位输出。现在我们解决了一个位的加法，但是我们知道，一个位相加并不能实现真的加法计算，我们要把进位输出作为上一位的加数。想一下这个计算（二进制）1111 + 1111 = 11110。当第二位相加的时候，不仅要1 + 1，还要加上第一位的进位1，也就是1+1+1。我们现在的设计只有两个输入A输入和B输入，根本不能完成1+1+1这样的操作，也就是我们需要一个进位输入，不绕弯子，直接给出答案。</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia21.png" alt=""></p>
+<p>它的工作原理是这样的，当A输入和B输入到一个半加器中，把<strong>和输出</strong>作为下个半加器的输入，两个半加器的<strong>进位输出</strong>和<strong>或门</strong>作为最终<strong>进位输出</strong>。</p>
+<p>我们可以吧上面的抽象成更简单的图形，我们把它叫做<strong>全加器</strong>。</p>
+<p><img src="/2018/01/12/计算机如何实现加法/jia22.png" alt=""></p>
+<p>追后你把这些<strong>全加器</strong>都链接到了一起，就能进行加法运行了。当和输出为1的时候灯泡亮，0的时候灯泡灭。</p>
+<h3><span id="总结">总结</span></h3><p>其实这个值是从硬件实现上解释了如何计算加法，距离解决计算机怎么计算的大问题还差好远。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/12/11/闭包的由来/" data-toggle="tooltip" data-placement="top" title="闭包的由来">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">计算机如何实现加法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">基本电路</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">串联电路</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">并联电路</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">逻辑门</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">AND（与门）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">OR（或门）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">NOT（非门）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">NOR（或非门）</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.5.</span> <span class="toc-nav-text">NAND（与非门）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">真正的加法来了</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">总结</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#计算机怎么样计算的" title="计算机怎么样计算的">计算机怎么样计算的</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "your-disqus-ID";
+    var disqus_identifier = "http://yoursite-url/2018/01/12/计算机如何实现加法/";
+    var disqus_url = "http://yoursite-url/2018/01/12/计算机如何实现加法/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Young_Ken_0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/5653027877?is_all=1">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/Young-Ken">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Young Ken 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite-url/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-107286104-1';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '5a9691721772988ee44a878d8dd9065b';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite-url/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

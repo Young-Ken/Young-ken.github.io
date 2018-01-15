@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://yoursite-url/2018/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8A%A0%E6%B3%95/</loc>
+        <lastmod>2018-01-15T03:53:21.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite-url/2017/12/11/%E9%97%AD%E5%8C%85%E7%9A%84%E7%94%B1%E6%9D%A5/</loc>
         <lastmod>2017-12-12T09:41:47.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,30 +25,6 @@
     <url>
         <loc>http://yoursite-url/2017/11/28/GIS%E5%8F%AA%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4/</loc>
         <lastmod>2017-11-29T09:59:17.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite-url/2017/11/07/IOS-UIViewController%E8%AF%A6%E8%A7%A3/</loc>
-        <lastmod>2017-11-07T09:20:29.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite-url/2017/11/06/IOS-UI%E5%9F%BA%E7%A1%80/</loc>
-        <lastmod>2017-11-07T02:25:01.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite-url/2017/11/06/IOS%E5%92%8CAndroid%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
-        <lastmod>2017-11-06T03:26:47.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -81,22 +65,6 @@
     <url>
         <loc>http://yoursite-url/2017/09/21/%E7%BD%91%E7%BB%9C-%E7%89%A9%E7%90%86%E5%B1%82/</loc>
         <lastmod>2017-09-30T01:30:28.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite-url/2017/09/19/%E5%B9%B3%E5%9D%87%E6%95%B0%EF%BC%8C%E6%96%B9%E5%B7%AE%EF%BC%8C%E6%A0%87%E5%87%86%E5%B7%AE/</loc>
-        <lastmod>2017-09-30T01:29:08.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite-url/2017/09/19/%E5%90%91%E9%87%8F%E7%9A%84%E7%82%B9%E7%A7%AF%EF%BC%88%E6%95%B0%E9%87%8F%E7%A7%AF%EF%BC%89/</loc>
-        <lastmod>2017-09-30T01:26:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -265,14 +233,6 @@
     <url>
         <loc>http://yoursite-url/2017/06/06/Android-SystemServer/</loc>
         <lastmod>2017-06-09T23:38:04.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite-url/2017/04/28/openCV-%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2017-04-29T02:13:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
