@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          GPS坐标算面积 - 艹! BUGs
+          Android事件-MotionEvent - 艹! BUGs
         
     </title>
 
-    <link rel="canonical" href="http://yoursite-url/2016/08/13/GPS坐标算面积/">
+    <link rel="canonical" href="http://yoursite-url/2016/08/13/Android事件-MotionEvent/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,7 +69,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('undefined')
+            background-image: url('null')
             /*post*/
         
     }
@@ -86,10 +86,10 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#GIS 算法" title="GIS 算法">GIS 算法</a>
+                              <a class="tag" href="/tags/#Android 事件" title="Android 事件">Android 事件</a>
                             
                         </div>
-                        <h1>GPS坐标算面积</h1>
+                        <h1>Android事件-MotionEvent</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Young Ken on
@@ -140,14 +140,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -217,10 +217,33 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<p>好久没有更新博客了，最近太忙了？不是很忙，是一直没有找到什么好写的，最近这几天研究算面积，感觉很有意思，和大家分享一下，有什么错误请指出。</p>
-</blockquote>
-<p>这篇文章是针对GPS坐标点写的，现在有很多这样的需求，给你一串GPS坐标点，让你算出这GPS坐标点围成图形的面积。<br>在这里要补充一下简单的基础知识，关于经纬度的，如果你已经非常熟悉了，可以跳过。</p>
+                <h2><span id="motionevent">MotionEvent</span></h2><p>当你的手指按到屏幕的时候，这个时候就产生了一个事件，这个事件的属性封装在MotionEvent，包括事件的时间，事件的类型等等。</p>
+<h3><span id="手指的个数">手指的个数</span></h3><ul>
+<li><strong>getPointerCount()</strong> 当前事件发生的时候有屏幕上有几个手指，这个数是大于等于1的。</li>
+<li><strong>getActionIndex()</strong> 这个方法非常有意思，这个是当前手指的索引。现在我们有一个手指按下，这个索引是0，当再有一个手指按下，这个索引是1，当再有一个手按下的时候这个索引是2，现在我们有三个手指按在屏幕上了。现在我们抬起第一个按下的手指，触发事件的索引是0，当我们再抬起第3个手指的的时候这个触发事件的索引是1，这个时候我们就明白了，总结一下上面的这段话。其实<strong>getActionIndex()</strong>就是一个数组。</li>
+</ul>
+<h3><span id="事件类型">事件类型</span></h3><p>Android把事件分成不同情况，当手指按到屏幕上会触发一个<strong>ACTION_DOWN</strong>类型的事件。</p>
+<ul>
+<li><strong>ACTION_DOWN</strong> 当第一个手指按下的时候回触发这个事件。</li>
+<li><strong>ACTION_MOVE</strong> 当第个手指按下，再移动就会触发移动事件。</li>
+<li><strong>ACTION_UP</strong> 当屏幕上的最后一个手指抬起的时候触发这个事件。</li>
+<li><strong>ACTION_POINTER_DOWN</strong> 当屏幕手指数大于1，手指按下的时候触发。</li>
+<li><strong>ACTION_POINTER_UP</strong> 当屏幕手指数大于1，手指抬起的时候触发。</li>
+<li><strong>ACTION_CANCEL</strong> 取消事件</li>
+</ul>
+<h4><span id="getaction和getactionmasked的区别">getAction()和getActionMasked()的区别</span></h4><p>先看看源代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ACTION_MASK             = <span class="number">0xff</span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAction</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="keyword">return</span> nativeGetAction(mNativePtr);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getActionMasked</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="keyword">return</span> nativeGetAction(mNativePtr) &amp; ACTION_MASK;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>事件类型是0x00到0xff。<strong>ACTION_DOWN</strong>是0x00，<strong>ACTION_MOVE</strong>是0x01。这是一个手指，大家都知道Android是支持多个手指同时触发发的。那么多个手指怎么办呢，第一个手指按下是0x0000，第二个手指按下时0x0100。0x00ff到0xffff表示的是当前第几个手指。</p>
+<p>要想得到那个手指当前的事件可有用<strong>getActionIndex()</strong>和<strong>getActionMasked()</strong>相结合。</p>
+<h3><span id="当前的坐标位置">当前的坐标位置</span></h3><ul>
+<li><strong>getRawY(),getRawX()</strong> 相对于屏幕的坐标。</li>
+<li><strong>getX(),getY()</strong> 相对于控件的坐标。</li>
+</ul>
+<p>相关参考</p>
+<ul>
+<li><a href="https://my.oschina.net/banxi/blog/56421" target="_blank" rel="external">android触控,先了解MotionEvent(一)</a></li>
+<li><a href="http://caobugs.com/2016/08/13/js%E4%BA%8B%E4%BB%B6%E6%B5%85%E6%9E%90%E5%92%8Candroid%E4%BA%8B%E4%BB%B6%E6%8E%A2%E7%B4%A2/" target="_blank" rel="external">Android事件探索</a></li>
+</ul>
 
                 
 
@@ -234,7 +257,7 @@
                     
                     
                         <li class="next">
-                            <a href="/2016/08/13/js事件浅析和android事件探索/" data-toggle="tooltip" data-placement="top" title="js事件浅析和android事件探索">Next Post &rarr;</a>
+                            <a href="/2016/06/02/Service-简介(笔记)/" data-toggle="tooltip" data-placement="top" title="Service 简介(笔记)">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -259,6 +282,17 @@
             <!-- Tabe of Content -->
             <!-- Table of Contents -->
 
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">MotionEvent</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">手指的个数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">事件类型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">getAction()和getActionMasked()的区别</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">当前的坐标位置</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
                 
             <!-- Sidebar Container -->
             <div class="
@@ -273,7 +307,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#GIS 算法" title="GIS 算法">GIS 算法</a>
+                          <a class="tag" href="/tags/#Android 事件" title="Android 事件">Android 事件</a>
                         
                     </div>
                 </section>
@@ -293,8 +327,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "http-caobugs-com";
-    var disqus_identifier = "http://yoursite-url/2016/08/13/GPS坐标算面积/";
-    var disqus_url = "http://yoursite-url/2016/08/13/GPS坐标算面积/";
+    var disqus_identifier = "http://yoursite-url/2016/08/13/Android事件-MotionEvent/";
+    var disqus_url = "http://yoursite-url/2016/08/13/Android事件-MotionEvent/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
