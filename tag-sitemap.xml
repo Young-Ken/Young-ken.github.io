@@ -100,14 +100,14 @@
     </url>
 
     <url>
-        <loc>http://yoursite-url/tags/Android%E5%9F%BA%E7%A1%80%E7%AF%87/</loc>
+        <loc>http://yoursite-url/tags/Activity/</loc>
         <lastmod>2017-09-30T00:40:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite-url/tags/Activity/</loc>
+        <loc>http://yoursite-url/tags/Android%E5%9F%BA%E7%A1%80%E7%AF%87/</loc>
         <lastmod>2017-09-30T00:40:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -213,7 +213,7 @@
 
     <url>
         <loc>http://yoursite-url/tags/%E7%BD%91%E7%BB%9C/</loc>
-        <lastmod>2018-03-13T05:26:18.000Z</lastmod>
+        <lastmod>2018-03-13T09:25:04.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
