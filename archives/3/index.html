@@ -216,40 +216,6 @@
 
 <div class="post-preview">
 
-    <a href="/2017/05/31/Android-Binder/">
-        <h2 class="post-title">
-            Android Binder
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Binder 为什么出现？
-binder 是Android系统进程的通讯方式。
-
-Liunx IPC有system V IPC，socket等方式，但是因为socket因为效率低，开销大不。而System V IPC 会导全局的内核资源泄漏。还有一点就是出于安全考虑。
-这个时候Binder就出现了，Binder采用的是Client-Server的通讯方式，一个进行作为Server提供服务（地......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Young Ken on
-            2017-05-31
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Android" title="Android">Android</a>
-            
-              <a href="/tags/#framework" title="framework">framework</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2017/05/24/统计学-基本概念/">
         <h2 class="post-title">
             统计学-基本概念
@@ -566,6 +532,37 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
 </div>
 <hr>
 
+<div class="post-preview">
+
+    <a href="/2016/08/13/Android事件-MotionEvent/">
+        <h2 class="post-title">
+            Android事件-MotionEvent
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            MotionEvent当你的手指按到屏幕的时候，这个时候就产生了一个事件，这个事件的属性封装在MotionEvent，包括事件的时间，事件的类型等等。
+手指的个数
+getPointerCount() 当前事件发生的时候有屏幕上有几个手指，这个数是大于等于1的。
+getActionIndex() 这个方法非常有意思，这个是当前手指的索引。现在我们有一个手指按下，这个索引是0，当再有一个手指按下......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Young Ken on
+            2016-08-13
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Android 事件" title="Android 事件">Android 事件</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
 
 
 <!-- Pager -->
@@ -678,8 +675,6 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
             
         
             
-            <a href="/tags/#设计模式" title="设计模式" rel="2">设计模式</a>
-            
         
             
         
@@ -757,10 +752,6 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
         </li>
       
         <li>
-          <a href="/2018/08/14/适配器模式/">适配器模式</a>
-        </li>
-      
-        <li>
           <a href="/2018/08/14/网络-网络层之IP协议篇/">网络-网络层之IP协议篇</a>
         </li>
       
@@ -770,6 +761,10 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
       
         <li>
           <a href="/2018/01/12/计算机如何实现加法/">计算机如何实现加法</a>
+        </li>
+      
+        <li>
+          <a href="/2017/12/11/闭包的由来/">闭包的由来</a>
         </li>
       
     </ul>
