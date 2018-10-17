@@ -140,13 +140,6 @@
 
                         
                         <li>
-                            <a href="/categories/">categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -155,6 +148,13 @@
                         
                         <li>
                             <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">categories</a>
                         </li>
                         
                     
@@ -257,6 +257,10 @@
 </ol>
 <h4><span id="给朋友发个邮件简述网络传输过程">给朋友发个邮件（简述网络传输过程）</span></h4><p>我想给我的朋友发个邮件，我想买本海贼王漫画，邮件内容是”早上好“。这几个字是怎样通过网络发出去的呢，我的朋友又是怎么接到这个邮件的。</p>
 <p><img src="/2018/01/22/计算机网络概述/yj1.png" alt=""></p>
+<h3><span id="tcpip诞生">TCP/IP诞生</span></h3><p>最初的网络是应用于军方的技术，开始的时候一个是星型的网络结构，这样一旦一个节点被关闭，可能导致整个网络瘫痪，于是人们采用了多个节点链接的方式。这个多节点链接方式的第一个项目是ARPANET项目，当人们想把这个网网络链接起来就需要协议，这个协议就是TCP/IP协议。</p>
+<h4><span id="tcpip的定义">TCP/IP的定义</span></h4><p>利用IP进行通信时所必须的协议群或则被叫做<code>网际协议族</code>。</p>
+<h3><span id="tcpip模型">TCP/IP模型</span></h3><p><img src="/2018/01/22/计算机网络概述/tcp.png" alt=""></p>
+<h4><span id="用tcpip发邮件">用TCP/IP发邮件</span></h4><p><img src="/2018/01/22/计算机网络概述/yj.png" alt=""></p>
 <ul>
 <li><p>应用程序处理</p>
 <p>应用程序对文字进行处理，变成字节流，中文一般用UTF-8，这个是表示层做的事情。什么时候发送数据和接受数据，这个是会话层做的事情。</p>
@@ -271,10 +275,6 @@
 <p>接着给数据添加头，这个头包括了Mac地址。</p>
 </li>
 </ul>
-<h3><span id="tcpip诞生">TCP/IP诞生</span></h3><p>最初的网络是应用于军方的技术，开始的时候一个是星型的网络结构，这样一旦一个节点被关闭，可能导致整个网络瘫痪，于是人们采用了多个节点链接的方式。这个多节点链接方式的第一个项目是ARPANET项目，当人们想把这个网网络链接起来就需要协议，这个协议就是TCP/IP协议。</p>
-<h4><span id="tcpip的定义">TCP/IP的定义</span></h4><p>利用IP进行通信时所必须的协议群或则被叫做<code>网际协议族</code>。</p>
-<h3><span id="tcpip模型">TCP/IP模型</span></h3><p><img src="/2018/01/22/计算机网络概述/tcp.png" alt=""></p>
-<h4><span id="用tcpip发邮件">用TCP/IP发邮件</span></h4><p><img src="/2018/01/22/计算机网络概述/yj.png" alt=""></p>
 <p><img src="/Volumes/job/own/blog/blog.github.io/source/_posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/bao.png" alt=""></p>
 <p>这包（准确的说是帧）被计算机发送出去，通过找这台计算机的路由表，找到了出口路由器，路由器通过找自己的路由表找到了接受机器的计算机（真幸运这么快就找到了），下面就是包的反解。</p>
 <h4><span id="两个协议的区别">两个协议的区别</span></h4><ul>
