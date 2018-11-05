@@ -212,15 +212,22 @@
     </url>
 
     <url>
-        <loc>http://yoursite-url/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-        <lastmod>2018-10-17T06:04:05.000Z</lastmod>
+        <loc>http://yoursite-url/tags/%E7%BD%91%E7%BB%9C/</loc>
+        <lastmod>2018-10-17T06:20:09.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://yoursite-url/tags/%E7%BD%91%E7%BB%9C/</loc>
-        <lastmod>2018-10-17T06:20:09.000Z</lastmod>
+        <loc>http://yoursite-url/tags/mapbox-mapbox-gl-native/</loc>
+        <lastmod>2018-10-18T08:17:46.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/tags/HTTP/</loc>
+        <lastmod>2018-10-31T11:14:41.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

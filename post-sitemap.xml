@@ -7,16 +7,32 @@
     </url>
 
     <url>
-        <loc>http://yoursite-url/2018/01/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</loc>
-        <lastmod>2018-10-17T06:20:09.000Z</lastmod>
+        <loc>http://yoursite-url/2018/10/13/HTTP%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE/</loc>
+        <lastmod>2018-11-05T07:00:12.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://yoursite-url/2018/10/13/HTTP%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE/</loc>
-        <lastmod>2018-10-17T06:04:05.000Z</lastmod>
+        <loc>http://yoursite-url/2018/10/31/HTTP%E9%A6%96%E9%83%A8/</loc>
+        <lastmod>2018-10-31T11:14:41.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/2018/10/18/%E7%BC%96%E8%AF%91mapbox-gl-native%E7%9A%84Android%E7%89%88/</loc>
+        <lastmod>2018-10-18T08:17:46.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite-url/2018/01/22/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A6%82%E8%BF%B0/</loc>
+        <lastmod>2018-10-17T06:20:09.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

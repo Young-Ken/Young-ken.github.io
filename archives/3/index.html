@@ -132,7 +132,7 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/categories/">categories</a>
                         </li>
                         
                     
@@ -146,7 +146,7 @@
 
                         
                         <li>
-                            <a href="/categories/">categories</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -213,6 +213,69 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2017/06/06/Android-SystemServer/">
+        <h2 class="post-title">
+            Android SystemServer
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            SystemServer详解SystemServer是zygote fork来的，SystemServer正如其名，和系统服务有着重要关系。Android系统中几乎所有的核心Service都在这个进程中，如ActivityManagerService、PowerManagerService和WindowManagerService等。
+startSystemServcer请看上一篇文章“An......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Young Ken on
+            2017-06-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Android" title="Android">Android</a>
+            
+              <a href="/tags/#SystemServer" title="SystemServer">SystemServer</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/06/06/Android-Zygote/">
+        <h2 class="post-title">
+            Android Zygote
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            ZygoteZygote 中文的意思是“受精卵”，是Native的应用程序，与驱动内核没有关系，它是由inti fork从来的。
+app_mainframeworks/base/cmds/app_process/app_main.cpp
+12345678910111213141516171819202122232425262728293031323334int main(int argc, ......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by Young Ken on
+            2017-06-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Android" title="Android">Android</a>
+            
+              <a href="/tags/#Zygote" title="Zygote">Zygote</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -497,75 +560,6 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/08/14/Android事件/">
-        <h2 class="post-title">
-            Android事件
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Android事件探索在人机交互之后，出现了我们要探索的事件的概念，这个事件是用来和计算机进行交互的。
-页面布局基于树形结构的思考
-事件是人机交互的重要媒介。
-
-现在我接触过的大部分前段页面都是这样的，一个分层的结构，都会有个最底层的根，根下有控件集合（能放多个控件的控件）和控件。
-基于事件的战争netscape 和 微软 曾经的战争还是比较火热的，当时， netscape 主张捕获方式，微......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Young Ken on
-            2016-08-14
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Android 事件" title="Android 事件">Android 事件</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/08/13/地球经纬度/">
-        <h2 class="post-title">
-            地球经纬度
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            其实这样的文章很多，这里面就简单的讲解一下地球的经纬度，这里不会涉及经纬度和大洋，大洲，怎么分东半球西半球等知识，只是纯纯的为了让你了解GIS。
-
-经纬度是经度与纬度的合称组成一个坐标系统。
-
-其实经纬度就是个坐标系统，那么什么是坐标系统。
-
-坐标系统是描述物质存在的空间位置（坐标）的参照系，通过定义特定基准及其参数形式来实现。
-
-有点抽象，可以这样理解，自己定义一套规则，表达物质的的位置。......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Young Ken on
-            2016-08-13
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#GIS 基础知识" title="GIS 基础知识">GIS 基础知识</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -638,9 +632,11 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
             
         
             
+            <a href="/tags/#Intent" title="Intent" rel="2">Intent</a>
+            
         
             
-            <a href="/tags/#Intent" title="Intent" rel="2">Intent</a>
+        
             
         
             
@@ -751,6 +747,14 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
     <ul>
       
         <li>
+          <a href="/2018/10/31/HTTP首部/">HTTP首部</a>
+        </li>
+      
+        <li>
+          <a href="/2018/10/18/编译mapbox-gl-native的Android版/">编译mapbox-gl-native的Android版</a>
+        </li>
+      
+        <li>
           <a href="/2018/10/13/HTTP超文本传输协议/">HTTP超文本传输协议</a>
         </li>
       
@@ -760,14 +764,6 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
       
         <li>
           <a href="/2018/08/14/网络-网络层之IP协议篇/">网络-网络层之IP协议篇</a>
-        </li>
-      
-        <li>
-          <a href="/2018/01/22/计算机网络概述/">计算机网络概述</a>
-        </li>
-      
-        <li>
-          <a href="/2018/01/12/计算机如何实现加法/">计算机如何实现加法</a>
         </li>
       
     </ul>
