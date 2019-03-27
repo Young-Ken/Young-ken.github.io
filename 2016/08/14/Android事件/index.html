@@ -17,7 +17,7 @@
         
     </title>
     <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
-    <link rel="canonical" href="http://yoursite-url/2016/08/14/Android事件/">
+    <link rel="canonical" href="http://caobugs.com/2016/08/14/Android事件/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -138,9 +138,6 @@
                     
 
                         
-                    
-
-                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -226,7 +223,7 @@
 <p>现在我接触过的大部分前段页面都是这样的，一个分层的结构，都会有个最底层的根，根下有<strong>控件集合</strong>（能放多个控件的控件）和<strong>控件</strong>。<br><img src="/2016/08/14/Android事件/event1.png" alt=""></p>
 <h3><span id="基于事件的战争">基于事件的战争</span></h3><p>netscape 和 微软 曾经的战争还是比较火热的，当时， netscape 主张捕获方式，微软主张冒泡方式。后来 w3c 采用折中的方式，平息了战火，制定了统一的标准——先捕获再冒泡。<br><img src="/2016/08/14/Android事件/event2.png" alt=""></p>
 <h3><span id="android事件探索">Android事件探索</span></h3><p>Android事件的触发是底层的传感器，然后把这事件交给了Acitvity，Activity通<strong>dispatchTouchEvent()</strong>把事件派发出来。交给ViewRoot，ViewRoot在把事件派发出去，如果子控件是ViewGroup就对ViewGroup进行递归派发，直到最上层的控件，然后事件从最上层的控件再往底层流动，这个时候掉用的是<strong>onTouchEvent()</strong>，如有控件对这个事件感兴趣，也就是<strong>onTouchEvent()</strong>返回true，这个事件就认为被消费掉了，如果没有控件对这个事件感兴趣最后就回到了Activity。</p>
-<h4><span id="motionevent">MotionEvent</span></h4><p>这个类存储了关于事件的全部信息。当你的手指按下的时候，会产生一个事件，这个事件包括当前你事件的时候，几个手指按下，按下的坐标位置等等。详情看<a href="http://caobugs.com/2016/08/13/Android事件-MotionEvent/" target="_blank" rel="external">Android事件-MotionEvent</a>，这个可以算是事件的一个基础。</p>
+<h4><span id="motionevent">MotionEvent</span></h4><p>这个类存储了关于事件的全部信息。当你的手指按下的时候，会产生一个事件，这个事件包括当前你事件的时候，几个手指按下，按下的坐标位置等等。详情看<a href="http://caobugs.com/2016/08/13/Android事件-MotionEvent/">Android事件-MotionEvent</a>，这个可以算是事件的一个基础。</p>
 <h3><span id="ontouchevent">onTouchEvent()</span></h3><h4><span id="没有被消费的事件">没有被消费的事件</span></h4><p>现在我们有一个Activity，加载了一个ViewGroup容器，ViewGroup里面有一个View。当点击View的时候。事件会从Activity的<strong>dispatchTouchEvent()</strong>开始分发，分发到Activity的子类，也就是ViewGroup，因为ViewGroup是一个容器，事件会递归分发到ViewGroup的每个子控件，因为这例子中ViewGroup就一个子类，分发给View，View是控件的最上级。View调用自己的<strong>onTouchEvent()</strong>，一直往上调用，直到最底层的Activity。</p>
 <p>如果这个事件没被消费，当移动和抬起的时候，Android直接从Activity的<strong>dispatchTouchEvent()</strong>到Activity的<strong>onTouchEvent()</strong>。</p>
 <p><img src="/2016/08/14/Android事件/liuc.png" alt=""></p>
@@ -360,8 +357,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "http-caobugs-com";
-    var disqus_identifier = "http://yoursite-url/2016/08/14/Android事件/";
-    var disqus_url = "http://yoursite-url/2016/08/14/Android事件/";
+    var disqus_identifier = "http://caobugs.com/2016/08/14/Android事件/";
+    var disqus_url = "http://caobugs.com/2016/08/14/Android事件/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -521,7 +518,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("http://yoursite-url/js/jquery.tagcloud.js",function(){
+        async("http://caobugs.com/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -586,7 +583,7 @@
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 <!-- Image to hack wechat -->
-<img src="http://yoursite-url/img/icon_wechat.png" width="0" height="0" />
+<img src="http://caobugs.com/img/icon_wechat.png" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>
