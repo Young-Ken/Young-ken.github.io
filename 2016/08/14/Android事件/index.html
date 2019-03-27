@@ -17,6 +17,7 @@
         
     </title>
     <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
+    <meta name="baidu-site-verification" content="E7rirbKfgT" />
     <link rel="canonical" href="http://caobugs.com/2016/08/14/Android事件/">
 
     <!-- Bootstrap Core CSS -->
@@ -139,14 +140,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -216,60 +217,81 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="android事件探索">Android事件探索</span></h2><p>在人机交互之后，出现了我们要探索的事件的概念，这个事件是用来和计算机进行交互的。</p>
-<h3><span id="页面布局基于树形结构的思考">页面布局基于树形结构的思考</span></h3><blockquote>
+                <h2><span id="android事件探索">Android事件探索</span></h2>
+<p>在人机交互之后，出现了我们要探索的事件的概念，这个事件是用来和计算机进行交互的。</p>
+<h3><span id="页面布局基于树形结构的思考">页面布局基于树形结构的思考</span></h3>
+<blockquote>
 <p>事件是人机交互的重要媒介。</p>
 </blockquote>
-<p>现在我接触过的大部分前段页面都是这样的，一个分层的结构，都会有个最底层的根，根下有<strong>控件集合</strong>（能放多个控件的控件）和<strong>控件</strong>。<br><img src="/2016/08/14/Android事件/event1.png" alt=""></p>
-<h3><span id="基于事件的战争">基于事件的战争</span></h3><p>netscape 和 微软 曾经的战争还是比较火热的，当时， netscape 主张捕获方式，微软主张冒泡方式。后来 w3c 采用折中的方式，平息了战火，制定了统一的标准——先捕获再冒泡。<br><img src="/2016/08/14/Android事件/event2.png" alt=""></p>
-<h3><span id="android事件探索">Android事件探索</span></h3><p>Android事件的触发是底层的传感器，然后把这事件交给了Acitvity，Activity通<strong>dispatchTouchEvent()</strong>把事件派发出来。交给ViewRoot，ViewRoot在把事件派发出去，如果子控件是ViewGroup就对ViewGroup进行递归派发，直到最上层的控件，然后事件从最上层的控件再往底层流动，这个时候掉用的是<strong>onTouchEvent()</strong>，如有控件对这个事件感兴趣，也就是<strong>onTouchEvent()</strong>返回true，这个事件就认为被消费掉了，如果没有控件对这个事件感兴趣最后就回到了Activity。</p>
-<h4><span id="motionevent">MotionEvent</span></h4><p>这个类存储了关于事件的全部信息。当你的手指按下的时候，会产生一个事件，这个事件包括当前你事件的时候，几个手指按下，按下的坐标位置等等。详情看<a href="http://caobugs.com/2016/08/13/Android事件-MotionEvent/">Android事件-MotionEvent</a>，这个可以算是事件的一个基础。</p>
-<h3><span id="ontouchevent">onTouchEvent()</span></h3><h4><span id="没有被消费的事件">没有被消费的事件</span></h4><p>现在我们有一个Activity，加载了一个ViewGroup容器，ViewGroup里面有一个View。当点击View的时候。事件会从Activity的<strong>dispatchTouchEvent()</strong>开始分发，分发到Activity的子类，也就是ViewGroup，因为ViewGroup是一个容器，事件会递归分发到ViewGroup的每个子控件，因为这例子中ViewGroup就一个子类，分发给View，View是控件的最上级。View调用自己的<strong>onTouchEvent()</strong>，一直往上调用，直到最底层的Activity。</p>
-<p>如果这个事件没被消费，当移动和抬起的时候，Android直接从Activity的<strong>dispatchTouchEvent()</strong>到Activity的<strong>onTouchEvent()</strong>。</p>
-<p><img src="/2016/08/14/Android事件/liuc.png" alt=""></p>
-<h4><span id="view消费事件">View消费事件</span></h4><p>如果View的<strong>onTouchEvent()</strong>返回true，那么这个事件就认为被消费掉了，事件将不再继续网上冒泡。但是一定要注意几个点。</p>
-<p><img src="/2016/08/14/Android事件/liucxf.png" alt=""></p>
+<p>现在我接触过的大部分前段页面都是这样的，一个分层的结构，都会有个最底层的根，根下有<strong>控件集合</strong>（能放多个控件的控件）和<strong>控件</strong>。<br>
+<img src="/2016/08/14/Android事件/Android%E4%BA%8B%E4%BB%B6%5Cevent1.png" alt=""></p>
+<h3><span id="基于事件的战争">基于事件的战争</span></h3>
+<p>netscape 和 微软 曾经的战争还是比较火热的，当时， netscape 主张捕获方式，微软主张冒泡方式。后来 w3c 采用折中的方式，平息了战火，制定了统一的标准——先捕获再冒泡。<br>
+<img src="/2016/08/14/Android事件/Android%E4%BA%8B%E4%BB%B6%5Cevent2.png" alt=""></p>
+<h3><span id="android事件探索">Android事件探索</span></h3>
+<p>Android事件的触发是底层的传感器，然后把这事件交给了Acitvity，Activity通<strong>dispatchTouchEvent()<strong>把事件派发出来。交给ViewRoot，ViewRoot在把事件派发出去，如果子控件是ViewGroup就对ViewGroup进行递归派发，直到最上层的控件，然后事件从最上层的控件再往底层流动，这个时候掉用的是</strong>onTouchEvent()</strong>，如有控件对这个事件感兴趣，也就是**onTouchEvent()**返回true，这个事件就认为被消费掉了，如果没有控件对这个事件感兴趣最后就回到了Activity。</p>
+<h4><span id="motionevent">MotionEvent</span></h4>
+<p>这个类存储了关于事件的全部信息。当你的手指按下的时候，会产生一个事件，这个事件包括当前你事件的时候，几个手指按下，按下的坐标位置等等。详情看<a href="http://caobugs.com/2016/08/13/Android%E4%BA%8B%E4%BB%B6-MotionEvent/">Android事件-MotionEvent</a>，这个可以算是事件的一个基础。</p>
+<h3><span id="ontouchevent">onTouchEvent()</span></h3>
+<h4><span id="没有被消费的事件">没有被消费的事件</span></h4>
+<p>现在我们有一个Activity，加载了一个ViewGroup容器，ViewGroup里面有一个View。当点击View的时候。事件会从Activity的<strong>dispatchTouchEvent()<strong>开始分发，分发到Activity的子类，也就是ViewGroup，因为ViewGroup是一个容器，事件会递归分发到ViewGroup的每个子控件，因为这例子中ViewGroup就一个子类，分发给View，View是控件的最上级。View调用自己的</strong>onTouchEvent()</strong>，一直往上调用，直到最底层的Activity。</p>
+<p>如果这个事件没被消费，当移动和抬起的时候，Android直接从Activity的<strong>dispatchTouchEvent()<strong>到Activity的</strong>onTouchEvent()</strong>。</p>
+<p><img src="/2016/08/14/Android事件/Android%E4%BA%8B%E4%BB%B6%5Cliuc.png" alt=""></p>
+<h4><span id="view消费事件">View消费事件</span></h4>
+<p>如果View的**onTouchEvent()**返回true，那么这个事件就认为被消费掉了，事件将不再继续网上冒泡。但是一定要注意几个点。</p>
+<p><img src="/2016/08/14/Android事件/Android%E4%BA%8B%E4%BB%B6%5Cliucxf.png" alt=""></p>
 <ul>
 <li>针对<strong>ACTION_MOVE</strong>和<strong>ACTION_UP</strong>返回true</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">     </div><div class="line">       <span class="keyword">if</span> (event.getAction() == MotionEvent.ACTION_MOVE) &#123;</div><div class="line">           <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(event);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>这个是ViewGroup的代码，我们重写了<strong>onTouchEvent()</strong>方法。这个方法在<strong>ACTION_MOVE</strong>的时候返回true。但是在<strong>ACTION_DOWN</strong>的时候Android认为这个事件没有被关注，所以在<strong>ACTION_MOVE</strong>的时候从Activity的<strong>dispatchTouchEvent()</strong>直接到Activity的<strong>onTouchEvent()</strong>。也就是说这ViewGroup的<strong>onTouchEvent()</strong>在<strong>ACTION_MOVE</strong>的时候根本没有被调用。</p>
+<p>这个是ViewGroup的代码，我们重写了<strong>onTouchEvent()<strong>方法。这个方法在</strong>ACTION_MOVE</strong>的时候返回true。但是在<strong>ACTION_DOWN</strong>的时候Android认为这个事件没有被关注，所以在<strong>ACTION_MOVE</strong>的时候从Activity的<strong>dispatchTouchEvent()<strong>直接到Activity的</strong>onTouchEvent()</strong>。也就是说这ViewGroup的<strong>onTouchEvent()<strong>在</strong>ACTION_MOVE</strong>的时候根本没有被调用。</p>
 <ul>
 <li>针对<strong>ACTION_DOWN</strong>返回true</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">      </div><div class="line">        <span class="keyword">if</span> (event.getAction() == MotionEvent.ACTION_DOWN) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">      </div><div class="line">      	<span class="keyword">if</span> (event.getAction() == MotionEvent.ACTION_UP) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>这个还是ViewGroup得代码，我们重写了<strong>onTouchEvent()</strong>方法。在<strong>ACTION_DOWN</strong>中返回true，这样就认为ViewGroup对这个事件感兴趣，不会在Acitvity的<strong>dispatchTouchEvent()</strong>，直接调用Activity的<strong>onTouchEvent()</strong>，看下面的流程。也就是说，你对你对<strong>ACTION_DOWN</strong>不感兴趣，那么之后的事件就会走捷径。</p>
-<p><img src="/2016/08/14/Android事件/liuc2.png" alt=""></p>
-<h4><span id="当viewgroup变成scrollview">当ViewGroup变成ScrollView</span></h4><p>当把ViewGroup变成ScrollView之后会发生什么，当手指按下的时候，同样View把事件消费掉，<strong>ACTION_DOWN</strong>事件不再冒泡。但是这个时候你移动手指，事件不会从ScrollView的<strong>dispatchTouchEvent()</strong>分发到View，而是直接跳转到了ScrollView的<strong>onTouchEvent()</strong>，这是为什么呢？其实是这样的，在ScrollView中有个函数是这个<strong>onInterceptTouchEvent()</strong>，这是分发事件的拦截，当你的事件是<strong>ACTION_MOVE</strong>，<strong>ACTION_UP</strong>的时候，<strong>onInterceptTouchEvent()</strong>返回true，这事件就不继续分发，直接把事件给ScrollView的<strong>onTouchEvent()</strong>。</p>
-<p><img src="/2016/08/14/Android事件/liucscr.png" alt=""></p>
-<h3><span id="dispatchtouchevent">dispatchTouchEvent()</span></h3><p>上面讲的都是关于<strong>onTouchEvent()</strong>的事件，但是<strong>dispatchTouchEvent()</strong>也很重要。</p>
-<h4><span id="activity的dispathtouchevent返回truefalse">Activity的dispathTouchEvent()返回true/false</span></h4><ul>
-<li><p>整体返回</p>
-<p><strong>dispathTouchEvent()</strong>直接返回，事件接着结束了。</p>
-<p><img src="/2016/08/14/Android事件/dis1.png" alt=""></p>
+<p>这个还是ViewGroup得代码，我们重写了<strong>onTouchEvent()<strong>方法。在</strong>ACTION_DOWN</strong>中返回true，这样就认为ViewGroup对这个事件感兴趣，不会在Acitvity的<strong>dispatchTouchEvent()</strong>，直接调用Activity的<strong>onTouchEvent()</strong>，看下面的流程。也就是说，你对你对<strong>ACTION_DOWN</strong>不感兴趣，那么之后的事件就会走捷径。</p>
+<p><img src="/2016/08/14/Android事件/Android%E4%BA%8B%E4%BB%B6%5Cliuc2.png" alt=""></p>
+<h4><span id="当viewgroup变成scrollview">当ViewGroup变成ScrollView</span></h4>
+<p>当把ViewGroup变成ScrollView之后会发生什么，当手指按下的时候，同样View把事件消费掉，<strong>ACTION_DOWN</strong>事件不再冒泡。但是这个时候你移动手指，事件不会从ScrollView的<strong>dispatchTouchEvent()<strong>分发到View，而是直接跳转到了ScrollView的</strong>onTouchEvent()</strong>，这是为什么呢？其实是这样的，在ScrollView中有个函数是这个<strong>onInterceptTouchEvent()</strong>，这是分发事件的拦截，当你的事件是<strong>ACTION_MOVE</strong>，<strong>ACTION_UP</strong>的时候，<strong>onInterceptTouchEvent()<strong>返回true，这事件就不继续分发，直接把事件给ScrollView的</strong>onTouchEvent()</strong>。</p>
+<p><img src="/2016/08/14/Android事件/Android%E4%BA%8B%E4%BB%B6%5Cliucscr.png" alt=""></p>
+<h3><span id="dispatchtouchevent">dispatchTouchEvent()</span></h3>
+<p>上面讲的都是关于**onTouchEvent()<strong>的事件，但是</strong>dispatchTouchEvent()**也很重要。</p>
+<h4><span id="activity的dispathtouchevent返回truefalse">Activity的dispathTouchEvent()返回true/false</span></h4>
+<ul>
+<li>
+<p>整体返回</p>
+<p>**dispathTouchEvent()**直接返回，事件接着结束了。</p>
+<p><img src="/2016/08/14/Android事件/Android%E4%BA%8B%E4%BB%B6%5Cdis1.png" alt=""></p>
 </li>
-<li><p>根据不同的事件返回</p>
+<li>
+<p>根据不同的事件返回</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dispatchTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (ev.getAction() == MotionEvent.ACTION_MOVE) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.dispatchTouchEvent(ev);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>因为Acitvity的<strong>dispatchTouchEvent()</strong>是程序事件的入口，那么首先执行的是<strong>ACTION_DOWN</strong>，因为这个事件调研的是super的<strong>dispatchTouchEvent()</strong>，那么这个事件将正常的走完事件的流程，在行<strong>ACTION_MOVE</strong>的时候事件被消费掉，当执行到<strong>ACTION_UP</strong>的时候，因为当执行<strong>ACTION_DOWN</strong>的候，<strong>onTouchEvent()</strong>，都不对这个事件感兴趣，那么事件就是走捷径的。自己想一下如是<strong>ACTION_DOWN</strong>的时候返回true时什么样子的。</p>
-<p><img src="/2016/08/14/Android事件/dis2.png" alt=""></p>
+<p>因为Acitvity的<strong>dispatchTouchEvent()<strong>是程序事件的入口，那么首先执行的是</strong>ACTION_DOWN</strong>，因为这个事件调研的是super的<strong>dispatchTouchEvent()</strong>，那么这个事件将正常的走完事件的流程，在行<strong>ACTION_MOVE</strong>的时候事件被消费掉，当执行到<strong>ACTION_UP</strong>的时候，因为当执行<strong>ACTION_DOWN</strong>的候，<strong>onTouchEvent()</strong>，都不对这个事件感兴趣，那么事件就是走捷径的。自己想一下如是<strong>ACTION_DOWN</strong>的时候返回true时什么样子的。</p>
+<p><img src="/2016/08/14/Android事件/Android%E4%BA%8B%E4%BB%B6%5Cdis2.png" alt=""></p>
 </li>
 </ul>
-<h4><span id="viewgroup的dispathtouchevent返回truefalse">ViewGroup的dispathTouchEvent()返回true/false</span></h4><p>ViewGroup的<strong>dispatchTouchEvent()</strong>和Activity的<strong>dispatchTouchEvent()</strong>还是有点区别的。都知道在ViewGroup中还有一个重要的函数，<strong>onInterceptTouchEvent()</strong>，这个事件是拦截事件的，当不想事件继续往下分发了，可以让这个函数返回true，这样就可以调用ViewGroup的<strong>onTouchEvent()</strong>了。<strong>onInterceptTouchEvent()</strong>函数在什么时候执行。只有当ViewGroup的<strong>dispatchTouchEvent()</strong>调用super的时候才调用这个方法。那么ViewGroup的<strong>dispatchTouchEvent()</strong>返回true和false事件有怎么分发呢。</p>
-<p><img src="/2016/08/14/Android事件/dis3.png" alt=""></p>
-<p>这很酷了，首先事件从黑点开始，当ViewGroup的<strong>dispatchTouchEvent()</strong>返回true，很简单事件被消费了，但是当返回false的时候，事件调用上一层（也就是Activity的）的<strong>onTouchEvent()</strong>，记得这个概念，除了最上层的Activity的<strong>dispatchTouchEvent()</strong>返回false，事件被消费掉，其他的都是调用上层的<strong>onTouchEvent()</strong>。只有调用super才能掉用<strong>onInterceptTouchEvent()</strong>，当这个事件返回true的时候，调用ViewGroup的<strong>onTouchEvent()</strong>事件，当返回false和返回suer的时候，会继续分发事件。</p>
-<h4><span id="view的dispathtouchevent返回truefalse">View的dispathTouchEvent()返回true/false</span></h4><p>那么当View的<strong>dispathTouchEvent()</strong>返回false/true怎么样呢。</p>
-<p><img src="/2016/08/14/Android事件/dis4.png" alt=""></p>
-<p>当View的<strong>dispathTouchEvent()</strong>的返回false，会调用上层的<strong>onTouchEvent()</strong>，当返回true的时候会被消费掉，当调用super的时候回调用View的<strong>onTouchEvent()</strong>。</p>
-<h3><span id="总结">总结</span></h3><h4><span id="dispathtouchevent">dispathTouchEvent()</span></h4><ol>
+<h4><span id="viewgroup的dispathtouchevent返回truefalse">ViewGroup的dispathTouchEvent()返回true/false</span></h4>
+<p>ViewGroup的**dispatchTouchEvent()<strong>和Activity的</strong>dispatchTouchEvent()<strong>还是有点区别的。都知道在ViewGroup中还有一个重要的函数，<strong>onInterceptTouchEvent()</strong>，这个事件是拦截事件的，当不想事件继续往下分发了，可以让这个函数返回true，这样就可以调用ViewGroup的</strong>onTouchEvent()**了。**onInterceptTouchEvent()<strong>函数在什么时候执行。只有当ViewGroup的</strong>dispatchTouchEvent()<strong>调用super的时候才调用这个方法。那么ViewGroup的</strong>dispatchTouchEvent()**返回true和false事件有怎么分发呢。</p>
+<p><img src="/2016/08/14/Android事件/Android%E4%BA%8B%E4%BB%B6%5Cdis3.png" alt=""></p>
+<p>这很酷了，首先事件从黑点开始，当ViewGroup的<strong>dispatchTouchEvent()<strong>返回true，很简单事件被消费了，但是当返回false的时候，事件调用上一层（也就是Activity的）的</strong>onTouchEvent()</strong>，记得这个概念，除了最上层的Activity的<strong>dispatchTouchEvent()<strong>返回false，事件被消费掉，其他的都是调用上层的</strong>onTouchEvent()</strong>。只有调用super才能掉用<strong>onInterceptTouchEvent()</strong>，当这个事件返回true的时候，调用ViewGroup的**onTouchEvent()**事件，当返回false和返回suer的时候，会继续分发事件。</p>
+<h4><span id="view的dispathtouchevent返回truefalse">View的dispathTouchEvent()返回true/false</span></h4>
+<p>那么当View的**dispathTouchEvent()**返回false/true怎么样呢。</p>
+<p><img src="/2016/08/14/Android事件/Android%E4%BA%8B%E4%BB%B6%5Cdis4.png" alt=""></p>
+<p>当View的<strong>dispathTouchEvent()<strong>的返回false，会调用上层的</strong>onTouchEvent()</strong>，当返回true的时候会被消费掉，当调用super的时候回调用View的<strong>onTouchEvent()</strong>。</p>
+<h3><span id="总结">总结</span></h3>
+<h4><span id="dispathtouchevent">dispathTouchEvent()</span></h4>
+<ol>
 <li>当Activity返回true/false的时候，事件直接就被消费掉了。</li>
 <li>当ViewGroup和View返回true的时候，事件就被消费掉了，当返回false的时候，调用上一层的<strong>onTouchEvent()</strong>，当ViewGroup调用super的时候，会调用<strong>onInterceptTouchEvent()</strong>，当View调用super的时候，会调用<strong>onTouchEvent()</strong>。</li>
 </ol>
-<h4><span id="onintercepttouchevent">onInterceptTouchEvent()</span></h4><ol>
+<h4><span id="onintercepttouchevent">onInterceptTouchEvent()</span></h4>
+<ol>
 <li>只有ViewGroup才会有这个方法。</li>
 <li>返回true的时候是事件拦截，调用ViewGroup的<strong>onTouchEvent()</strong>。</li>
 <li>调用super/false的时候调用View的<strong>dispathTouchEvent()</strong>。</li>
 </ol>
-<h4><span id="ontouchevent">onTouchEvent()</span></h4><ol>
+<h4><span id="ontouchevent">onTouchEvent()</span></h4>
+<ol>
 <li>当返回true的时候事件被消费掉。</li>
 <li>当返回false/super的时候，事件继续冒泡。</li>
 <li>当<strong>ACTION_DOWN</strong>不被消费的时候，事件会走捷径，也就是<strong>ACTION_MOVE</strong>和<strong>ACTION_UP</strong>不被调用。</li>

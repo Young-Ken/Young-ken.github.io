@@ -17,6 +17,7 @@
         
     </title>
     <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
+    <meta name="baidu-site-verification" content="E7rirbKfgT" />
     <link rel="canonical" href="http://caobugs.com/2016/03/17/Intent广播事件/">
 
     <!-- Bootstrap Core CSS -->
@@ -143,14 +144,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -220,26 +221,41 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="使用intent广播事件">使用Intent广播事件</span></h2><p>作为一个系统级别的消息传递机制，Intent可以在晋城之间发送结构化的消息。因此可以通过实现Broadcast Receiver来监听和响应应用程序的Broadcast Intent。</p>
+                <h2><span id="使用intent广播事件">使用Intent广播事件</span></h2>
+<p>作为一个系统级别的消息传递机制，Intent可以在晋城之间发送结构化的消息。因此可以通过实现Broadcast Receiver来监听和响应应用程序的Broadcast Intent。</p>
 <ol>
-<li><p><strong>使用Intent来广播事件</strong><br>在应用程序组件中，可以构建希望广播的Intent，然后使用sendBroadcast()发送它。</p>
+<li><strong>使用Intent来广播事件</strong><br>
+在应用程序组件中，可以构建希望广播的Intent，然后使用sendBroadcast()发送它。</li>
+</ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"caobugs.com"</span>);</div><div class="line">intent.putExtra(<span class="string">"name"</span>,<span class="string">"Young Ken"</span>);</div><div class="line">sendBroadcast(intent);</div></pre></td></tr></table></figure>
 <p>这样就把广播发出去了。</p>
-</li>
-<li><strong>使用Broadcast Receiver监听广播事件</strong><br>Broadcast Receiver（通常简单的称为接收器）可以监听Broadcast Intent。要使Broadcast Receiver能接受广播，就需要对其进行注册，可以使用代码注册，也可以使用manifest文件中注册。<br>这里要对manifest接收器的应用程序特别说明一下，在Intent广播的时候，程序不一定处于被运行状态。当有匹配的Intent被广播出去的时候，它会被自动启动。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBroadcastReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">//这这里写接收Intent的处理</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<ol start="2">
+<li><strong>使用Broadcast Receiver监听广播事件</strong><br>
+Broadcast Receiver（通常简单的称为接收器）可以监听Broadcast Intent。要使Broadcast Receiver能接受广播，就需要对其进行注册，可以使用代码注册，也可以使用manifest文件中注册。<br>
+这里要对manifest接收器的应用程序特别说明一下，在Intent广播的时候，程序不一定处于被运行状态。当有匹配的Intent被广播出去的时候，它会被自动启动。</li>
 </ol>
-<p>这个类要继承BroadcastReceiver类，并且重写onReceive()，在onReceive()中处理Intent广播，但是这里要注意，处理时间不能超出5秒，不然会显示Force Close对话框。<br>注册Broadcast Receiver主要有两种方式<br><strong>代码注册（动态注册）</strong><br>动态注册就是带代码进行注册<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> IntentFilter intentFilter = <span class="keyword">new</span> IntentFilter(<span class="string">"capbugs.com"</span>);</div><div class="line"><span class="keyword">private</span> MyBroadcastReceiver myBroadcastReceiver = <span class="keyword">new</span> MyBroadcastReceiver();</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">super</span>.onResume();</div><div class="line">    registerReceiver(myBroadcastReceiver, intentFilter);<span class="comment">//注册</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">super</span>.onPause();</div><div class="line">    unregisterReceiver(myBroadcastReceiver);<span class="comment">//取消注册</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这里要非常注意，动态注册一定要取消注册，要不然会出错。<br><strong>manifest注册（静态注册）</strong><br>静态注册就是在主配置文件中进行注册<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">".MyBroadcastReceiver"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"caobugs.com"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBroadcastReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span></span></div><div class="line"><span class="class"></span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span></span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">//这这里写接收Intent的处理</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个类要继承BroadcastReceiver类，并且重写onReceive()，在onReceive()中处理Intent广播，但是这里要注意，处理时间不能超出5秒，不然会显示Force Close对话框。<br>
+注册Broadcast Receiver主要有两种方式<br>
+<strong>代码注册（动态注册）</strong><br>
+动态注册就是带代码进行注册</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> IntentFilter intentFilter = <span class="keyword">new</span> IntentFilter(<span class="string">"capbugs.com"</span>);</div><div class="line"><span class="keyword">private</span> MyBroadcastReceiver myBroadcastReceiver = <span class="keyword">new</span> MyBroadcastReceiver();</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">super</span>.onResume();</div><div class="line">    registerReceiver(myBroadcastReceiver, intentFilter);<span class="comment">//注册</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">super</span>.onPause();</div><div class="line">    unregisterReceiver(myBroadcastReceiver);<span class="comment">//取消注册</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里要非常注意，动态注册一定要取消注册，要不然会出错。<br>
+<strong>manifest注册（静态注册）</strong><br>
+静态注册就是在主配置文件中进行注册</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">".MyBroadcastReceiver"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"caobugs.com"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>这样注册的好处就是不用管理取消注册了，还有一个好处，就是动态注册必须项目启动的时候才能进行注册，要注册开机启动广播，恐怕就无能为力了。</p>
-<ol>
-<li><strong>有序广播</strong><br>有很多的用意程序都注册了这广播，大家都能接收到，有没有让A先收到，B后收到这样的功能呢，答案是肯定的。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"caobugs.com"</span>);</div><div class="line">intent.putExtra(<span class="string">"name"</span>,<span class="string">"Young Ken"</span>);</div><div class="line">sendOrderedBroadcast(intent, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
-</li>
+<ol start="3">
+<li><strong>有序广播</strong><br>
+有很多的用意程序都注册了这广播，大家都能接收到，有没有让A先收到，B后收到这样的功能呢，答案是肯定的。</li>
 </ol>
-<p>调用这样的方法发送的就是有序的广播了，sendOrderedBroadcast()的第一个参数是Intent，第二个是与权限有关的东西，给个null。这样只是发了有序的广播，那么谁决定接收的顺序呢。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">".MyBroadcastReceiver"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span> <span class="attr">android:priority</span>=<span class="string">"100"</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"caobugs.com"</span>/&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"caobugs.com"</span>);</div><div class="line">intent.putExtra(<span class="string">"name"</span>,<span class="string">"Young Ken"</span>);</div><div class="line">sendOrderedBroadcast(intent, <span class="keyword">null</span>);</div></pre></td></tr></table></figure>
+<p>调用这样的方法发送的就是有序的广播了，sendOrderedBroadcast()的第一个参数是Intent，第二个是与权限有关的东西，给个null。这样只是发了有序的广播，那么谁决定接收的顺序呢。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">".MyBroadcastReceiver"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span> <span class="attr">android:priority</span>=<span class="string">"100"</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"caobugs.com"</span>/&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>大家注意priority属性，这个是接收有序广播优先级的属性，值越高优先级越高，也就是越先接收到广播。</p>
-<ol>
-<li><strong>本地广播（Local BroadCast Manager）简介</strong><br>Local BroadCast Manager又叫做本地广播，就是自己的应用程序能接受到这个广播，其他的应用程序接受不到，这样就更加高效，也更加安全。</li>
+<ol start="4">
+<li><strong>本地广播（Local BroadCast Manager）简介</strong><br>
+Local BroadCast Manager又叫做本地广播，就是自己的应用程序能接受到这个广播，其他的应用程序接受不到，这样就更加高效，也更加安全。</li>
 </ol>
 
                 

@@ -17,6 +17,7 @@
         
     </title>
     <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
+    <meta name="baidu-site-verification" content="E7rirbKfgT" />
     <link rel="canonical" href="http://caobugs.com/2016/05/08/Git-分支/">
 
     <!-- Bootstrap Core CSS -->
@@ -137,14 +138,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -214,34 +215,59 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3><span id="分支简介">分支简介</span></h3><p>Git 的分支，其实本质上仅仅是指向提交对象的可变指针。<br>Git 的默认分支名字是 master。 在多次提交操作之后，你其实已经有一个指向最后那个提交对象的 master 分支。 它会在每次的提交操作中自动向前移动。</p>
+                <h3><span id="分支简介">分支简介</span></h3>
+<p>Git 的分支，其实本质上仅仅是指向提交对象的可变指针。<br>
+Git 的默认分支名字是 master。 在多次提交操作之后，你其实已经有一个指向最后那个提交对象的 master 分支。 它会在每次的提交操作中自动向前移动。</p>
 <p><img src="/2016/05/08/Git-分支/branch-and-history.png" alt=""></p>
-<h5><span id="创建分支">创建分支</span></h5><p>创建分支的命令很简单<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch testing</div></pre></td></tr></table></figure></p>
-<p><img src="/2016/05/08/Git-分支/two-branches.png" alt=""><br>创建分支之后的testing指针指向开始的快照,当前只是创建分支，HEAD还指向master</p>
-<h5><span id="查看分支">查看分支</span></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log --oneline --decorate</div></pre></td></tr></table></figure>
-<p>还查看分支的详情<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log --oneline --decorate --graph --all</div></pre></td></tr></table></figure></p>
-<h5><span id="切换分支">切换分支</span></h5><p>这是HEAD指向了当前的分支<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout testing</div></pre></td></tr></table></figure></p>
-<p>创建分支和切换分支可以用一个命令<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -b test1</div></pre></td></tr></table></figure></p>
-<p><img src="/2016/05/08/Git-分支/head-to-testing.png" alt=""><br>这个时候你在修改一个文件，进行提交，你就会发现testing指向一个新的快照<br><img src="/2016/05/08/Git-分支/advance-testing.png" alt=""></p>
-<h2><span id="合并分支">合并分支</span></h2><p>合并分支的命令是<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git merge 合并的分支</div></pre></td></tr></table></figure></p>
+<h5><span id="创建分支">创建分支</span></h5>
+<p>创建分支的命令很简单</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch testing</div></pre></td></tr></table></figure>
+<p><img src="/2016/05/08/Git-分支/two-branches.png" alt=""><br>
+创建分支之后的testing指针指向开始的快照,当前只是创建分支，HEAD还指向master</p>
+<h5><span id="查看分支">查看分支</span></h5>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log --oneline --decorate</div></pre></td></tr></table></figure>
+<p>还查看分支的详情</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log --oneline --decorate --graph --all</div></pre></td></tr></table></figure>
+<h5><span id="切换分支">切换分支</span></h5>
+<p>这是HEAD指向了当前的分支</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout testing</div></pre></td></tr></table></figure>
+<p>创建分支和切换分支可以用一个命令</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -b test1</div></pre></td></tr></table></figure>
+<p><img src="/2016/05/08/Git-分支/head-to-testing.png" alt=""><br>
+这个时候你在修改一个文件，进行提交，你就会发现testing指向一个新的快照<br>
+<img src="/2016/05/08/Git-分支/advance-testing.png" alt=""></p>
+<h2><span id="合并分支">合并分支</span></h2>
+<p>合并分支的命令是</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git merge 合并的分支</div></pre></td></tr></table></figure>
 <p>这里只讲用收到解决冲突的方式</p>
-<h2><span id="分支管理">分支管理</span></h2><p>查看当前分支<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch</div></pre></td></tr></table></figure></p>
-<p>带星号的是当前分支<br>删除分支<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -d testing</div></pre></td></tr></table></figure></p>
+<h2><span id="分支管理">分支管理</span></h2>
+<p>查看当前分支</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch</div></pre></td></tr></table></figure>
+<p>带星号的是当前分支<br>
+删除分支</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -d testing</div></pre></td></tr></table></figure>
 <p>####用带参数的git log也可以看到分支的合并情况：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log --graph --pretty=oneline --abbrev-commit</div></pre></td></tr></table></figure>
-<h2><span id="github上提交代码">GitHub上提交代码</span></h2><ol>
+<h2><span id="github上提交代码">GitHub上提交代码</span></h2>
+<ol>
 <li>在GitHub上创建一个仓库</li>
-<li><p>和GitHub关联</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin ssh.git</div></pre></td></tr></table></figure>
-</li>
-<li><p>提交代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
-</li>
+<li>和GitHub关联</li>
 </ol>
-<h2><span id="管理远程版本库">管理远程版本库</span></h2><h5><span id="查看远程仓库">查看远程仓库</span></h5><p>查看远程库命令<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote -v</div></pre></td></tr></table></figure></p>
-<p>删除远程库名字<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote rm paul</div></pre></td></tr></table></figure></p>
-<p>重命名远程库<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote rename pb paul</div></pre></td></tr></table></figure></p>
-<p>推送代码到远程库<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin ssh.git</div></pre></td></tr></table></figure>
+<ol start="3">
+<li>提交代码</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
+<h2><span id="管理远程版本库">管理远程版本库</span></h2>
+<h5><span id="查看远程仓库">查看远程仓库</span></h5>
+<p>查看远程库命令</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote -v</div></pre></td></tr></table></figure>
+<p>删除远程库名字</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote rm paul</div></pre></td></tr></table></figure>
+<p>重命名远程库</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote rename pb paul</div></pre></td></tr></table></figure>
+<p>推送代码到远程库</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
 
                 
 

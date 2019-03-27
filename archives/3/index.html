@@ -17,6 +17,7 @@
         
     </title>
     <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
+    <meta name="baidu-site-verification" content="E7rirbKfgT" />
     <link rel="canonical" href="http://caobugs.com/archives/3/">
 
     <!-- Bootstrap Core CSS -->
@@ -131,14 +132,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -223,8 +224,10 @@
             
         </h3>
         <div class="post-content-preview">
-            创建Activity在zygote fork一个子进程，这个就是App的进程，这个App的入口函数就是ActivityThread的main函数。
-performLaunchActivity 分析1234567891011121314151617181920212223242526272829303132333435private Activity performLaunchActivity......
+            创建Activity
+在zygote fork一个子进程，这个就是App的进程，这个App的入口函数就是ActivityThread的main函数。
+performLaunchActivity 分析
+1234567891011121314151617181920212223242526272829303132333435private Activity performLaunchActivi......
         </div>
     </a>
     
@@ -254,8 +257,10 @@ performLaunchActivity 分析1234567891011121314151617181920212223242526272829303
             
         </h3>
         <div class="post-content-preview">
-            SystemServer详解SystemServer是zygote fork来的，SystemServer正如其名，和系统服务有着重要关系。Android系统中几乎所有的核心Service都在这个进程中，如ActivityManagerService、PowerManagerService和WindowManagerService等。
-startSystemServcer请看上一篇文章“An......
+            SystemServer详解
+SystemServer是zygote fork来的，SystemServer正如其名，和系统服务有着重要关系。Android系统中几乎所有的核心Service都在这个进程中，如ActivityManagerService、PowerManagerService和WindowManagerService等。
+startSystemServcer
+请看上一篇文章“......
         </div>
     </a>
     
@@ -285,9 +290,11 @@ startSystemServcer请看上一篇文章“An......
             
         </h3>
         <div class="post-content-preview">
-            ZygoteZygote 中文的意思是“受精卵”，是Native的应用程序，与驱动内核没有关系，它是由inti fork从来的。
-app_mainframeworks/base/cmds/app_process/app_main.cpp
-12345678910111213141516171819202122232425262728293031323334int main(int argc, ......
+            Zygote
+Zygote 中文的意思是“受精卵”，是Native的应用程序，与驱动内核没有关系，它是由inti fork从来的。
+app_main
+frameworks/base/cmds/app_process/app_main.cpp
+12345678910111213141516171819202122232425262728293031323334int main(int argc......
         </div>
     </a>
     
@@ -318,10 +325,11 @@ app_mainframeworks/base/cmds/app_process/app_main.cpp
         </h3>
         <div class="post-content-preview">
             Binder 为什么出现？
+
 binder 是Android系统进程的通讯方式。
 
 Liunx IPC有system V IPC，socket等方式，但是因为socket因为效率低，开销大不。而System V IPC 会导全局的内核资源泄漏。还有一点就是出于安全考虑。
-这个时候Binder就出现了，Binder采用的是Client-Server的通讯方式，一个进行作为Server提供服务（地......
+这个时候Binder就出现了，Binder采用的是Client-Server的通讯方式，一个进行作为Server提供服务（......
         </div>
     </a>
     
@@ -351,11 +359,14 @@ Liunx IPC有system V IPC，socket等方式，但是因为socket因为效率低�
             
         </h3>
         <div class="post-content-preview">
-            集中趋势评价数
+            集中趋势
+评价数
+
 平均数（Mean）、均值是统计中的一个重要概念。为集中趋势的最常用测度值，目的是确定一组数据的均衡点。
 
 中位数
-中位数（又称中值，英语：Median），统计学中的专有名词，代表一个样本、种群或概率分布中的一个数值，其可将数值集合划分为相等的上下两部分。对于有限的数集，可以通过把所有观察值高低排序后找出正中间的一个作为中位数。如果观察值有偶数个，则中位数不唯一，通常取最中间的......
+
+中位数（又称中值，英语：Median），统计学中的专有名词，代表一个样本、种群或概率分布中的一个数值，其可将数值集合划分为相等的上下两部分。对于有限的数集，可以通过把所有观察值高低排序后找出正中间的一个作为中位数。如果观察值有偶数个，则中位数不唯一，通常取最......
         </div>
     </a>
     
@@ -383,13 +394,18 @@ Liunx IPC有system V IPC，socket等方式，但是因为socket因为效率低�
             
         </h3>
         <div class="post-content-preview">
-            概述引言
+            概述
+引言
+
 TCP/IP是起源于美国政府资助的一个项目，到90年代发展成为计算机最常用的组网形式。
 
 分层
+
+
 链路层
 
 也被成为数据链路层， 网络接口层 ，通常是设备驱动程序及接口卡
+
 
 
 网络层
@@ -397,18 +413,17 @@ TCP/IP是起源于美国政府资助的一个项目，到90年代发展成为计
 也被称为互联网层，在TCP/IP协议族中，网络层协议包括IP协议，IPMP协议，以及IGMP协议
 
 
+
 运输层
 
 两台主机端对端的通讯。
 
 
+
 应用层
 
 应用层负责处理特定的应用程序细节。
-
-
-
-FTP是......
+......
         </div>
     </a>
     
@@ -436,9 +451,10 @@ FTP是......
             
         </h3>
         <div class="post-content-preview">
-            Volatile详解在java语言中有两种同步机制，分别是同步块和Volatile。这两个方式都是为了保证线程安全的，但是其中的Volatile的同步性能差。
+            Volatile详解
+在java语言中有两种同步机制，分别是同步块和Volatile。这两个方式都是为了保证线程安全的，但是其中的Volatile的同步性能差。
 Java中Volatile变量可以看做是一种轻量级的synchronized；同synchronized对比，Volatile使用更加简单，运行开销更加小，它的功能只是synchronized的一部分。
-锁主要有两个特性：互斥（mut......
+锁主要有两个特性：互斥（mu......
         </div>
     </a>
     
@@ -465,6 +481,7 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
         </h3>
         <div class="post-content-preview">
             抽象
+
 抽象是指对一个过程或者一件制品的某些细节有目的的隐藏，以便把其他方面、细节或者结构表达的更加清楚。
 
 我们的大脑有有意识的隐藏了一些细节，这样能把问题集中在主要的特征上。
@@ -472,8 +489,12 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
 信息隐藏是指在抽象的表现开发过程中有目的的忽略细节。
 
 门和门铃
-面型对象设计（略）类和方法消息、实例和初始化消息的传递的语法消息传递这个术语来表示请求对象执行一项特定的动态过程。
-一个消息分为接收器、选择器、参数......
+面型对象设计（略）
+类和方法
+消息、实例和初始化
+消息的传递的语法
+消息传递这个术语来表示请求对象执行一项特定的动态过程。
+一个消息分为接收器、选......
         </div>
     </a>
     
@@ -502,15 +523,19 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
             
 还原科技的本质 剥离它天生的骄傲
 
-测量学怎么确定地图上的一个点？（参考是地球）
+测量学
+怎么确定地图上的一个点？（参考是地球）
 地球表面
+
 这个定义太难了，我不会
 
 大地水准面(大地基准面)
+
 大地水准面被定义为地球重力场的表面，它与平均海平面大致相同。因为这个平面和重力垂直，但是因为地球不是质量均匀的球体，所以大地基准面不是规则的图形。大地水准面是描述地球形状的一个重要物理参考面，也是海拔高程系统的起算面。
 
 椭球体
-因为地球表面凹凸不......
+
+因为地球表......
         </div>
     </a>
     
@@ -538,12 +563,16 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
             
         </h3>
         <div class="post-content-preview">
-            地图故事自从石器时代，人类开始制作地图。其中最早的地图在公元前6200年于土耳其地区出现。此处省略好多字…
+            地图故事
+自从石器时代，人类开始制作地图。其中最早的地图在公元前6200年于土耳其地区出现。
+此处省略好多字…
 地理信息系统
+
 地理信息系统（英语：Geographic Information System，缩写：GIS）是一门综合性学科，结合地理学与地图学，已经广泛的应用在不同的领域，是用于输入、存储、查询、分析和显示地理数据的计算机系统。
 
 地图学
-地图学:是研究地图的理论、编制技术与应用方法......
+
+地图学:是研究地图的理论、编制技术与......
         </div>
     </a>
     
@@ -619,13 +648,13 @@ Java中Volatile变量可以看做是一种轻量级的synchronized；同synchron
             
         
             
+        
+            
+        
+            
+        
+            
             <a href="/tags/#Android 事件" title="Android 事件" rel="2">Android 事件</a>
-            
-        
-            
-        
-            
-        
             
         
             

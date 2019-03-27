@@ -17,6 +17,7 @@
         
     </title>
     <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
+    <meta name="baidu-site-verification" content="E7rirbKfgT" />
     <link rel="canonical" href="http://caobugs.com/2016/03/17/Linkify简介/">
 
     <!-- Bootstrap Core CSS -->
@@ -141,14 +142,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -218,10 +219,14 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="linkify简介">Linkify简介</span></h2><p>Linkify是一个辅助类，它会自动在TextView类中通过RegEx模式匹配来创建超链接。这样说可能不明白，举个例子，我们收到短信的时候，对方给我们发的是电话号码，你发现电话号码是蓝色字体（什么颜色的都有），你点击这个电话，直接跳到了打电话的界面，电话拨出去了，这么高大上的功能就是Linkify实现的。</p>
-<p>Linkify类有一些预设的值检测都Web URL、电子邮件、电话号码等，并把它转成链接。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TextView textView = (TextView) findViewById(R.id.text);</div><div class="line">Linkify.addLinks(textView, Linkify.WEB_URLS|Linkify.EMAIL_ADDRESSES);</div></pre></td></tr></table></figure></p>
-<p>下面是XML布局<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line"><span class="tag">      <span class="attr">android:id</span>=<span class="string">"@+id/text"</span></span></div><div class="line"><span class="tag">      <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">      <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">      <span class="attr">android:text</span>=<span class="string">"网站 ：caobugs.com (草 ！BUGs) 邮箱 caobugs.com@gmail.com"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
-<p>你也可以直接在XML布局上设置，主要通过android：autoLink属性设置，而且还能同时设置多个值。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/text"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:autoLink</span>=<span class="string">"email|web"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"网站 ：caobugs.com 邮箱 caobugs.com@gmail.com"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+                <h2><span id="linkify简介">Linkify简介</span></h2>
+<p>Linkify是一个辅助类，它会自动在TextView类中通过RegEx模式匹配来创建超链接。这样说可能不明白，举个例子，我们收到短信的时候，对方给我们发的是电话号码，你发现电话号码是蓝色字体（什么颜色的都有），你点击这个电话，直接跳到了打电话的界面，电话拨出去了，这么高大上的功能就是Linkify实现的。</p>
+<p>Linkify类有一些预设的值检测都Web URL、电子邮件、电话号码等，并把它转成链接。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TextView textView = (TextView) findViewById(R.id.text);</div><div class="line">Linkify.addLinks(textView, Linkify.WEB_URLS|Linkify.EMAIL_ADDRESSES);</div></pre></td></tr></table></figure>
+<p>下面是XML布局</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line"><span class="tag">      <span class="attr">android:id</span>=<span class="string">"@+id/text"</span></span></div><div class="line"><span class="tag">      <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">      <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">      <span class="attr">android:text</span>=<span class="string">"网站 ：caobugs.com (草 ！BUGs) 邮箱 caobugs.com@gmail.com"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>你也可以直接在XML布局上设置，主要通过android：autoLink属性设置，而且还能同时设置多个值。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/text"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:autoLink</span>=<span class="string">"email|web"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"网站 ：caobugs.com 邮箱 caobugs.com@gmail.com"</span>/&gt;</span></div></pre></td></tr></table></figure>
 
                 
 

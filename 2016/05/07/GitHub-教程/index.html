@@ -17,6 +17,7 @@
         
     </title>
     <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
+    <meta name="baidu-site-verification" content="E7rirbKfgT" />
     <link rel="canonical" href="http://caobugs.com/2016/05/07/GitHub-教程/">
 
     <!-- Bootstrap Core CSS -->
@@ -137,14 +138,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -214,84 +215,114 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="git简介">Git简介</span></h2><p>Git是世界上最先进的版本控，没有之一；</p>
-<h3><span id="git-诞生史">Git 诞生史</span></h3><ul>
+                <h2><span id="git简介">Git简介</span></h2>
+<p>Git是世界上最先进的版本控，没有之一；</p>
+<h3><span id="git-诞生史">Git 诞生史</span></h3>
+<ul>
 <li>Linus在1991年创建了开源的Linux；</li>
 <li>在2002年以前，Liuns通过手工完成代码的合成，以为Liunx代码量很大，Liuns没有办法通过手工的方式合成代码，BitMover公司提供了一个免费的版本控制系统；</li>
 <li>2005Liunx社区破解BitMover协议，被BitMover发现，收回免费版本。</li>
 <li>重点来了：Linus花了两周时间自己用C写了一个分布式版本控制系统，这就是Git！一个月后Liunx用Git管理，牛逼的定义就是这样了。每次看到这里都血脉膨胀啊！！！</li>
-<li>2008年，GitHub网站上线了。<br><img src="/2016/05/07/GitHub-教程/liuns.jpg" alt=""></li>
+<li>2008年，GitHub网站上线了。<br>
+<img src="/2016/05/07/GitHub-教程/liuns.jpg" alt=""></li>
 </ul>
-<h3><span id="git和github的关系">Git和GitHub的关系</span></h3><ul>
+<h3><span id="git和github的关系">Git和GitHub的关系</span></h3>
+<ul>
 <li>git是一个版本控制工具；</li>
 <li>github是一个用git做版本控制的项目托管平台；</li>
 </ul>
-<h3><span id="git和svn的区别">Git和Svn的区别</span></h3><p>Svn是集中控制的方式，也就是一个服务端和多个客户端；</p>
+<h3><span id="git和svn的区别">Git和Svn的区别</span></h3>
+<p>Svn是集中控制的方式，也就是一个服务端和多个客户端；</p>
 <ul>
-<li>缺点：<br>1.如果主机出现了问题，都不能工作；<br>2.主机坏了，数据将丢失；<br>3.必须连接网络才能工作；</li>
+<li>缺点：<br>
+1.如果主机出现了问题，都不能工作；<br>
+2.主机坏了，数据将丢失；<br>
+3.必须连接网络才能工作；</li>
 </ul>
 <p>Git是分布式版本控制系统，每个主机上都有完整的代码（这里也有一个中央服务，它的作用只是交换合并代码的时候有用）</p>
 <ul>
-<li>优点<br>1.因为每个主机上都有完整的代码，主机坏了一样有代码；<br>2.没有网络也能提交代码，因为每个主机上都能有一个完整的代码库；</li>
+<li>优点<br>
+1.因为每个主机上都有完整的代码，主机坏了一样有代码；<br>
+2.没有网络也能提交代码，因为每个主机上都能有一个完整的代码库；</li>
 </ul>
-<h2><span id="git的安装和使用">Git的安装和使用</span></h2><h3><span id="git的安装">Git的安装</span></h3><p>Liunx的安装<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git</div><div class="line">The program <span class="string">'git'</span> is currently not installed. You can install it by typing:</div><div class="line">$ sudo apt-get install git</div><div class="line">$ git --version</div></pre></td></tr></table></figure></p>
-<p>Window安装<br>下载软件</p>
-<p>配置用户信息<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"Your Name"</span></div><div class="line">$ git config --global user.email <span class="string">"email@example.com"</span></div></pre></td></tr></table></figure></p>
-<p>查看配置config命令<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config -l</div></pre></td></tr></table></figure></p>
-<h3><span id="git的使用">Git的使用</span></h3><h4><span id="创建版本库和常用命令">创建版本库和常用命令</span></h4><p>创建版本库就是创建一个文件夹，这个文件夹的下代码和文件会被Git跟踪，以便追踪历史，在某个时刻进行还原。</p>
+<h2><span id="git的安装和使用">Git的安装和使用</span></h2>
+<h3><span id="git的安装">Git的安装</span></h3>
+<p>Liunx的安装</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git</div><div class="line">The program <span class="string">'git'</span> is currently not installed. You can install it by typing:</div><div class="line">$ sudo apt-get install git</div><div class="line">$ git --version</div></pre></td></tr></table></figure>
+<p>Window安装<br>
+下载软件</p>
+<p>配置用户信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"Your Name"</span></div><div class="line">$ git config --global user.email <span class="string">"email@example.com"</span></div></pre></td></tr></table></figure>
+<p>查看配置config命令</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config -l</div></pre></td></tr></table></figure>
+<h3><span id="git的使用">Git的使用</span></h3>
+<h4><span id="创建版本库和常用命令">创建版本库和常用命令</span></h4>
+<p>创建版本库就是创建一个文件夹，这个文件夹的下代码和文件会被Git跟踪，以便追踪历史，在某个时刻进行还原。</p>
 <ul>
-<li><p>创建版本库命令;</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
-</li>
-<li><p>在版本库中添加一个文件，手动创建一个文件，随便来一个；</p>
-</li>
-<li>查看版本库中文件的状态命令;<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git status</div></pre></td></tr></table></figure>
-</li>
+<li>创建版本库命令;</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
+<ul>
+<li>在版本库中添加一个文件，手动创建一个文件，随便来一个；</li>
+<li>查看版本库中文件的状态命令;</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git status</div></pre></td></tr></table></figure>
 <p>这个时候看见的状态是这样的，这个时候会到新建的文件是红色的，这个状态表明新建文件没有被跟踪</p>
 <ul>
-<li><p>添加文件跟踪，不文件暂存起来;</p>
+<li>添加文件跟踪，不文件暂存起来;</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add 文件名</div></pre></td></tr></table></figure>
-</li>
-<li><p>提交到版本库;<br>现在你已经创建了第一个提交！可以看到，提交后它会告诉你，当前是在哪个分支（master）提交的，本次提交的完整 SHA-1 校验和是什么（463dc4f），以及在本次提交中，有多少文件修订过，多少行添改和删改过。</p>
+<ul>
+<li>提交到版本库;<br>
+现在你已经创建了第一个提交！可以看到，提交后它会告诉你，当前是在哪个分支（master）提交的，本次提交的完整 SHA-1 校验和是什么（463dc4f），以及在本次提交中，有多少文件修订过，多少行添改和删改过。</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">"注释"</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>这里面有个简单的小问题，如果你对已经暂存的文件进行修改就会发现这个文件有两个状态，一个是暂存的状态，一个是没有暂存的状态，这个时候执行commit就会提交暂存状态的文件，解决方案从新add一次;</p>
-</li>
-<li><p>gitignore文件 忽略文件;</p>
+<ul>
+<li>这里面有个简单的小问题，如果你对已经暂存的文件进行修改就会发现这个文件有两个状态，一个是暂存的状态，一个是没有暂存的状态，这个时候执行commit就会提交暂存状态的文件，解决方案从新add一次;</li>
+<li>gitignore文件 忽略文件;</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">此为注释 – 将被 Git 忽略</div><div class="line">*.a       # 忽略所有 .a 结尾的文件</div><div class="line">!lib.a    # 但 lib.a 除外</div><div class="line">/TODO     # 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</div><div class="line">build/    # 忽略 build/ 目录下的所有文件</div><div class="line">doc<span class="comment">/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>查看文件暂存的时候和现在的不同;</p>
+<ul>
+<li>查看文件暂存的时候和现在的不同;</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff 文件名</div></pre></td></tr></table></figure>
-</li>
-<li><p>查看文件暂存之后的不同;</p>
+<ul>
+<li>查看文件暂存之后的不同;</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff --staged</div></pre></td></tr></table></figure>
-</li>
+<h4><span id="常用命令之查看提交历史">常用命令之查看提交历史</span></h4>
+<ul>
+<li>查看log</li>
 </ul>
-<h4><span id="常用命令之查看提交历史">常用命令之查看提交历史</span></h4><ul>
-<li><p>查看log</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log</div></pre></td></tr></table></figure>
-</li>
-<li><p>简单查看log</p>
+<ul>
+<li>简单查看log</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log --pretty=oneline</div></pre></td></tr></table></figure>
-</li>
-<li><p>时光穿梭机</p>
+<ul>
+<li>时光穿梭机</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard <span class="number">3628164</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>可以简单写回到上个版本 ~100 上100个版本<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard HEAD^</div></pre></td></tr></table></figure></p>
-<p>如果回到第一个版本那么找到头文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reflog</div></pre></td></tr></table></figure></p>
+<p>可以简单写回到上个版本 ~100 上100个版本</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard HEAD^</div></pre></td></tr></table></figure>
+<p>如果回到第一个版本那么找到头文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reflog</div></pre></td></tr></table></figure>
 <ul>
-<li>删除文件;<br>用命令删除文件<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rm 文件名</div></pre></td></tr></table></figure>
-</li>
+<li>删除文件;<br>
+用命令删除文件</li>
 </ul>
-<p>这个时候只是删除了文件的，但在Gis中这个文件还在被跟踪，没有被删除<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rm 文件名</div></pre></td></tr></table></figure></p>
-<p>这个时候在git中删除文件<br>注意这个命令会删除文件，但是有的时候我们不想删除文件，只是不想跟踪这个文件了怎么办<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rm --cached 文件名</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rm 文件名</div></pre></td></tr></table></figure>
+<p>这个时候只是删除了文件的，但在Gis中这个文件还在被跟踪，没有被删除</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rm 文件名</div></pre></td></tr></table></figure>
+<p>这个时候在git中删除文件<br>
+注意这个命令会删除文件，但是有的时候我们不想删除文件，只是不想跟踪这个文件了怎么办</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rm --cached 文件名</div></pre></td></tr></table></figure>
 <ul>
-<li>文件从命名<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git mv file_from file_to</div></pre></td></tr></table></figure>
-</li>
+<li>文件从命名</li>
 </ul>
-<p>这里有一个小的问题，如果我在版本库中重新命名了一个文件怎么办<br>这时候先删除这个文件在Git中的暂存状态，然后在从新添加从命名的问题就ok了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git mv file_from file_to</div></pre></td></tr></table></figure>
+<p>这里有一个小的问题，如果我在版本库中重新命名了一个文件怎么办<br>
+这时候先删除这个文件在Git中的暂存状态，然后在从新添加从命名的问题就ok了。</p>
 
                 
 
