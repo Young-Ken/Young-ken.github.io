@@ -137,6 +137,9 @@
                     
 
                         
+                    
+
+                        
                         <li>
                             <a href="/categories/">categories</a>
                         </li>
@@ -145,14 +148,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -215,129 +218,98 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="http超文本传输协议">HTTP超文本传输协议</span></h2>
-<h3><span id="http概述">HTTP概述</span></h3>
-<p><strong>超文本传输协议</strong>（HyperText Transfer Protocol, HTTP）是一种为分布式，合作式，多媒体信息系统服务，面向<strong>应用层</strong>的协议。</p>
-<h4><span id="http的历史">HTTP的历史</span></h4>
-<h5><span id="http09-单行协议">HTTP/0.9 （单行协议）</span></h5>
-<p>HTTP是1990年问世的，现在的HTTTP/0.9指的是就是HTTP/1.0之前的版本。</p>
+                <h2><span id="http超文本传输协议">HTTP超文本传输协议</span></h2><h3><span id="http概述">HTTP概述</span></h3><p><strong>超文本传输协议</strong>（HyperText Transfer Protocol, HTTP）是一种为分布式，合作式，多媒体信息系统服务，面向<strong>应用层</strong>的协议。</p>
+<h4><span id="http的历史">HTTP的历史</span></h4><h5><span id="http09-单行协议">HTTP/0.9 （单行协议）</span></h5><p>HTTP是1990年问世的，现在的HTTTP/0.9指的是就是HTTP/1.0之前的版本。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">GET /mypage.html</div></pre></td></tr></table></figure>
-<h5><span id="http10">HTTP/1.0</span></h5>
-<p>HTTP/1.0是1996年5月份被正式定义出来，现在还有好多的服务器端在使用。</p>
-<h5><span id="http11">HTTP/1.1</span></h5>
-<p>HTTP/1.1版本，是1997年1月被发布出来的，最大的改进是把<code>Keep-Alive</code>变成了默认选项，使<code>管线化（pipelining）</code>成为可能。</p>
-<h4><span id="http的特点">HTTP的特点</span></h4>
-<ul>
-<li>
-<p>简单的</p>
+<h5><span id="http10">HTTP/1.0</span></h5><p>HTTP/1.0是1996年5月份被正式定义出来，现在还有好多的服务器端在使用。</p>
+<h5><span id="http11">HTTP/1.1</span></h5><p>HTTP/1.1版本，是1997年1月被发布出来的，最大的改进是把<code>Keep-Alive</code>变成了默认选项，使<code>管线化（pipelining）</code>成为可能。</p>
+<h4><span id="http的特点">HTTP的特点</span></h4><ul>
+<li><p>简单的</p>
 <p>因为HTTP的头消息都是简单易读读的。</p>
 </li>
-<li>
-<p>可扩展性</p>
+<li><p>可扩展性</p>
 <p>HTTP中头部是可扩展的，常见的请求头加token。</p>
 </li>
-<li>
-<p>无状态性</p>
+<li><p>无状态性</p>
 <p>用一个客户端的两个请求是完全没有关系的，也就是HTTP不具备保存上个请求状态的功能。这样在开发中就有一些麻烦，比如一个客户端已经登录，我从新打开客户端，这个时候客户端又要从新登录，这样就很麻烦。</p>
 </li>
-<li>
-<p>HTTP的链接</p>
+<li><p>HTTP的链接</p>
 <p>在HTTP/0.9的时候，每发一次链接就要进行TCP的握手，然后再TCP断开链接，这是没有链接保持的。但是到了HTTP/1.0版本加入一个<code>Keep-Alive</code>的头，这样就不用每一次请求都进行握手和断开链接了，但是这个属性不是默认有的，需要客户端主动添加。在HTTP/1.1版本就默认添加了。</p>
 </li>
 </ul>
-<h3><span id="协议参数">协议参数</span></h3>
-<h4><span id="http版本">HTTP版本</span></h4>
-<p>HTTP使用&quot;&lt;主要&gt;.&lt;次要&gt;&quot;的编号方案表示协议版本。当发送端有性能提升的时候或者增加了消息的语义增加次要版本号，当消息体有实质的变化的时候增加主版本号，因为1.0的版本和1.1的版本消息实体没有发生变化，因此没有添加大的版本号，但是2.0和1.1大版本号发生了变更，消息实体一定发生了变化。</p>
+<h3><span id="协议参数">协议参数</span></h3><h4><span id="http版本">HTTP版本</span></h4><p>HTTP使用”&lt;主要&gt;.&lt;次要&gt;”的编号方案表示协议版本。当发送端有性能提升的时候或者增加了消息的语义增加次要版本号，当消息体有实质的变化的时候增加主版本号，因为1.0的版本和1.1的版本消息实体没有发生变化，因此没有添加大的版本号，但是2.0和1.1大版本号发生了变更，消息实体一定发生了变化。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HTTP-Version = &quot;HTTP&quot; &quot;/&quot; 1*DIGIT &quot;.&quot; 1*DIGIT</div></pre></td></tr></table></figure>
 <p>例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HTTP/0.9, HTTP/1.0</div></pre></td></tr></table></figure>
-<h4><span id="统一资源标识符uri">统一资源标识符（URI）</span></h4>
-<p><strong>统一资源标识符</strong>（Uniform Resource Identifier，<strong>URI</strong>）是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对网络中（一般指万维网）的资源通过特定的协议进行交互操作。</p>
+<h4><span id="统一资源标识符uri">统一资源标识符（URI）</span></h4><p><strong>统一资源标识符</strong>（Uniform Resource Identifier，<strong>URI</strong>）是一个用于标识某一互联网资源名称的字符串。 该种标识允许用户对网络中（一般指万维网）的资源通过特定的协议进行交互操作。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scheme:[//[user[:password]@]host[:port]][/path][?query][#fragment]</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">                    authority               path</div><div class="line">        ┌───────────────┴───────────────┐┌───┴────┐</div><div class="line">  abc://username:password@example.com:123/path/data?key=value&amp;key2=value2#fragid1</div><div class="line">  └┬┘   └───────┬───────┘ └────┬────┘ └┬┘           └─────────┬─────────┘ └──┬──┘</div><div class="line">scheme  user information     host     port                  query         fragment</div></pre></td></tr></table></figure>
-<h4><span id="统一资源定位符url">统一资源定位符（URL）</span></h4>
-<p><strong>统一资源定位符</strong>或<strong>URL地址</strong>（Uniform Resource Locato，<strong>URL</strong>），有时也被俗称为<strong>网页地址</strong>（<strong>网址</strong>）。</p>
+<h4><span id="统一资源定位符url">统一资源定位符（URL）</span></h4><p><strong>统一资源定位符</strong>或<strong>URL地址</strong>（Uniform Resource Locato，<strong>URL</strong>），有时也被俗称为<strong>网页地址</strong>（<strong>网址</strong>）。</p>
 <p>URL的<code>scheme</code>常见的有<code>http</code>，<code>https</code>，<code>ftp</code>，<code>telnet</code>等等。</p>
-<h5><span id="http的url">HTTP的URL</span></h5>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">                    authority               path</div><div class="line">        ┌───────────────┴───────────────┐┌───┴────┐</div><div class="line">  http://username:password@example.com:123/path/data?key=value&amp;key2=value2#fragid1</div><div class="line">  └┬┘   └───────┬───────┘ └────┬────┘ └┬┘           └─────────┬─────────┘ └──┬──┘</div><div class="line">scheme  user information     host     port                  query         fragment</div></pre></td></tr></table></figure>
+<h5><span id="http的url">HTTP的URL</span></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">                    authority               path</div><div class="line">        ┌───────────────┴───────────────┐┌───┴────┐</div><div class="line">  http://username:password@example.com:123/path/data?key=value&amp;key2=value2#fragid1</div><div class="line">  └┬┘   └───────┬───────┘ └────┬────┘ └┬┘           └─────────┬─────────┘ └──┬──┘</div><div class="line">scheme  user information     host     port                  query         fragment</div></pre></td></tr></table></figure>
 <p>很多同学说，我没有用过后<strong>user information</strong>，这个是个比较含糊的问题，在HTTP1.1规范中没有对这个明确的定义，没有说用，也没有说不让用，没办法之下我们参考了伟大的<code>okhttp</code>框架，这个框架中的注释给了我一些启发。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;h4&gt;Username and Password&lt;/h4&gt;</div><div class="line"></div><div class="line">&lt;p&gt;Username and password are either present, or the empty string &#123;@code &quot;&quot;&#125; if absent. This class offers no mechanism to differentiate empty from absent. Neither of these components are popular in practice. Typically HTTP applications use other mechanisms for user identification and authentication.</div></pre></td></tr></table></figure>
 <p>简单的意思就是最好不要用<strong>user information</strong>，通常，HTTP应用程序使用其他机制进行用户识别和身份验，也就是我们常用的token。</p>
-<h5><span id="fragment">fragment</span></h5>
-<p><code>fragment</code>可以为空，但是<code>fragment</code>不会被发送到服务器，那么他有什么用呢？</p>
+<h5><span id="fragment">fragment</span></h5><p><code>fragment</code>可以为空，但是<code>fragment</code>不会被发送到服务器，那么他有什么用呢？</p>
 <ul>
 <li>可以跳转到相应的标题下，点击下面的这个标题会跳转到3.2.2</li>
 <li>滚动到新的位置但是不加载网页</li>
 </ul>
-<h4><span id="媒体类型">媒体类型</span></h4>
-<p><strong>互联网媒体类型</strong>（Internet media type，也称为<strong>MIME类型</strong>（<strong>MIME type</strong>）或<strong>内容类型</strong>（<strong>content type</strong>））是给互联网上传输的内容赋予的分类类型。</p>
+<h4><span id="媒体类型">媒体类型</span></h4><p><strong>互联网媒体类型</strong>（Internet media type，也称为<strong>MIME类型</strong>（<strong>MIME type</strong>）或<strong>内容类型</strong>（<strong>content type</strong>））是给互联网上传输的内容赋予的分类类型。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">media-type     = type &quot;/&quot; subtype *( &quot;;&quot; parameter )</div><div class="line">type           = token</div><div class="line">subtype        = token</div></pre></td></tr></table></figure>
 <p>一个MIME类型包括一个类型（type），一个子类型（subtype）。此外可以加上一个或多个可选参数（optional parameter）。其格式为</p>
 <p>常见的类型有<code>application</code>、<code>audio</code>、<code>image</code>、<code>multipart</code>、<code>text</code>、<code>Multipart</code>和<code>video</code>。</p>
 <p>子类型名有<code>text</code>、<code>json</code>、<code>xml</code>和<code>form-data</code>等等。</p>
 <p>常见的媒体类型有<code>application/json</code>，<code>application/xml</code>，<code>text/html</code>，<code>audio/mp4</code>，<code>application/octet-stream</code>任意二进制文件。</p>
-<h4><span id="字符集">字符集</span></h4>
-<p><strong>字符集</strong>(Character set)是多个字符的集合，字符集种类较多，每个字符集包含的字符个数不同，常见字符集名称：ASCII字符集、GB2312字符集、BIG5字符集、 GB18030字符集、Unicode字符集等。</p>
+<h4><span id="字符集">字符集</span></h4><p><strong>字符集</strong>(Character set)是多个字符的集合，字符集种类较多，每个字符集包含的字符个数不同，常见字符集名称：ASCII字符集、GB2312字符集、BIG5字符集、 GB18030字符集、Unicode字符集等。</p>
 <p><strong>字符编码</strong>（Character encoding）、<strong>字集码</strong>是把<strong>字符集</strong>中的字符编码为指定集合中某一对象，以便文本在计算机中存储和通过通信网络的传递。</p>
 <blockquote>
-<p>在计算机早期的时候<strong>字符集</strong>、<strong>字符编码</strong>是同一回事情，因为<strong>ASCII <strong>占用了7个bit，最高未用0表示，（也就是128个字符）也就是一个byte，这样</strong>字符集</strong>等于<strong>字符编码</strong>，但是到了现代编码的时代，一个<strong>字符集</strong>对应多个<strong>字符编码</strong>方式。</p>
+<p>在计算机早期的时候<strong>字符集</strong>、<strong>字符编码</strong>是同一回事情，因为<strong>ASCII </strong>占用了7个bit，最高未用0表示，（也就是128个字符）也就是一个byte，这样<strong>字符集</strong>等于<strong>字符编码</strong>，但是到了现代编码的时代，一个<strong>字符集</strong>对应多个<strong>字符编码</strong>方式。</p>
 </blockquote>
 <p><strong>在HTTP中我们用的是字符编码</strong>。</p>
-<h3><span id="http消息message">HTTP消息(Message)</span></h3>
-<p>HTTP消息是服务器和客户端之间交换数据的方式。有两种类型的消息︰ 请求–由客户端发送用来触发一个服务器上的动作；响应–来自服务器的应答。</p>
+<h3><span id="http消息message">HTTP消息(Message)</span></h3><p>HTTP消息是服务器和客户端之间交换数据的方式。有两种类型的消息︰ 请求–由客户端发送用来触发一个服务器上的动作；响应–来自服务器的应答。</p>
 <p>一般的消息体是这样的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">generic-message = start-line</div><div class="line">                        *(message-header CRLF)</div><div class="line">                        CRLF</div><div class="line">                        [ message-body ]</div></pre></td></tr></table></figure>
-<p><img src="/2018/10/13/HTTP超文本传输协议/HTTP%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%5CHTTPMsgStructure2.png" alt=""></p>
+<p><img src="/2018/10/13/HTTP超文本传输协议/HTTPMsgStructure2.png" alt=""></p>
 <ul>
 <li>消息也都有一个<code>start-line</code>，我们通常叫做起始行，起始行是单独的一行，不可用省略。</li>
 <li><code>message-header</code>是一个可选的，可以省略，也可以有多个。</li>
 <li>每个消息头都有一个空行进行分割。</li>
 <li>最后由一个可选的消息体组成。</li>
 </ul>
-<h3><span id="http-请求">HTTP 请求</span></h3>
-<p>HTTP请求是由客户端发出的消息，用来使服务器执行动作。</p>
+<h3><span id="http-请求">HTTP 请求</span></h3><p>HTTP请求是由客户端发出的消息，用来使服务器执行动作。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Request       = Request-Line              </div><div class="line">                       *(( general-header        </div><div class="line">                        | request-header        </div><div class="line">                        | entity-header ) CRLF)  </div><div class="line">                       CRLF</div><div class="line">                       [ message-body ]</div></pre></td></tr></table></figure>
-<h4><span id="请求起始行request-line">请求起始行（Request-Line）</span></h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Request-Line   = Method SP Request-URI SP HTTP-Version CRLF</div></pre></td></tr></table></figure>
+<h4><span id="请求起始行request-line">请求起始行（Request-Line）</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Request-Line   = Method SP Request-URI SP HTTP-Version CRLF</div></pre></td></tr></table></figure>
 <ul>
 <li>HTTP 方法（<code>Method</code>），常见的有<code>get</code>、<code>post</code>、<code>put</code>和<code>delete</code>。</li>
 <li>请求的uri（<code>Request-URI</code>），通常是一个 URL，或者是协议、端口和域名的绝对路径，通常以请求的环境为特征。</li>
 <li>HTTP 版本 (<code>HTTP version</code>)。</li>
 </ul>
-<h4><span id="请求头">请求头</span></h4>
-<p>请求头包括三个方面，<code>general-headers</code>，<code>request-header</code>和<code>entity-header</code>。</p>
-<p><img src="/2018/10/13/HTTP超文本传输协议/HTTP%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%5CHTTP_Request_Headers2.png" alt=""></p>
+<h4><span id="请求头">请求头</span></h4><p>请求头包括三个方面，<code>general-headers</code>，<code>request-header</code>和<code>entity-header</code>。</p>
+<p><img src="/2018/10/13/HTTP超文本传输协议/HTTP_Request_Headers2.png" alt=""></p>
 <ul>
-<li>
-<p><code>general-headers</code>，适用于整个报文。</p>
+<li><p><code>general-headers</code>，适用于整个报文。</p>
 <p><code>Transfer-Encoding</code>，<code>Data</code>，<code>Connection</code>。</p>
 </li>
-<li>
-<p><code>entity-header</code>，适用于请求的 实体。显然，如果请求中没有任何 实体，则不会发送这样的头文件，包括的内容有</p>
-<p><code>Content-Length</code>, <code>Content-Language</code>, <code>Content-Encoding</code>。</p>
+<li><p><code>entity-header</code>，适用于请求的 实体。显然，如果请求中没有任何 实体，则不会发送这样的头文件，包括的内容有</p>
+<p> <code>Content-Length</code>, <code>Content-Language</code>, <code>Content-Encoding</code>。</p>
 </li>
-<li>
-<p><code>request-header</code>，</p>
+<li><p><code>request-header</code>，</p>
 </li>
 </ul>
-<h3><span id="http-响应">HTTP 响应</span></h3>
-<p>在接收并解释请求消息之后，服务器以HTTP响应消息进行响应。</p>
+<h3><span id="http-响应">HTTP 响应</span></h3><p> 在接收并解释请求消息之后，服务器以HTTP响应消息进行响应。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Response      = Status-Line               </div><div class="line">                     *(( general-header        </div><div class="line">                      | response-header        </div><div class="line">                      | entity-header ) CRLF)  </div><div class="line">                     CRLF</div><div class="line">                     [ message-body ]</div></pre></td></tr></table></figure>
-<h4><span id="状态行status-line">状态行（Status-Line）</span></h4>
-<p>表示当前的请求的状态。</p>
+<h4><span id="状态行status-line">状态行（Status-Line）</span></h4><p>表示当前的请求的状态。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF</div></pre></td></tr></table></figure>
 <ul>
 <li>HTTP 版本 (HTTP version)。</li>
 <li>状态码，表明请求是成功或失败。<code>200</code>、<code>404</code>等等。</li>
 <li>状态文本，一个简短的，纯粹的信息，通过状态码的文本描述，帮助人们理解该 HTTP 消息。</li>
 </ul>
-<h4><span id="请求头">请求头</span></h4>
-<p>参考同HTTP请求的请求头。</p>
-<p><img src="/2018/10/13/HTTP超文本传输协议/HTTP%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%5CHTTP_Response_Headers2.png" alt=""></p>
-<h4><span id="请求体">请求体</span></h4>
-<p>响应的最后一部分是 body。不是所有的响应都有 body：具有状态码 (如 <code>201</code>或 <code>204</code>的响应，通常不会有 body。</p>
-<h3><span id="说明">说明</span></h3>
-<ul>
+<h4><span id="请求头">请求头</span></h4><p>参考同HTTP请求的请求头。</p>
+<p><img src="/2018/10/13/HTTP超文本传输协议/HTTP_Response_Headers2.png" alt=""></p>
+<h4><span id="请求体">请求体</span></h4><p>响应的最后一部分是 body。不是所有的响应都有 body：具有状态码 (如 <code>201</code>或 <code>204</code>的响应，通常不会有 body。</p>
+<h3><span id="说明">说明</span></h3><ul>
 <li>在下面的内容中<strong>HTTP规范</strong>如果不强调指的就是<strong>HTTP1.1规范</strong>。</li>
 <li><code>DIGIT</code> = &lt;任意数字0，1，…9&gt;</li>
 <li><code>*</code> = 元素前面的字符<code>*</code>表示重复。完整形式是<n> <code>*</code> <m>元素，表示元素的至少<n>和最多<m>次出现。默认值为0和无穷大，因此“<code>*</code>（元素）”允许任何数字，包括零; “1<code>*</code>元素”至少需要一个;并且“1 <code>*</code> 2element”允许一个或两个。</m></n></m></n></li>

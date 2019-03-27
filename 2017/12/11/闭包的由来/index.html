@@ -139,6 +139,9 @@
                     
 
                         
+                    
+
+                        
                         <li>
                             <a href="/categories/">categories</a>
                         </li>
@@ -147,14 +150,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -217,11 +220,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="闭包的由来">闭包的由来</span></h2>
-<p>我们在开发中经常听到闭包这个概念，为什么要有闭包的概念，我总是感觉闭包这个概念很鸡肋，那么最初设计闭包的人是怎么想的。</p>
-<h3><span id="为什么要有闭包">为什么要有闭包？</span></h3>
-<h4><span id="闭包的定义">闭包的定义</span></h4>
-<p>首先闭包有概念之后才能问上面的问题，先给闭包一个概念。</p>
+                <h2><span id="闭包的由来">闭包的由来</span></h2><p>我们在开发中经常听到闭包这个概念，为什么要有闭包的概念，我总是感觉闭包这个概念很鸡肋，那么最初设计闭包的人是怎么想的。</p>
+<h3><span id="为什么要有闭包">为什么要有闭包？</span></h3><h4><span id="闭包的定义">闭包的定义</span></h4><p>首先闭包有概念之后才能问上面的问题，先给闭包一个概念。</p>
 <blockquote>
 <p>在计算机科学中，<strong>闭包</strong>（英语：Closure），又称<strong>词法闭包</strong>（Lexical Closure）或<strong>函数闭包</strong>（function closures），是引用了自由变量的函数。</p>
 </blockquote>
@@ -232,50 +232,42 @@
 <p>另一种说法认为闭包是由函数和与其相关的引用环境组合而成的实体。</p>
 </blockquote>
 <p>这个定义是<strong>闭包的概念、形式与应用</strong>文章中的定义，看上去没有什么大的区别，但是这里强调的是一个引用环境的整体。看上去还是很难理解，我们先放下概念，回头看能不能自己给出属于自己的定义。</p>
-<h4><span id="闭包的由来">闭包的由来</span></h4>
-<p>计算机的目的就是计算，也可以这样狭隘的理解，计算机要能完成可计算公式的计算和逻辑。要完成这样的事情，需要一套东西去支持。</p>
-<p><strong>阿隆佐邱奇（Alonzo Church）<strong>发明了</strong>Lambda演算</strong>，也就是<strong>λ演算</strong>。</p>
-<h5><span id="lambda演算">Lambda演算</span></h5>
-<blockquote>
+<h4><span id="闭包的由来">闭包的由来</span></h4><p>计算机的目的就是计算，也可以这样狭隘的理解，计算机要能完成可计算公式的计算和逻辑。要完成这样的事情，需要一套东西去支持。</p>
+<p><strong>阿隆佐邱奇（Alonzo Church）</strong>发明了<strong>Lambda演算</strong>，也就是<strong>λ演算</strong>。</p>
+<h5><span id="lambda演算">Lambda演算</span></h5><blockquote>
 <p><strong>λ演算</strong>（英语：lambda calculus，λ-calculus）是一套从数学逻辑中发展，以变量绑定和替换的规则，来研究函数如何抽象化定义、函数如何被应用以及递归的形式系统。</p>
 </blockquote>
 <p>因为这里Lambda演算不是讨论的重点，我举几个简单的例子，让大家明白就好。</p>
 <p>在Lambda演算中，每个表达式都代表一个函数，这个函数有一个参数，并且会返回一个值。也就是说在Lambda演算中只有函数。</p>
 <ol>
-<li>
-<p>Lambda演算的基本定义：</p>
-<p><strong>λx. E</strong>，x是参数，并且有且仅有一个参数，E是函数体。</p>
+<li><p>Lambda演算的基本定义：</p>
+<p> <strong>λx. E</strong>，x是参数，并且有且仅有一个参数，E是函数体。</p>
 </li>
-<li>
-<p>函数的应用：</p>
+<li><p>函数的应用：</p>
 <p><strong>E1 E2</strong>，E1是个函数，E2也是个函数，并且每个函数都有返回值，E2的返回值当成<strong>λx. E</strong>的x，带人到E1的函数中，在返回E1的结果。</p>
 </li>
 </ol>
 <p>这样还是很难理解，再来个个例子。</p>
 <p>现在我们定义一个数学函数f(x) = x + 2，数学意义很明显，就给x加上2。怎么用Lambda演算弄？</p>
 <ol>
-<li>
-<p>Lambda演算的基本定义：</p>
+<li><p>Lambda演算的基本定义：</p>
 <p>λx. x + 2，x是参数，x + 2函数体。</p>
 </li>
-<li>
-<p>函数的应用：</p>
+<li><p>函数的应用：</p>
 <p>当有个参数λa.a 3的时候就是这个样子(λx. x + 2) (λa.a 3)，可以写成也就符合上面的<strong>E1 E2</strong>格式。结果就是(λx. x + 2)3 = 3 + 2 = 5</p>
 </li>
 </ol>
 <p>这里有没有特别的熟悉，说说编程函数定义。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">returnValue funcitonName(parameter)&#123;</div><div class="line">  methodBody</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>假如这个函数只能传入一个参数，那么是不是就是 <strong>λx. E</strong>的简单表达，原来函数的由来可以这样追溯。</p>
-<h5><span id="lambda演算的加法问题">Lambda演算的加法问题</span></h5>
-<p>Lambda演算只支持一个参数，我想计算f(x, y) = x + y怎么算呢，λx y. x + y，这样是违反规则的，不要着急我们可以采用Currying的方式，λx.λy.x + y，调用的时候是这样的（λx.λy.x + y) (7 2) = （λy.7 + y)(2) = (7 + 2) = 9。想一下程序怎样写。</p>
+<h5><span id="lambda演算的加法问题">Lambda演算的加法问题</span></h5><p>Lambda演算只支持一个参数，我想计算f(x, y) = x + y怎么算呢，λx y. x + y，这样是违反规则的，不要着急我们可以采用Currying的方式，λx.λy.x + y，调用的时候是这样的（λx.λy.x + y) (7 2) = （λy.7 + y)(2) = (7 + 2) = 9。想一下程序怎样写。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> (<span class="function"><span class="keyword">function</span>(<span class="params">y</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> x+y;</div><div class="line">&#125;);</div><div class="line">&#125;</div><div class="line">add(<span class="number">100</span>)(<span class="number">12</span>);</div></pre></td></tr></table></figure>
 <p>这个不是闭包吗，我们绕了一大圈终于把闭包的源头找到了，闭包是这样来的。</p>
 <p>现在我们尝试一下给闭包下个定义，首先闭包应该是函数内套用函数，这样我的java世界会来了，因为java是类里面有函数，函数是不能套用函数的(语法是这样的)。</p>
 <blockquote>
 <p><strong>这是尝试下的定义，大家不要全信</strong>，函数本身被当做参数传入函数中，并且函数直接有特殊的作用域。</p>
 </blockquote>
-<h4><span id="相关文章"><strong>相关文章</strong></span></h4>
-<ul>
+<h4><span id="相关文章"><strong>相关文章</strong></span></h4><ul>
 <li><a href="http://cgnail.github.io/academic/lambda-1/" target="_blank" rel="external">我的最爱Lambda演算</a>，一篇关于Lambda演算的文章。</li>
 <li><a href="">维基百科-闭包</a></li>
 </ul>

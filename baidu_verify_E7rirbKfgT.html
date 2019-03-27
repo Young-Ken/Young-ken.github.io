@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          网络-传输层 - 艹! BUGs
+          艹! BUGs
         
     </title>
     <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
-    <link rel="canonical" href="http://caobugs.com/2017/10/16/网络-传输层/">
+    <link rel="canonical" href="http://caobugs.com/baidu_verify_E7rirbKfgT.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('null')
-            /*post*/
+            background-image: url('/undefined')
+            /*page*/
         
     }
     
@@ -83,18 +83,10 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/#网络" title="网络">网络</a>
-                            
-                        </div>
-                        <h1>网络-传输层</h1>
-                        <h2 class="subheading"></h2>
-                        <span class="meta">
-                            Posted by Young Ken on
-                            2017-10-16
-                        </span>
+                    <div class="site-heading">
+                        <h1>艹! BUGs</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">while (1) { study(); }</span>
                     </div>
                 
 
@@ -207,200 +199,264 @@
 
 
     <!-- Main Content -->
-    <!-- Modify by Yu-Hsuan Yen -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-            <!-- Post Container -->
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                E7rirbKfgT
 
-                <h2><span id="传输层">传输层</span></h2><p>传输层和网络层构成网络协议的核心。因为网络层是不可靠的，传输层的目标是让网络层更加可靠。</p>
-<h3><span id="传输层服务">传输层服务</span></h3><h4><span id="给上层提供服务">给上层提供服务</span></h4><p>每个网络协议的重要职责都有给上层提供服务，传输层是针对每个机器的，也就是这个协议都是允许在用户的主机上，网络层是运行在路由器上的。传输层的服务也分为面向链接和无连接服务两种，两种连接都有经过建立链接，数据传输和释放链接三个步骤。</p>
-<h4><span id="传输服务原语">传输服务原语</span></h4><p>看一下TCP的socket的原语。</p>
-<ul>
-<li><p>SOCKET</p>
-<p>创建一个新通信端点</p>
-</li>
-<li><p>BIND</p>
-<p>将套接字与一个本地地址关联</p>
-</li>
-<li><p>LISTEN</p>
-<p>声明愿意接受一个连接，给出队列长度</p>
-</li>
-<li><p>ACCEPT</p>
-<p>被动创建一个入境连接</p>
-</li>
-<li><p>CONNECT</p>
-<p>主动创建一个连接</p>
-</li>
-<li><p>SEND</p>
-<p>通过连接发送一些数据</p>
-</li>
-<li><p>RECEIVE</p>
-<p>从连接上接收一些数据</p>
-</li>
-<li><p>CLOSE</p>
-<p>释放连接</p>
-</li>
-</ul>
-<h3><span id="传输协议的要素">传输协议的要素</span></h3><h4><span id="寻址">寻址</span></h4><p>当一个应用想和另一个应用通信的时候，必须指明那个是那个应用进程上。通常情况下会为每个服务定义一个连接地址，这个连接地址叫做<strong>端口</strong>（port）。</p>
-<h4><span id="连接建立">连接建立</span></h4><p>其实建立连接是比较复杂的事情，涉及到建立连接的包丢失，延时等等问题，我们就具体讨论一下这里的问题。</p>
-<p>我们想象一个场景，用户和一个银行建立连接，给一个账号汇款，这个时候数据包选择了一个新的很绕的路线，不幸的是数据包超时了，发送端补发数据，银行很快就接收到了补发数据，汇款完成。但是开始的那个另辟蹊径的数据包到了，要求建立一个连接并且汇款，问题就这样产生了。</p>
-<p>上面的问题在于从复的数据包，我们针对这问题进行了解决，设计了杀死从复数据包的方案，主要手段是增加了另辟蹊径的数据包的生存难度。</p>
-<ul>
-<li>限制网络设计</li>
-<li>在每个数据包中设置一个跳计数器（好像这个手段很长用啊 ）</li>
-<li>为每个数据包打上时间戳</li>
-</ul>
-<p>为了解决重复包问题，从复建立连接，在传输层采用了<strong>三次握手</strong>的策略。</p>
-<p>A先向B发出一个随机数x，B收到x了以后，发给A另一个随机数y以及x+1作为答复，这样A就知道B已经收到了，因为要破解随机数x可能性并不大；然后A再发回y+1给B，这样B就知道A已经收到了。这样，A和B之间就建立一个可靠的连接，彼此相信对方已经收到并确认了信息。</p>
-<p>而事实上，A并不会知道B是否收到了y+1；并且，由于信道的不可靠性，x或者y都是可能被截获的，这些问题说明了即使是三次握手。</p>
-<p>到现在为止我们一定在想，为什么是三次，两次不行吗，四次呢？这里我们举一个例子说明一下。</p>
-<p>在这里我们引入非常有意思的问题，<strong>两军对垒问题</strong>，现在有两个军队要进行决胜，分别是蓝军和白军。白军被两部分蓝军包围在了山谷里，而只有全部的蓝军一起进攻才能取得胜利。这个时候要你设计一个协议，通知两部分蓝军同时进攻，但是有个前提，送信的信使必须经过白军，白军有概率捕获信使。</p>
-<p><img src="/2017/10/16/网络-传输层/ljdl.png" alt=""></p>
-<p>B1(蓝军1号)写了一封信，说”我们明天10开始进攻”，（这个时间的定义意味着，从现在到明天10点能完成你的协议通讯）。信使如果在送信中被捕，通讯是被。如果成功到达，B2（蓝军2号）会回复B1，“可以啊!”。信使拿着信去B1，如果顺利，信使到达B1。这时候B1知道B2同意进攻了，但是现在有个很重要的问题来了，B2不知道B1是否收到信，所有信使必须在把信送回到B2，告诉B1收到了。</p>
-<p>但是先有个问题，就是B1犹豫了，因为他不知道B2是否收到消息，我们要是设计四次握手呢。这样就无尽循环下去了。这是时候我们利用反证法，也就是最后一条消息非常重要，不可丢失。那么就是三次握手。因为只有第三次握手后才能发动进攻。</p>
-<h4><span id="连接释放">连接释放</span></h4><p>连接建立了，最后要进行断开，同样断开也没那么简单。</p>
-<p>当主机A发送一个释放连接的请求给B，A启动一个定时器。B接到这个请求，也启动了一个定时器，并发送断开连接消息给A，A接到消息断开连接，同样A发送消息给B，B接到消息断开链接，这个是最好的情况。</p>
-<p><img src="/2017/10/16/网络-传输层/dklj.png" alt=""></p>
-<p>这里有个最好的情况，就是(d)，B超时释放连接，A经过多次超时释放连接。</p>
-
+                <!-- 如果开启评论功能 -->
                 
+                    <hr>
 
-                <hr>
-                <!-- Pager -->
-                <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2017/10/20/机器学习-神经网络/" data-toggle="tooltip" data-placement="top" title="机器学习-神经网络">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2017/10/11/网络-网络层-2/" data-toggle="tooltip" data-placement="top" title="网络-网络层(2)">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
 
-                <!-- duoshuo Share start -->
-                
-                <!-- 多说 Share end-->
-
-                <!-- 多说评论框 start -->
-                
-                <!-- 多说评论框 end -->
-
-                <!-- disqus comment start -->
-                
+                    
+                    <!-- disqus 评论框 start -->
                     <div class="comment">
                         <div id="disqus_thread" class="disqus-thread"></div>
                     </div>
-                
-                <!-- disqus comment end -->
-            </div>
-            
-            <!-- Tabe of Content -->
-            <!-- Table of Contents -->
+                    <!-- disqus 评论框 end -->
+                    
 
-    
-      <aside id="sidebar">
-        <div id="toc" class="toc-article">
-        <strong class="toc-title">Contents</strong>
-        
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">传输层</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">传输层服务</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">给上层提供服务</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">传输服务原语</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">传输协议的要素</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">寻址</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">连接建立</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">连接释放</span></a></li></ol></li></ol></li></ol>
-        
-        </div>
-      </aside>
-    
 
-                
-            <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
+                    
 
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#网络" title="网络">网络</a>
+                    
+                    <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES * * */
+                        var disqus_shortname = "http-caobugs-com";
+                        var disqus_identifier = "http://caobugs.com/baidu_verify_E7rirbKfgT.html";
+                        var disqus_url = "http://caobugs.com/baidu_verify_E7rirbKfgT.html";
+
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+
                         
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
+                    </script>
+                    <!-- disqus 公共JS代码 end -->
+                    
                 
             </div>
-        </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+        
+            
+            <a href="/tags/#Android基础篇" title="Android基础篇" rel="6">Android基础篇</a>
+            
+        
+            
+        
+            
+            <a href="/tags/#Android" title="Android" rel="5">Android</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Android 事件" title="Android 事件" rel="2">Android 事件</a>
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#GIS" title="GIS" rel="3">GIS</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#Intent" title="Intent" rel="2">Intent</a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+            <a href="/tags/#网络" title="网络" rel="7">网络</a>
+            
+        
+            
+        
+            
+        
+            
+        
     </div>
-</article>
+</section>
 
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
 
+        
+            <img id = "avatar_pic" src="/image/avatar.png" />
+        
 
+        
+            <p>Hi, i&#39;m Young Ken</p>
+        
 
-<!-- disqus embedded js code start (one page only need to embed once) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "http-caobugs-com";
-    var disqus_identifier = "http://caobugs.com/2017/10/16/网络-传输层/";
-    var disqus_url = "http://caobugs.com/2017/10/16/网络-传输层/";
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+                <li>
+                    <a target="_blank" href="https://twitter.com/Young_Ken_0">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
 
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus embedded js code start end -->
+            
+                <li>
+                    <a target="_blank" href="http://weibo.com/u/5653027877?is_all=1">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
 
+            
 
+            
+                <li>
+                    <a target="_blank"  href="https://github.com/Young-Ken">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+            
+            
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS</h3>
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2019/03/26/Fullter-启动页/">Fullter 启动页</a>
+        </li>
+      
+        <li>
+          <a href="/2018/12/26/HTTPS详解/">HTTPS详解</a>
+        </li>
+      
+        <li>
+          <a href="/2018/11/27/HTTP缓存/">HTTP缓存</a>
+        </li>
+      
+        <li>
+          <a href="/2018/10/13/HTTP超文本传输协议/">HTTP超文本传输协议</a>
+        </li>
+      
+        <li>
+          <a href="/2018/09/07/组件说明/">组件说明</a>
+        </li>
+      
+    </ul>
+  </div>
 
+        <hr>
+    
+        <!-- Friends Blog -->
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'left',
-          icon: 'ℬ'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+        <hr>
+    
+</div>
 
+        
+    </div>
+</div>
 
 
     <!-- Footer -->
