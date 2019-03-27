@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keyword"  content="">
@@ -139,8 +139,11 @@
                     
 
                         
+                    
+
+                        
                         <li>
-                            <a href="/categories/">categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -154,7 +157,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/categories/">categories</a>
                         </li>
                         
                     
@@ -217,59 +220,75 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3><span id="概述">概述</span></h3><h4><span id="引言">引言</span></h4><blockquote>
+                <h3><span id="概述">概述</span></h3>
+<h4><span id="引言">引言</span></h4>
+<blockquote>
 <p>TCP/IP是起源于美国政府资助的一个项目，到90年代发展成为计算机最常用的组网形式。</p>
 </blockquote>
-<h4><span id="分层">分层</span></h4><ul>
-<li><p>链路层</p>
+<h4><span id="分层">分层</span></h4>
+<ul>
+<li>
+<p>链路层</p>
 <blockquote>
 <p>也被成为<strong>数据链路层</strong>， <strong>网络接口层</strong> ，通常是设备驱动程序及接口卡</p>
 </blockquote>
 </li>
-<li><p>网络层</p>
+<li>
+<p>网络层</p>
 <blockquote>
 <p>也被称为<strong>互联网层</strong>，在TCP/IP协议族中，网络层协议包括IP协议，IPMP协议，以及IGMP协议</p>
 </blockquote>
 </li>
-<li><p>运输层</p>
+<li>
+<p>运输层</p>
 <blockquote>
 <p>两台主机端对端的通讯。</p>
 </blockquote>
 </li>
-<li><p>应用层</p>
+<li>
+<p>应用层</p>
 <blockquote>
 <p>应用层负责处理特定的应用程序细节。</p>
 </blockquote>
 </li>
 </ul>
 <p>FTP是应用层协议，TCP、UDP是运输层协议，IP是网络层协议，以太网协议则应用于链路层上。</p>
-<h4><span id="tcpip的分层">TCP/IP的分层</span></h4><p>TCP和UDP都是最为著名的运输层协议，二者都使用IP作为网络协议。</p>
-<h4><span id="互联网的地址">互联网的地址</span></h4><p>互联网上的每个<strong>接口</strong>都必须有唯一一个Internet地址。</p>
-<h4><span id="域名系统">域名系统</span></h4><p>DNS是分布式数据库，它提供域名和地址的对应关系。</p>
-<h3><span id="链路层">链路层</span></h3><p>链路层主要有三个目的</p>
+<h4><span id="tcpip的分层">TCP/IP的分层</span></h4>
+<p>TCP和UDP都是最为著名的运输层协议，二者都使用IP作为网络协议。</p>
+<h4><span id="互联网的地址">互联网的地址</span></h4>
+<p>互联网上的每个<strong>接口</strong>都必须有唯一一个Internet地址。</p>
+<h4><span id="域名系统">域名系统</span></h4>
+<p>DNS是分布式数据库，它提供域名和地址的对应关系。</p>
+<h3><span id="链路层">链路层</span></h3>
+<p>链路层主要有三个目的</p>
 <ol>
 <li>为IP模块发送和接收IP数据报。</li>
 <li>为ARP模块发送ARP请求和接收ARP应答。</li>
 <li>为RARP模块发送RARP请求和接收RARP应答。</li>
 </ol>
-<h3><span id="ip协议">IP协议</span></h3><p>IP是TCP/UDP协议族中最核心的协议。</p>
+<h3><span id="ip协议">IP协议</span></h3>
+<p>IP是TCP/UDP协议族中最核心的协议。</p>
 <ul>
-<li><p>不可靠</p>
+<li>
+<p>不可靠</p>
 <blockquote>
 <p><strong>不可靠</strong> 不可靠的意思是<strong>不能保证IP数据报能成功到达目的地</strong>，要求可靠性必须由上层协议提供。</p>
 </blockquote>
 </li>
-<li><p>无连接</p>
+<li>
+<p>无连接</p>
 <blockquote>
 <p><strong>无连接</strong> IP并不维护任何关于后续数据报的状态信息，每个数据都是相互独立的。IP数据报可以不按顺序发送。</p>
 </blockquote>
 </li>
 </ul>
-<h4><span id="ip的首部">IP的首部</span></h4><p><img src="/2017/05/09/TCP-IP详解-概述/001.png" alt=""></p>
+<h4><span id="ip的首部">IP的首部</span></h4>
+<p><img src="/2017/05/09/TCP-IP详解-概述/001.png" alt=""></p>
 <ul>
 <li>版本号：长度是4比特，（0100 = IP4， 0110 = IP6）</li>
 <li>首部长度：长度4比特。</li>
-<li>服务类型：长度8比特，8位 按位被如下定义 PPP DTRC0，PPP：定义包的优先级，取值越大数据越重要<ul>
+<li>服务类型：长度8比特，8位 按位被如下定义 PPP DTRC0，PPP：定义包的优先级，取值越大数据越重要
+<ul>
 <li>000 普通 (Routine)</li>
 <li>001 优先的 (Priority)</li>
 <li>010 立即的发送 (Immediate)</li>
@@ -285,7 +304,8 @@
 <li>标识：长度3比特。该字段第一位不使用。第二位是DF（Don’t Fragment）位，DF位设为1时表明路由器不能对该上层数据包分段。如果一个上层数据包无法在不分段的情况下进行转发，则路由器会丢弃该上层数据包并返回一个错误信息。第三位是MF（More Fragments）位，当路由器对一个上层数据包分段，则路由器会在除了最后一个分段的IP包的包头中将MF位设为1。</li>
 <li>片位偏移：长度13比特。表示该IP包在该组分片包中位置，接收端靠此来组装还原IP包。</li>
 <li>生存时间：长度8比特。当IP包进行传送时，先会对该字段赋予某个特定的值。当IP包经过每一个沿途的路由器的时候，每个沿途的路由器会将IP包的TTL值减少1。如果TTL减少为0，则该IP包会被丢弃。这个字段可以防止由于路由环路而导致IP包在网络中不停被转发。</li>
-<li>协议：长度8比特。标识了上层所使用的协议。<ul>
+<li>协议：长度8比特。标识了上层所使用的协议。
+<ul>
 <li>1    ICMP</li>
 <li>2    IGMP</li>
 <li>6    TCP</li>
@@ -296,9 +316,12 @@
 </li>
 <li>头部校验和：度16位。用来做IP头部的正确性检测，但不包含数据部分。 因为每个路由器要改变TTL的值,所以路由器会为每个通过的数据包重新计算这个值。</li>
 </ul>
-<h4><span id="ip路由选择">IP路由选择</span></h4><p>IP层在内存中有一个路由表。当收到一份数据报并进行发送时，它都要对该表搜索一次,查看是否是本机IP和广播IP。如果不是就交给路由器的功能。</p>
-<h4><span id="子网寻址">子网寻址</span></h4><p>现在不是把IP地址看成由单纯的一个网络号和一个主机号组成的，而是把主机号在分成一个子网好和一个主机号。</p>
+<h4><span id="ip路由选择">IP路由选择</span></h4>
+<p>IP层在内存中有一个路由表。当收到一份数据报并进行发送时，它都要对该表搜索一次,查看是否是本机IP和广播IP。如果不是就交给路由器的功能。</p>
+<h4><span id="子网寻址">子网寻址</span></h4>
+<p>现在不是把IP地址看成由单纯的一个网络号和一个主机号组成的，而是把主机号在分成一个子网好和一个主机号。</p>
 <h4><span id="子网掩码">子网掩码</span></h4>
+
                 
 
                 <hr>

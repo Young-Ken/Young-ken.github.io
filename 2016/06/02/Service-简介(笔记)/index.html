@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keyword"  content="">
@@ -141,8 +141,11 @@
                     
 
                         
+                    
+
+                        
                         <li>
-                            <a href="/categories/">categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -156,7 +159,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/categories/">categories</a>
                         </li>
                         
                     
@@ -225,42 +228,71 @@
 </blockquote>
 <p>服务基本上分为两种形式：</p>
 <ul>
-<li>启动<br>当应用组件通过startService()启动服务的时候，一旦服务启动，将无限期的运行下去。操作完成自动停止。</li>
-<li>绑定<br>当应用程序通过bindService()绑定到服务时候，服务处于绑定状态。绑定端提供了一个接口，和服务端进行交换。多个组件可已绑定到一个服务，全部取消后，该服务被销毁。<blockquote>
+<li>启动<br>
+当应用组件通过startService()启动服务的时候，一旦服务启动，将无限期的运行下去。操作完成自动停止。</li>
+<li>绑定<br>
+当应用程序通过bindService()绑定到服务时候，服务处于绑定状态。绑定端提供了一个接口，和服务端进行交换。多个组件可已绑定到一个服务，全部取消后，该服务被销毁。</li>
+</ul>
+<blockquote>
 <p>但是您的服务可以同时以这两种方式运行，也就是说，它既可以是启动服务（以无限期运行），也允许绑定</p>
 </blockquote>
-</li>
-</ul>
-<h3><span id="基础知识">基础知识</span></h3><p>要创建服务必须是Service的子类，在使用中需要重写一些回调方法。</p>
+<h3><span id="基础知识">基础知识</span></h3>
+<p>要创建服务必须是Service的子类，在使用中需要重写一些回调方法。</p>
 <ul>
-<li>onStartCommand()<br>当另一个组件通过调用startService()请求启动服务是，系统将调用这个方法。这个方法一旦被调用，服务将无限期的运行，调用stopSelf()和sotpSevice()来停止服务。</li>
-<li>onBind()<br>当一个组件通过调用bindService()与服务绑定，系统将调用这个方法。您必须通过返回 IBinder 提供一个接口，供客户端用来与服务进行通信。</li>
-<li>onCreate()<br>首次创建服务时，系统将调用此方法来执行一次性设置程序（在调用 onStartCommand() 或 onBind() 之前）。如果服务已在运行，则不会调用此方法。</li>
-<li>onDestroy()<br>当服务不再使用且将被销毁时，系统将调用此方法。服务应该实现此方法来清理所有资源，如线程、注册的侦听器、接收器等。 这是服务接收的最后一个调用。<h3><span id="使用清单文件声明服务">使用清单文件声明服务</span></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">...</span> &gt;</span></div><div class="line">  ...</div><div class="line">  <span class="tag">&lt;<span class="name">application</span> <span class="attr">...</span> &gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">".ExampleService"</span> /&gt;</span></div><div class="line">      ...</div><div class="line">  <span class="tag">&lt;/<span class="name">application</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure>
-</li>
+<li>onStartCommand()<br>
+当另一个组件通过调用startService()请求启动服务是，系统将调用这个方法。这个方法一旦被调用，服务将无限期的运行，调用stopSelf()和sotpSevice()来停止服务。</li>
+<li>onBind()<br>
+当一个组件通过调用bindService()与服务绑定，系统将调用这个方法。您必须通过返回 IBinder 提供一个接口，供客户端用来与服务进行通信。</li>
+<li>onCreate()<br>
+首次创建服务时，系统将调用此方法来执行一次性设置程序（在调用 onStartCommand() 或 onBind() 之前）。如果服务已在运行，则不会调用此方法。</li>
+<li>onDestroy()<br>
+当服务不再使用且将被销毁时，系统将调用此方法。服务应该实现此方法来清理所有资源，如线程、注册的侦听器、接收器等。 这是服务接收的最后一个调用。</li>
 </ul>
-<p>android:name是必须有的属性。<br>此外，还可以通过添加 android:exported 属性并将其设置为 “false”，确保服务仅适用于您的应用。</p>
-<h3><span id="创建启动服务">创建启动服务</span></h3><p>启动服务由另一个组件通过调用startService()启动，服务通过 onStartCommand() 方法接收此 Intent。<br>您可以扩展两个类来创建启动服务：</p>
+<h3><span id="使用清单文件声明服务">使用清单文件声明服务</span></h3>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">...</span> &gt;</span></div><div class="line">  ...</div><div class="line">  <span class="tag">&lt;<span class="name">application</span> <span class="attr">...</span> &gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">service</span> <span class="attr">android:name</span>=<span class="string">".ExampleService"</span> /&gt;</span></div><div class="line">      ...</div><div class="line">  <span class="tag">&lt;/<span class="name">application</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>android:name是必须有的属性。<br>
+此外，还可以通过添加 android:exported 属性并将其设置为 “false”，确保服务仅适用于您的应用。</p>
+<h3><span id="创建启动服务">创建启动服务</span></h3>
+<p>启动服务由另一个组件通过调用startService()启动，服务通过 onStartCommand() 方法接收此 Intent。<br>
+您可以扩展两个类来创建启动服务：</p>
 <ul>
-<li>Service<br>默认不会启动线程，要自己启动线程做事。</li>
-<li>IntentService<br>这个是Service的子类，使用工作线程处理所用启动请求。如果您不要求服务同时处理多个请求，这是最好的选择。 您只需实现 onHandleIntent() 方法即可，该方法会接收每个启动请求的 Intent，使您能够执行后台工作。</li>
+<li>Service<br>
+默认不会启动线程，要自己启动线程做事。</li>
+<li>IntentService<br>
+这个是Service的子类，使用工作线程处理所用启动请求。如果您不要求服务同时处理多个请求，这是最好的选择。 您只需实现 onHandleIntent() 方法即可，该方法会接收每个启动请求的 Intent，使您能够执行后台工作。</li>
 </ul>
-<h3><span id="扩展-intentservice-类">扩展 IntentService 类</span></h3><p>由于大多数启动服务都不必同时处理多个请求（实际上，这种多线程情况可能很危险），因此使用 IntentService 类实现服务也许是最好的选择。</p>
+<h3><span id="扩展-intentservice-类">扩展 IntentService 类</span></h3>
+<p>由于大多数启动服务都不必同时处理多个请求（实际上，这种多线程情况可能很危险），因此使用 IntentService 类实现服务也许是最好的选择。</p>
 <ul>
-<li>START_NOT_SKICKY<br>如果系统在onStartCommand()返回后终止服务，则除非有intent要传递，否则系统不会重建服务。这个是最安全的选项，可以避免不必要是以及应用能够轻松重启所有未完成的作业时运行服务。</li>
-<li>START_STICKY<br>如果系统在 onStartCommand() 返回后终止服务，则会重建服务并调用 onStartCommand()，但绝对不会重新传递最后一个 Intent。相反，除非有挂起 Intent 要启动服务（在这种情况下，将传递这些 Intent ），否则系统会通过空 Intent 调用 onStartCommand()。这适用于不执行命令、但无限期运行并等待作业的媒体播放器（或类似服务）。</li>
-<li>START_REDELIVER_INTENT<br>如果系统在 onStartCommand() 返回后终止服务，则会重建服务，并通过传递给服务的最后一个 Intent 调用 onStartCommand()。任何挂起 Intent 均依次传递。这适用于主动执行应该立即恢复的作业（例如下载文件）的服务。</li>
+<li>START_NOT_SKICKY<br>
+如果系统在onStartCommand()返回后终止服务，则除非有intent要传递，否则系统不会重建服务。这个是最安全的选项，可以避免不必要是以及应用能够轻松重启所有未完成的作业时运行服务。</li>
+<li>START_STICKY<br>
+如果系统在 onStartCommand() 返回后终止服务，则会重建服务并调用 onStartCommand()，但绝对不会重新传递最后一个 Intent。相反，除非有挂起 Intent 要启动服务（在这种情况下，将传递这些 Intent ），否则系统会通过空 Intent 调用 onStartCommand()。这适用于不执行命令、但无限期运行并等待作业的媒体播放器（或类似服务）。</li>
+<li>START_REDELIVER_INTENT<br>
+如果系统在 onStartCommand() 返回后终止服务，则会重建服务，并通过传递给服务的最后一个 Intent 调用 onStartCommand()。任何挂起 Intent 均依次传递。这适用于主动执行应该立即恢复的作业（例如下载文件）的服务。</li>
 </ul>
-<h3><span id="启动服务">启动服务</span></h3><p>通过调用startService()进行启动服务。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, HelloService.class);</div><div class="line">startService(intent);</div></pre></td></tr></table></figure></p>
-<p>startService() 方法将立即返回,如果系统没有在运行调用onCreate()，然后调用onStartCommand()。<br>多个服务请求会导致多次掉用onStartCommand()</p>
-<h3><span id="停止服务">停止服务</span></h3><p>启动服务必须管理自己的生命周期。也就是说，除非系统必须回收内存资源，否则系统不会停止或销毁服务，而且服务在 onStartCommand() 返回后会继续运行。因此，服务必须通过调用 stopSelf() 自行停止运行，或者由另一个组件通过调用 stopService() 来停止它。<br>如果是多个服务，要用stopSelf(int)进行结束当前任务。</p>
-<h3><span id="创建绑定服务">创建绑定服务</span></h3><p>绑定服务允许应用组件通过调用 bindService() 与其绑定，以便创建长期连接（通常不允许组件通过调用 startService() 来启动它）。<br>要创建绑定服务，必须实现 onBind() 回调方法以返回 IBinder，用于定义与服务通信的接口。<br>多个客户端可以同时绑定到服务。客户端完成与服务的交互后，会调用 unbindService() 取消绑定。一旦没有客户端绑定到该服务，系统就会销毁它。</p>
-<h3><span id="管理服务生命周期">管理服务生命周期</span></h3><ul>
-<li>启动服务<br>startService()时候创建，stopSelf()和stopService()停止服务。</li>
-<li>绑定服务<br>该服务在另一个组件（客户端）调用 bindService() 时创建。然后，客户端通过 IBinder 接口与服务进行通信。客户端可以通过调用 unbindService() 关闭连接。多个客户端可以绑定到相同服务，而且当所有绑定全部取消后，系统即会销毁该服务。</li>
+<h3><span id="启动服务">启动服务</span></h3>
+<p>通过调用startService()进行启动服务。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, HelloService.class);</div><div class="line">startService(intent);</div></pre></td></tr></table></figure>
+<p>startService() 方法将立即返回,如果系统没有在运行调用onCreate()，然后调用onStartCommand()。<br>
+多个服务请求会导致多次掉用onStartCommand()</p>
+<h3><span id="停止服务">停止服务</span></h3>
+<p>启动服务必须管理自己的生命周期。也就是说，除非系统必须回收内存资源，否则系统不会停止或销毁服务，而且服务在 onStartCommand() 返回后会继续运行。因此，服务必须通过调用 stopSelf() 自行停止运行，或者由另一个组件通过调用 stopService() 来停止它。<br>
+如果是多个服务，要用stopSelf(int)进行结束当前任务。</p>
+<h3><span id="创建绑定服务">创建绑定服务</span></h3>
+<p>绑定服务允许应用组件通过调用 bindService() 与其绑定，以便创建长期连接（通常不允许组件通过调用 startService() 来启动它）。<br>
+要创建绑定服务，必须实现 onBind() 回调方法以返回 IBinder，用于定义与服务通信的接口。<br>
+多个客户端可以同时绑定到服务。客户端完成与服务的交互后，会调用 unbindService() 取消绑定。一旦没有客户端绑定到该服务，系统就会销毁它。</p>
+<h3><span id="管理服务生命周期">管理服务生命周期</span></h3>
+<ul>
+<li>启动服务<br>
+startService()时候创建，stopSelf()和stopService()停止服务。</li>
+<li>绑定服务<br>
+该服务在另一个组件（客户端）调用 bindService() 时创建。然后，客户端通过 IBinder 接口与服务进行通信。客户端可以通过调用 unbindService() 关闭连接。多个客户端可以绑定到相同服务，而且当所有绑定全部取消后，系统即会销毁该服务。</li>
 </ul>
-<center><br><img src="/2016/06/02/Service-简介(笔记)/201606/03/service_lifecycle.png" alt=""><br></center>
-
+<center>
+![](image/201606/03/service_lifecycle.png)
+</center>
 <p>尽管该图分开介绍通过 startService() 创建的服务和通过 bindService() 创建的服务，但是请记住，不管启动方式如何，任何服务均有可能允许客户端与其绑定。因此，最初使用 onStartCommand()（通过客户端调用 startService()）启动的服务仍可接收对 onBind() 的调用（当客户端调用 bindService() 时）</p>
 
                 

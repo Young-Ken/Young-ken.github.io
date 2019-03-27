@@ -7,6 +7,13 @@
     </url>
     
     <url>
+        <loc>http://yoursite-url/googledc59ca279f1fb88d.html</loc>
+        <lastmod>2019-03-27T10:31:47.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>http://yoursite-url/categories/</loc>
         <lastmod>2017-10-21T10:02:20.000Z</lastmod>
         <changefreq>weekly</changefreq>

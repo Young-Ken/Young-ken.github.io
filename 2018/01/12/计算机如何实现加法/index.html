@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keyword"  content="">
@@ -139,8 +139,11 @@
                     
 
                         
+                    
+
+                        
                         <li>
-                            <a href="/categories/">categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -154,7 +157,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/categories/">categories</a>
                         </li>
                         
                     
@@ -217,25 +220,31 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="计算机如何实现加法">计算机如何实现加法</span></h2><p>这个博客源于媳妇的一个问题，<strong>计算机怎么样计算的？</strong></p>
+                <h2><span id="计算机如何实现加法">计算机如何实现加法</span></h2>
+<p>这个博客源于媳妇的一个问题，<strong>计算机怎么样计算的？</strong></p>
 <p>当问到这个问题的时候我还是有点措手不及的，不知道从哪里说起，即使说出了答案，答案也不完整，没有逻辑，很多知识更不敢较真，我决定对这个问题深入探索一下，这也是今年的目标，对计算机怎么样计算的这一问题给出答案。</p>
-<h3><span id="基本电路">基本电路</span></h3><p>我们先从电路入手，也就是用两个开关，一个灯泡和电池组成的简单电路。</p>
-<h4><span id="串联电路">串联电路</span></h4><p><img src="/2018/01/12/计算机如何实现加法/yudainl.png" alt=""></p>
+<h3><span id="基本电路">基本电路</span></h3>
+<p>我们先从电路入手，也就是用两个开关，一个灯泡和电池组成的简单电路。</p>
+<h4><span id="串联电路">串联电路</span></h4>
+<p><img src="/2018/01/12/计算机如何实现加法/yudainl.png" alt=""></p>
 <p>这个电路是两个开关都关闭灯泡才会亮。如果把开关<strong>关闭</strong>定义为<strong>1</strong>，<strong>打开</strong>定义为<strong>0</strong>，下面的表达方式更清楚。</p>
 <p><img src="/2018/01/12/计算机如何实现加法/and1.png" alt=""></p>
 <p>这个好像在哪里见过，我们再换一下表达方式。</p>
 <p><img src="/2018/01/12/计算机如何实现加法/and2.png" alt=""></p>
 <p>这个时候好像明白了，这不是计算机中的<strong>与</strong>操作吗。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="keyword">true</span> &amp;&amp; <span class="keyword">true</span>) &#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4><span id="并联电路">并联电路</span></h4><p><img src="/2018/01/12/计算机如何实现加法/ordl.png" alt=""></p>
+<h4><span id="并联电路">并联电路</span></h4>
+<p><img src="/2018/01/12/计算机如何实现加法/ordl.png" alt=""></p>
 <p>同理，只有一个开关关闭灯泡亮，如果把开关<strong>关闭</strong>定义为<strong>1</strong>，<strong>打开</strong>定义为<strong>0</strong>，可以用下面的方式表达。</p>
 <p><img src="/2018/01/12/计算机如何实现加法/or1.png" alt=""></p>
 <p>我们再换一下表达方式。</p>
 <p><img src="/2018/01/12/计算机如何实现加法/or2.png" alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="keyword">true</span> || <span class="keyword">true</span>) &#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>我们总结一下，好像我们猜到了什么，是不是通过电路的开关状态和电路的链接方式能表达逻辑关系。答案是肯定的。</p>
-<h3><span id="逻辑门">逻辑门</span></h3><p>通过上面的例子，我们知道，链接方式(串联并联)和开关的状态可以表示逻辑，下面我们探索一下这样的电路能表达什么样的逻辑。</p>
-<h4><span id="and与门">AND（与门）</span></h4><p>我们把开关换一下，换成下面这样，</p>
+<h3><span id="逻辑门">逻辑门</span></h3>
+<p>通过上面的例子，我们知道，链接方式(串联并联)和开关的状态可以表示逻辑，下面我们探索一下这样的电路能表达什么样的逻辑。</p>
+<h4><span id="and与门">AND（与门）</span></h4>
+<p>我们把开关换一下，换成下面这样，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/lj1.png" alt=""></p>
 <p>开关是个一个小铁柱绕着线圈，当小铁柱通电的时候，会产生吸引力，把开关吸下来，灯泡亮起来。那么串联就是这样的，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/ljcl.png" alt=""></p>
@@ -244,38 +253,43 @@
 <p>它的意思是这样的，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/andmen1.png" alt=""></p>
 <p>最终表达的就是，当两个小铁柱都通电的时候输出1。</p>
-<h4><span id="or或门">OR（或门）</span></h4><p>或门（并联）的电路图</p>
+<h4><span id="or或门">OR（或门）</span></h4>
+<p>或门（并联）的电路图</p>
 <p><img src="/2018/01/12/计算机如何实现加法/ormen2.png" alt=""></p>
 <p>当其中一个通电的时候，小灯泡就亮了，符号是这样的</p>
 <p><img src="/2018/01/12/计算机如何实现加法/ormen3.png" alt=""></p>
 <p>表达的意思，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/ormen5.png" alt=""></p>
-<h4><span id="not非门">NOT（非门）</span></h4><p>什么是非门呢，我门先看下电路图，</p>
+<h4><span id="not非门">NOT（非门）</span></h4>
+<p>什么是非门呢，我门先看下电路图，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/notmen.png" alt=""></p>
 <p>从上面的图可以看出来，当小铁柱不通电的时候，灯泡是亮的，小铁柱通电之后灯泡反而灭了。非门也有符号表达，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/notmen2.png" alt=""></p>
 <p>表达的意思，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/notmen3.png" alt=""></p>
-<h4><span id="nor或非门">NOR（或非门）</span></h4><p>还是老思路，先看电路图，</p>
+<h4><span id="nor或非门">NOR（或非门）</span></h4>
+<p>还是老思路，先看电路图，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/nand1.png" alt=""></p>
 <p>从上面的电路图可以看出来，当两个小磁铁都不通电的时候，小灯泡变亮，当其中一个通电的时候，灯泡熄灭。这样的电路叫做<strong>或非门</strong>。</p>
 <p>符号表达，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/nor1.png" alt=""></p>
 <p>其实就是或取非。</p>
-<h4><span id="nand与非门">NAND（与非门）</span></h4><p>来张电路图，</p>
+<h4><span id="nand与非门">NAND（与非门）</span></h4>
+<p>来张电路图，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/nand2.png" alt=""></p>
 <p>从上面的电路图可以看出来，两个都通电之后灯泡灭了，这样的定义叫做<strong>与非门</strong>。</p>
 <p>符号的表达，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/nand4.png" alt=""></p>
 <p>其实就是与取非。</p>
-<h3><span id="真正的加法来了">真正的加法来了</span></h3><p>在进行计算机的加法（二进制加法）运算之前，我们先复习一下10进制加法，78 + 114 = 192。这个值具体怎么来的，计算过程应该是这的，先个位相加，等于12，也就是向十位进1，个位是2。十位相加，7+1+1=9，百位相加1+0=1。我们分析一下，加法运算的规律，最重要的有两点，一是同位相加，二是如果同位相加大于等于10，那么向上一位进1。</p>
+<h3><span id="真正的加法来了">真正的加法来了</span></h3>
+<p>在进行计算机的加法（二进制加法）运算之前，我们先复习一下10进制加法，78 + 114 = 192。这个值具体怎么来的，计算过程应该是这的，先个位相加，等于12，也就是向十位进1，个位是2。十位相加，7+1+1=9，百位相加1+0=1。我们分析一下，加法运算的规律，最重要的有两点，一是同位相加，二是如果同位相加大于等于10，那么向上一位进1。</p>
 <p>二进制加法也是如此，</p>
 <p><img src="/2018/01/12/计算机如何实现加法/jia1.png" alt=""></p>
 <p>1+1 等于0，向上一位近1。如我们把加法分成同位相加和进位，二进制加法可以这样表示。</p>
 <p><img src="/2018/01/12/计算机如何实现加法/jia3.png" alt=""></p>
 <p><img src="/2018/01/12/计算机如何实现加法/jia4.png" alt=""></p>
 <p>我们计算一个二进制加法，来是试一下，</p>
-<p>  0 1 1 0 0 1 0 1</p>
+<p>0 1 1 0 0 1 0 1</p>
 <p>+1 0 1 1 0 1 1 0</p>
 <p>———————</p>
 <p>1 0 0 0 1 1 0 1 1</p>
@@ -301,7 +315,8 @@
 <p>我们可以吧上面的抽象成更简单的图形，我们把它叫做<strong>全加器</strong>。</p>
 <p><img src="/2018/01/12/计算机如何实现加法/jia22.png" alt=""></p>
 <p>追后你把这些<strong>全加器</strong>都链接到了一起，就能进行加法运行了。当和输出为1的时候灯泡亮，0的时候灯泡灭。</p>
-<h3><span id="总结">总结</span></h3><p>其实这个值是从硬件实现上解释了如何计算加法，距离解决计算机怎么计算的大问题还差好远。</p>
+<h3><span id="总结">总结</span></h3>
+<p>其实这个值是从硬件实现上解释了如何计算加法，距离解决计算机怎么计算的大问题还差好远。</p>
 
                 
 

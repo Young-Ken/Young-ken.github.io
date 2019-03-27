@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keyword"  content="">
@@ -141,8 +141,11 @@
                     
 
                         
+                    
+
+                        
                         <li>
-                            <a href="/categories/">categories</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -156,7 +159,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/categories/">categories</a>
                         </li>
                         
                     
@@ -219,34 +222,43 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="机器学习">机器学习</span></h2><blockquote>
+                <h2><span id="机器学习">机器学习</span></h2>
+<blockquote>
 <p>它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。</p>
 </blockquote>
 <p>写这个的目的主要是让我们理解，机器学如果能够对图片进行分类的，以及一些神经网络的一些基础知识。</p>
-<h3><span id="神经网络">神经网络</span></h3><p>神经网络是机器学习的一个算法。</p>
-<h4><span id="神经元">神经元</span></h4><p>对于神经元的研究由来已久，1904年生物学家就已经知晓了神经元的组成结构。</p>
+<h3><span id="神经网络">神经网络</span></h3>
+<p>神经网络是机器学习的一个算法。</p>
+<h4><span id="神经元">神经元</span></h4>
+<p>对于神经元的研究由来已久，1904年生物学家就已经知晓了神经元的组成结构。</p>
 <p>一个神经元通常具有多个<strong>树突</strong>，主要用来接受传入信息；而<strong>轴突</strong>只有一条，轴突尾端有许多轴突末梢可以给其他多个神经元传递信息。轴突末梢跟其他神经元的树突产生连接，从而传递信号。这个连接的位置在生物学上叫做<strong>突触</strong>。</p>
 <p><img src="/2017/10/20/机器学习-神经网络/sjy.png" alt=""></p>
 <p>1943年，心理学家McCulloch和数学家Pitts参考了生物神经元的结构，发表了抽象的神经元模型MP。</p>
-<h4><span id="mp模型">MP模型</span></h4><p><img src="/2017/10/20/机器学习-神经网络/pm.png" alt=""></p>
+<h4><span id="mp模型">MP模型</span></h4>
+<p><img src="/2017/10/20/机器学习-神经网络/pm.png" alt=""></p>
 <p><img src="/2017/10/20/机器学习-神经网络/pmsx.png" alt=""></p>
-<p>上面就是一个MP模型，和数学公式，P 是输入向量，W是权值向量，b 是偏置值标量 。f称为<strong>“激活函数”</strong>，激活函数有那些，举一个好理解的例子。</p>
+<p>上面就是一个MP模型，和数学公式，P 是输入向量，W是权值向量，b 是偏置值标量 。f称为**“激活函数”**，激活函数有那些，举一个好理解的例子。</p>
 <p><img src="/2017/10/20/机器学习-神经网络/QQ20171023-165104.png" alt=""></p>
 <p>这个是比较简单的激活函数，复杂的我们这里不做重点研究，因为单层神经网络连最基本的亦或问题都很难解决，神经网络的第一寒冬。</p>
-<h4><span id="两层经网络">两层经网络</span></h4><p>人们把神经网络扩展到了两层。</p>
+<h4><span id="两层经网络">两层经网络</span></h4>
+<p>人们把神经网络扩展到了两层。</p>
 <p><img src="/2017/10/20/机器学习-神经网络/2csj.jpg" alt=""></p>
 <p><img src="/2017/10/20/机器学习-神经网络/2csj2.jpg" alt="2csj2"></p>
 <p>从上图能看出来：</p>
-<p>g(<strong>W</strong>(1) <em> <strong>a</strong>(1)) = <em>*a</em></em>(2); </p>
-<p>g(<strong>W</strong>(2) <em> <strong>a</strong>(2)) = <em>*z</em></em>;</p>
+<p>g(<strong>W</strong>(1) * <strong>a</strong>(1)) = <strong>a</strong>(2);</p>
+<p>g(<strong>W</strong>(2) * <strong>a</strong>(2)) = <strong>z</strong>;</p>
 <p>两层神经网络能无限逼近连续的任意函数，但是一次神经网络的训练仍然耗时太久，而且困扰训练优化的一个问题就是局部最优解问题，这使得神经网络的优化较为困难，神经网络迎来了第二次寒冬。</p>
-<h4><span id="多层神经网络cnn">多层神经网络（CNN）</span></h4><p>现在人们把神经网络扩展到了多层。多层神经网络的代表有CNN。</p>
+<h4><span id="多层神经网络cnn">多层神经网络（CNN）</span></h4>
+<p>现在人们把神经网络扩展到了多层。多层神经网络的代表有CNN。</p>
 <blockquote>
 <p><strong>卷积神经网络</strong>（Convolutional Neural Network,<strong>CNN</strong>）是一种<strong>前馈神经网络</strong>，它的人工神经元可以响应一部分覆盖范围内的周围单元，对于大型图像处理有出色表现出色。</p>
+</blockquote>
+<blockquote>
 <p><strong>前馈神经网</strong>络是一种最简单的神经网络，各神经元分层排列。每个神经元只与前一层的神经元相连。接收前一层的输出，并输出给下一层，各层间没有反馈。</p>
 </blockquote>
 <p>现在明确了CNN的概念，那么最重要的问题来了，这东西是怎么识别图片分类的？</p>
-<h5><span id="卷积">卷积</span></h5><p>卷积神经网络，那么什么是卷积呢，其实卷积是一个数学表达。</p>
+<h5><span id="卷积">卷积</span></h5>
+<p>卷积神经网络，那么什么是卷积呢，其实卷积是一个数学表达。</p>
 <p><img src="/2017/10/20/机器学习-神经网络/jjsx2.png" alt=""></p>
 <p>数学的意义是：第二个等号成立是因为在这里我们每隔单位长度 1 一采样，ds,dt都是 1 。可以令 G 表示一幅 100 x 100 大小的灰度图像。G(x, y) 取值 [0,255] 区间内的整数，是图像在 (x, y) 的灰度值。x 和 y 坐标取 [0, 99] ，其它位置上 G 值全取 0 。令 F 在 s 和 t 取 {-1, 0, 1} 的位置为特定值，其他位置全取 0 。F 可以看作是一个 3 x 3 的网格。</p>
 <p>说人话就是这个样子：</p>
@@ -269,16 +281,20 @@
 <p>但是每一层的卷积不会适应一个滤波器，会会用多个。</p>
 <p><img src="/2017/10/20/机器学习-神经网络/lbq10.png" alt=""></p>
 <p>上面是一个32*32的图片，被10个滤波器卷积的结果。</p>
-<h5><span id="最大池化">最大池化</span></h5><p>有时图像太大，我们需要减少训练参数的数量，它被要求在随后的卷积层之间周期性地引进池化层。池化的唯一目的是减少图像的空间大小。池化在每一个纵深维度上独自完成，因此图像的纵深保持不变。池化层的最常见形式是最大池化。</p>
+<h5><span id="最大池化">最大池化</span></h5>
+<p>有时图像太大，我们需要减少训练参数的数量，它被要求在随后的卷积层之间周期性地引进池化层。池化的唯一目的是减少图像的空间大小。池化在每一个纵深维度上独自完成，因此图像的纵深保持不变。池化层的最常见形式是最大池化。</p>
 <p><img src="/2017/10/20/机器学习-神经网络/zdch.png" alt=""></p>
 <p>其实也比较简单，很容易易理解，再看一张图片</p>
 <p><img src="/2017/10/20/机器学习-神经网络/jwlz.png" alt=""></p>
-<h4><span id="全链接层">全链接层</span></h4><blockquote>
+<h4><span id="全链接层">全链接层</span></h4>
+<blockquote>
 <p><strong>全连接层</strong>（fully connected layers，FC）在整个卷积神经网络中起到“分类器”的作用。</p>
 </blockquote>
-<h4><span id="cnn的最终模式">CNN的最终模式</span></h4><p><img src="/2017/10/20/机器学习-神经网络/car.jpeg" alt=""></p>
-<p>#### </p>
-<h3><span id="后记">后记</span></h3><p><img src="/2017/10/20/机器学习-神经网络/mrdl.png" alt=""></p>
+<h4><span id="cnn的最终模式">CNN的最终模式</span></h4>
+<p><img src="/2017/10/20/机器学习-神经网络/car.jpeg" alt=""></p>
+<h4><span id=""></span></h4>
+<h3><span id="后记">后记</span></h3>
+<p><img src="/2017/10/20/机器学习-神经网络/mrdl.png" alt=""></p>
 
                 
 
@@ -322,7 +338,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">机器学习</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">神经网络</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">神经元</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">MP模型</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">两层经网络</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.4.</span> <span class="toc-nav-text">多层神经网络（CNN）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.4.1.</span> <span class="toc-nav-text">卷积</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.4.2.</span> <span class="toc-nav-text">最大池化</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.5.</span> <span class="toc-nav-text">全链接层</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.6.</span> <span class="toc-nav-text">CNN的最终模式</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">后记</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">机器学习</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">神经网络</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">神经元</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">MP模型</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.3.</span> <span class="toc-nav-text">两层经网络</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.4.</span> <span class="toc-nav-text">多层神经网络（CNN）</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.4.1.</span> <span class="toc-nav-text">卷积</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.4.2.</span> <span class="toc-nav-text">最大池化</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.5.</span> <span class="toc-nav-text">全链接层</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.6.</span> <span class="toc-nav-text">CNN的最终模式</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.7.</span> <span class="toc-nav-text"></span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">后记</span></a></li></ol></li></ol>
         
         </div>
       </aside>
