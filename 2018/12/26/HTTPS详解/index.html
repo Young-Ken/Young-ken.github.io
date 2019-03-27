@@ -5,7 +5,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keyword"  content="">
@@ -17,7 +16,7 @@
           HTTPS详解 - 艹! BUGs
         
     </title>
-
+    <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
     <link rel="canonical" href="http://yoursite-url/2018/12/26/HTTPS详解/">
 
     <!-- Bootstrap Core CSS -->
@@ -222,168 +221,133 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="https详解">HTTPS详解</span></h2>
-<p>在讲HTTPS之前我们先聊一下密码学的简单知识，因为密码学还是比较复杂的学科，这里就简单的介绍一些概念，但是这些概念对理解HTTPS有很大的帮助。</p>
+                <h2><span id="https详解">HTTPS详解</span></h2><p>在讲HTTPS之前我们先聊一下密码学的简单知识，因为密码学还是比较复杂的学科，这里就简单的介绍一些概念，但是这些概念对理解HTTPS有很大的帮助。</p>
 <blockquote>
 <p>在密码学中常用Alice和Bob这两个名字进行举例，我们也尊重一下密码学的文化，一般还有个大坏蛋，截获网络的消息，这个人叫做Eve。</p>
 </blockquote>
-<h3><span id="基础概念">基础概念</span></h3>
-<p>我们举一个小例子，Bob喜欢同班的一个女孩Alice，Bob想给Alice子传一张纸条，写了上了<code>LOVE</code>，传给Alice，在传送过程中纸条被老师（Eve）截获了，Eve打开一看，写着<code>LOVE</code>，Bob被找家长了（竟然早恋）。Bob总结了经验，想出了一个策略，纸条即使被Eve截获也看不懂其中的内容，那么怎么做才能让Eve看不懂，而让Alice能看懂呢？Bob想出一个办法，就是把当前的字母变成字母表的上一个字母，也就是是把B变成A，把C变成B，把D变成C。Bob想要写的<code>LOVE</code>就变成了<code>KNUD</code>，当Eve截获你的小纸条，看到的就是<code>KNUD</code>，而Alice会把<code>KNUD</code>的每一个字母变成字母表的下一个字母，也就是解析出了<code>LOVE</code>，Bob追到了心仪的女孩，也没有被找过家长。</p>
+<h3><span id="基础概念">基础概念</span></h3><p>我们举一个小例子，Bob喜欢同班的一个女孩Alice，Bob想给Alice子传一张纸条，写了上了<code>LOVE</code>，传给Alice，在传送过程中纸条被老师（Eve）截获了，Eve打开一看，写着<code>LOVE</code>，Bob被找家长了（竟然早恋）。Bob总结了经验，想出了一个策略，纸条即使被Eve截获也看不懂其中的内容，那么怎么做才能让Eve看不懂，而让Alice能看懂呢？Bob想出一个办法，就是把当前的字母变成字母表的上一个字母，也就是是把B变成A，把C变成B，把D变成C。Bob想要写的<code>LOVE</code>就变成了<code>KNUD</code>，当Eve截获你的小纸条，看到的就是<code>KNUD</code>，而Alice会把<code>KNUD</code>的每一个字母变成字母表的下一个字母，也就是解析出了<code>LOVE</code>，Bob追到了心仪的女孩，也没有被找过家长。</p>
 <blockquote>
 <p>这个这样的密码方式叫做<strong>凯撒密码</strong>。</p>
 </blockquote>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Cmima.png" alt=""></p>
+<p><img src="/2018/12/26/HTTPS详解/mima.png" alt=""></p>
 <ul>
-<li>
-<p>密码</p>
+<li><p>密码</p>
 <p>在密码学中密码是一种加密方式，比如上个例子中把当前的字母变成字母表的上一个字母，这是密码。<strong>这个需要注意一下和我们日常生活中的密码概念不同，生活中的密码通常是指是通行码，同通行码和秘钥还不是同一个概念，后面我们会讲秘钥。</strong></p>
 </li>
-<li>
-<p>明文</p>
+<li><p>明文</p>
 <p>没有加密之前的内容，就是<code>LOVE</code>。</p>
 </li>
-<li>
-<p>密文</p>
+<li><p>密文</p>
 <p>使用加密之后的内容，也就是<code>KNUD</code>。</p>
 </li>
-<li>
-<p>编码</p>
+<li><p>编码</p>
 <p>把明文变成密文的过程，也就是把<code>LOVE</code>通过密码变成<code>KNUD</code>，加密工作Bob完成的。</p>
 </li>
-<li>
-<p>解码</p>
+<li><p>解码</p>
 <p>把密文变成明文的过程，Alice把<code>KNUD</code>变成了<code>LOVE</code>。</p>
 </li>
 </ul>
 <p>我们再继续上一个例子，过了一个月，Bob发现Eve可能要破解你的小字条，Bob同Alice商量，我们换一下编码方式吧，我们把<strong>当前字母变成字母表的上一个字母</strong>的方式变成<strong>当前字母变成字母表的上两个字母</strong>的方式吧，这样Eve就会更难破解。</p>
 <ul>
-<li>
-<p>密钥</p>
+<li><p>密钥</p>
 <p>密钥是一个用于加解密算法的秘密参数，通常只有通信者拥有，也就是上一个字母或者上两个字母。</p>
 </li>
 </ul>
 <p>大家发现了，在传送小字条的过程中，密文是可以被Eve随便截获的，Eve也可以知道你的编码和解码方式（向前移动字母），但是老师不知道密钥，也就是不知道移动几个字母，这样老师还是看不懂小纸条。</p>
-<h4><span id="对称密钥加密">对称密钥加密</span></h4>
-<p>密码学中的一类加密算法。这类算法在加密和解密时使用相同的密钥。这个很容易理解，就是上面的例子，你和女孩使用的相同的秘钥，都是<strong>变成字母表的上一个字母</strong>。</p>
+<h4><span id="对称密钥加密">对称密钥加密</span></h4><p>密码学中的一类加密算法。这类算法在加密和解密时使用相同的密钥。这个很容易理解，就是上面的例子，你和女孩使用的相同的秘钥，都是<strong>变成字母表的上一个字母</strong>。</p>
 <p>再来个例子，你是一个特工，想把一个非常机密的事情告诉组织，你把非常机密的事情写好了，放在一个箱子中（假设这箱子非常结实，只能用钥匙打开），你用钥匙锁好之后，把箱子邮寄了出去，你的组织有和你一样的钥匙，他能打开箱子看到其中的内容，这个就是对称密钥加密。</p>
-<h4><span id="非对称称密钥加密">非对称称密钥加密</span></h4>
-<p>是密码学的一种算法，它需要两个密钥，一个是公开密钥，另一个是私有密钥；一个用作加密，另一个则用作解密。</p>
+<h4><span id="非对称称密钥加密">非对称称密钥加密</span></h4><p>是密码学的一种算法，它需要两个密钥，一个是公开密钥，另一个是私有密钥；一个用作加密，另一个则用作解密。</p>
 <p>现在我们先讨论一个问题，也就是对称密钥加密有什么大的缺点，特别是在互联网中。</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Cjm.png" alt=""></p>
+<p><img src="/2018/12/26/HTTPS详解/jm.png" alt=""></p>
 <p>通过上面的图很好理解，Alice想和Bob进行通讯，Alice通过密钥进行了编码，Bob通过密钥进行了解码，这样互联网中有人截获了密文，也不知道Alice和Bob在说什么。但是大家想过没有，密钥怎么办传输。</p>
 <p>也就是在Alice和Bob第一通讯的时候，Alice生成了一个密钥，怎么传输给B呢？通过网络传输吗，这样必定会被户联网中的坏人（Eve）给截获，如果截获他就能通过密钥解码密文，那么我们就把密钥在加密传输，如果密钥等在互联网中安全传输，那么密文也可以啊！就不需要密钥了，看来对称密钥加密有一些问题。</p>
 <p>还有一个更主要的原因，当Alice要和20个主机通讯的时候，Alice至少应该有20个密钥，这样管理密钥就是一个很大的工作量了。</p>
 <p>这个时候非对称称密钥加密就发挥了大的用途，他是怎么做到，不在互联网中传输密钥的而且在传输过程中一直是密文的牛逼程度（词穷）。</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Cgy.png" alt=""></p>
+<p><img src="/2018/12/26/HTTPS详解/gy.png" alt=""></p>
 <p>先Alice想和Bob通讯，Alice先拿到Bob的公钥，因为公钥是公开的，任何人都可以拿到，Alice把明文用Bob的公钥进行编码，变成了密文，进程传输，然后Bob用自己的私钥进行解码，得到明文。非对称密码加密中传输的过程是密文，而且Bob的私钥没有在互联网中传输，一切都很美好。</p>
-<h4><span id="数字签名">数字签名</span></h4>
-<p>数字签名是做什么事情的呢，就是看传输内容是否被修改过和验证是不是作者发出的内容，那怎么做的的呢。</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Cqm.png" alt=""></p>
+<h4><span id="数字签名">数字签名</span></h4><p>数字签名是做什么事情的呢，就是看传输内容是否被修改过和验证是不是作者发出的内容，那怎么做的的呢。</p>
+<p><img src="/2018/12/26/HTTPS详解/qm.png" alt=""></p>
 <p>Bob想验证内容是否是Alice发送的还有就是内容是否被修改过，Alice对内容进行了一次MD5处理，生成了一个摘要，再用自己的私钥对内容的摘要进行了一次编码操作，得到了一个签名。Alice把内容（<strong>内容是明文传输的</strong>）和签名放在一起发送出去。当Bob接到这个请求的时候，先把签名的部分拿出来，用Alice的公钥进行解码，得到一个内容摘要，再把内容用MD5进行一次摘要处理，得到一个摘要内容，两个摘要内容相同，证明内容没被改过是Alice发送的。</p>
-<h4><span id="证书">证书</span></h4>
-<p>有了数字签名Bob就可以验证这文字内容是不是Alice发的，但是有一天Eve偷走了Bob的电脑，把Alice的公钥换成了自己的公钥，这样Eve就可以伪装成Alice和Bob通讯了。那我们怎么避免这样的问题发生呢。</p>
+<h4><span id="证书">证书</span></h4><p>有了数字签名Bob就可以验证这文字内容是不是Alice发的，但是有一天Eve偷走了Bob的电脑，把Alice的公钥换成了自己的公钥，这样Eve就可以伪装成Alice和Bob通讯了。那我们怎么避免这样的问题发生呢。</p>
 <p>这个时候出现了一个机构，证书授权中心（CA），这组织是干啥的呢，这组织对Alice进行严格的身份验证（CA 有很多的验证手段，能验证这个人是有信誉的人或者公司），发现Alice是一个有信誉的人，给Alice授权了一个证书。因为Eve信誉不好，他拿不到这个证书。</p>
 <p>总结起来证书的作用是验证公钥的合法性。</p>
 <p>那么证书怎么生成的呢。</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Czs1.png" alt=""></p>
-<h4><span id="rsa交换密钥的方式">RSA交换密钥的方式</span></h4>
-<h3><span id="https介绍">HTTPS介绍</span></h3>
-<p>当初人们在设计网络协议的时候，没有考虑网络协议的安全性，HTTP是典型的不安全的协议，只能依靠人们的诚信过活。人们为了更安全的互联网通讯，采用了HTTPS这样通讯方式。</p>
+<p><img src="/2018/12/26/HTTPS详解/zs1.png" alt=""></p>
+<h4><span id="rsa交换密钥的方式">RSA交换密钥的方式</span></h4><h3><span id="https介绍">HTTPS介绍</span></h3><p>当初人们在设计网络协议的时候，没有考虑网络协议的安全性，HTTP是典型的不安全的协议，只能依靠人们的诚信过活。人们为了更安全的互联网通讯，采用了HTTPS这样通讯方式。</p>
 <p><strong>超文本传输安全协议</strong>（Hypertext Transfer Protocol Secure，常称为<strong>HTTP over TLS</strong>，<strong>HTTP over SSL</strong>）是一种透过计算机网络进行安全通信的传输协议。</p>
 <p>其实就是在HTTP和TCP协议上加了一层，叫做SSL或者TLS的协议。</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Cwlc.png" alt=""></p>
+<p><img src="/2018/12/26/HTTPS详解/wlc.png" alt=""></p>
 <p>那么现在的问题就明确了，我们只有掌握了SSL或者TLS协议就可以，那么他们之间有什么区别呢，可以这样的简单的理解，TLS只不过是SSL的一个最新的版本。接下来我们将以TLS 1.2的版本作为主要的学习内容。TLS协议主要有4个非常主要的协议分别是握手协议、密钥规格变更协议、应用数据协议和警报协议。</p>
-<h4><span id="握手协议">握手协议</span></h4>
-<p>根据当前的通讯的不同场景，主要把握手协议分成三种情况。</p>
-<h5><span id="完整的握手">完整的握手</span></h5>
-<p>在客户端和服务器端想进行通讯的时候，要进行握手，我们先来说一下STL握手中最完整的握手机制，也就是完整的握手。完整的握手大概分成四部分，</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Cws.png" alt=""></p>
+<h4><span id="握手协议">握手协议</span></h4><p>根据当前的通讯的不同场景，主要把握手协议分成三种情况。</p>
+<h5><span id="完整的握手">完整的握手</span></h5><p>在客户端和服务器端想进行通讯的时候，要进行握手，我们先来说一下STL握手中最完整的握手机制，也就是完整的握手。完整的握手大概分成四部分，</p>
+<p><img src="/2018/12/26/HTTPS详解/ws.png" alt=""></p>
 <ol>
-<li>
-<p>Client Hello</p>
+<li><p>Client Hello</p>
 <p>这是握手的第一条消息，这消息内容是告诉服务端的一些基本情况。</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Ccl.png" alt=""></p>
+<p><img src="/2018/12/26/HTTPS详解/cl.png" alt=""></p>
 <ul>
-<li>
-<p>Version</p>
+<li><p>Version</p>
 <p>当前客户端的TLS的版本。</p>
 </li>
-<li>
-<p>Random</p>
+<li><p>Random</p>
 <p>随机数，也就是流程图中的客户端随机数。包含32字节的数据，其中28字节是随机生成的(Random Bytes)。剩下的4字节包含额外的信息(GMT Unix Time)。</p>
 </li>
-<li>
-<p>Session ID</p>
+<li><p>Session ID</p>
 <p>第一条通讯中握手是空的。</p>
 </li>
-<li>
-<p>Cipher Suites</p>
+<li><p>Cipher Suites</p>
 <p>加密套件，TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Ctj.png" alt=""></p>
+<p><img src="/2018/12/26/HTTPS详解/tj.png" alt=""></p>
 </li>
-<li>
-<p>Compression</p>
+<li><p>Compression</p>
 <p>采用的压缩算法，因为HTTP会对数据进行压缩，这里面就没有进行压缩。</p>
 </li>
 </ul>
 </li>
-<li>
-<p>Server Hello</p>
+<li><p>Server Hello</p>
 <p>这个是服务端回复客户端的第一条消息，是告诉客户端的一些基本信息，并且确定加密套件。</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Cc2.png" alt=""></p>
+<p><img src="/2018/12/26/HTTPS详解/c2.png" alt=""></p>
 <p>这个字段的意思和ClinetHello的意思相同，这个Session ID 不是空的了。</p>
 </li>
-<li>
-<p>Certificate</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Czs.png" alt=""></p>
+<li><p>Certificate</p>
+<p><img src="/2018/12/26/HTTPS详解/zs.png" alt=""></p>
 <p>典型的Certificate消息用于携带的证书链，叶子证书必须是第一个发送，中间证书按照正确的顺序跟在叶子证书之后。</p>
 </li>
-<li>
-<p>Server Key Exchange</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Cl3.png" alt=""></p>
-<p>当证书验证不足的时候，需要补充一些信息。消息内容对于不同的协商算法套<br>
-件都会存在差异。</p>
+<li><p>Server Key Exchange</p>
+<p><img src="/2018/12/26/HTTPS详解/l3.png" alt=""></p>
+<p>当证书验证不足的时候，需要补充一些信息。消息内容对于不同的协商算法套<br>件都会存在差异。</p>
 </li>
-<li>
-<p>Certificate Request</p>
+<li><p>Certificate Request</p>
 <p>服务器要求客户端上传证书，这个步骤是可以省略的。</p>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Cc3.png" alt=""></p>
+<p><img src="/2018/12/26/HTTPS详解/c3.png" alt=""></p>
 </li>
-<li>
-<p>Server Hello Done</p>
+<li><p>Server Hello Done</p>
 <p>服务端发送完成了。</p>
 </li>
-<li>
-<p>Certificate</p>
+<li><p>Certificate</p>
 <p>客户端把证书发送到服务端。</p>
 </li>
-<li>
-<p>Client Key Exchange</p>
+<li><p>Client Key Exchange</p>
 <p>这是经过加密的预备主密码。预备主密码是当做主密码的一个种子。</p>
-<p>RSA密钥交换的过程中。客户端生成预主密钥(46字节随机数)，使用服务器公钥对其加密，将其包含在这个消息中，最后发送出去。</p>
+<p>RSA密钥交换的过程中。客户端生成预主密钥(46字节随机数)，使用服务器公钥对其加密，将其包含在这个消息中，最后发送出去。 </p>
 </li>
-<li>
-<p>CertificateVerify</p>
+<li><p>CertificateVerify</p>
 <p>证明自己拥有对应的私钥，这个消息只有服务端发送<strong>Certificate Request</strong>，客户端才会发送这个消息。</p>
 </li>
-<li>
-<p>Change Clipher Spec</p>
+<li><p>Change Clipher Spec</p>
 <p>我们切换到了主密码，在这之前他们通讯都是明文进行通讯的。</p>
 </li>
-<li>
-<p>Finished</p>
+<li><p>Finished</p>
 <p>客户端说握手结束。</p>
 </li>
-<li>
-<p>Change Clipher Spec</p>
+<li><p>Change Clipher Spec</p>
 <p>切换到主密码通讯。</p>
 </li>
-<li>
-<p>Finished</p>
+<li><p>Finished</p>
 <p>服务端说握手结束。</p>
 </li>
 </ol>
-<p><img src="/2018/12/26/HTTPS详解/HTTPS%E8%AF%A6%E8%A7%A3%5Cxx.png" alt=""></p>
+<p><img src="/2018/12/26/HTTPS详解/xx.png" alt=""></p>
 
                 
 

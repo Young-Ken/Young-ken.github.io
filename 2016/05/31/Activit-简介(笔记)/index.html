@@ -5,7 +5,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="keyword"  content="">
@@ -17,7 +16,7 @@
           Activit-简介(笔记) - 艹! BUGs
         
     </title>
-
+    <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
     <link rel="canonical" href="http://yoursite-url/2016/05/31/Activit-简介(笔记)/">
 
     <!-- Bootstrap Core CSS -->
@@ -86,9 +85,9 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Activity" title="Activity">Activity</a>
-                            
                               <a class="tag" href="/tags/#Android基础篇" title="Android基础篇">Android基础篇</a>
+                            
+                              <a class="tag" href="/tags/#Activity" title="Activity">Activity</a>
                             
                         </div>
                         <h1>Activit-简介(笔记)</h1>
@@ -222,51 +221,37 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>官网对Activity的定义：</p>
+                <p>官网对Activity的定义： </p>
 <blockquote>
 <p>Activity 是一个应用组件，用户可与其提供的屏幕进行交互，以执行拨打电话、拍摄照片、发送电子邮件或查看地图等操作。</p>
 </blockquote>
-<p>从官方的定义不难看出，Activity是一个组件，它的用途是提供用户和屏幕直接的交互和内容的展示。<br>
-一个应用程序有多个Activity组成，每个Activity都可以启动另一个Activity，每次启动新的Activity的时候，前一个Activity便会停止。系统会在返回栈中保存这Activity，当点击返回按钮的时候，这个Activity就会从新启动。</p>
-<h2><span id="创建activity">创建Activity</span></h2>
-<p>要创建Activity必须继承Activity类，需要在子类中实现父类的方法。</p>
+<p>从官方的定义不难看出，Activity是一个组件，它的用途是提供用户和屏幕直接的交互和内容的展示。<br>一个应用程序有多个Activity组成，每个Activity都可以启动另一个Activity，每次启动新的Activity的时候，前一个Activity便会停止。系统会在返回栈中保存这Activity，当点击返回按钮的时候，这个Activity就会从新启动。</p>
+<h2><span id="创建activity">创建Activity</span></h2><p>要创建Activity必须继承Activity类，需要在子类中实现父类的方法。</p>
 <ul>
-<li>onCreate()<br>
-您应该在实现内初始化 Activity 的必需组件。 最重要的是，您必须在此方法内调用 setContentView()，以定义 Activity 用户界面的布局。</li>
-<li>onPause()<br>
-系统将此方法作为用户离开 Activity 的第一个信号。</li>
+<li>onCreate()<br>您应该在实现内初始化 Activity 的必需组件。 最重要的是，您必须在此方法内调用 setContentView()，以定义 Activity 用户界面的布局。</li>
+<li>onPause()<br>系统将此方法作为用户离开 Activity 的第一个信号。</li>
 </ul>
-<h3><span id="实现用户界面">实现用户界面</span></h3>
-<p>Activity的界面是由继承View的视图组成。每个视图控制Activity的一个矩形区域，提供用户交互和内容展示。</p>
-<h3><span id="在清单文件中声明-activity">在清单文件中声明 Activity</span></h3>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">...</span> &gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">application</span> <span class="attr">...</span> &gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".ExampleActivity"</span> /&gt;</span></div><div class="line">      ...</div><div class="line">  <span class="tag">&lt;/<span class="name">application</span> <span class="attr">...</span> &gt;</span></div><div class="line">  ...</div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span> &gt;</span></div></pre></td></tr></table></figure>
+<h3><span id="实现用户界面">实现用户界面</span></h3><p>Activity的界面是由继承View的视图组成。每个视图控制Activity的一个矩形区域，提供用户交互和内容展示。</p>
+<h3><span id="在清单文件中声明-activity">在清单文件中声明 Activity</span></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">...</span> &gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">application</span> <span class="attr">...</span> &gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".ExampleActivity"</span> /&gt;</span></div><div class="line">      ...</div><div class="line">  <span class="tag">&lt;/<span class="name">application</span> <span class="attr">...</span> &gt;</span></div><div class="line">  ...</div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span> &gt;</span></div></pre></td></tr></table></figure>
 <p>name属性是Activity的类名称，每个Activity在清单文件中必须声明。</p>
 <blockquote>
 <p>注释：当然如果你创建的Activity如果没有在应用程序中被启动，就不用进行声明。</p>
 </blockquote>
-<h3><span id="使用-intent-过滤器">使用 Intent 过滤器</span></h3>
-<p><activity> 元素还可指定各种 Intent 过滤器—使用 <intent-filter> 元素—以声明其他应用组件激活它的方法。</intent-filter></activity></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".ExampleActivity"</span> <span class="attr">android:icon</span>=<span class="string">"@drawable/app_icon"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3><span id="使用-intent-过滤器">使用 Intent 过滤器</span></h3><p><activity> 元素还可指定各种 Intent 过滤器—使用 <intent-filter> 元素—以声明其他应用组件激活它的方法。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".ExampleActivity"</span> <span class="attr">android:icon</span>=<span class="string">"@drawable/app_icon"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure></intent-filter></activity></p>
 <p><action android:name="android.intent.action.MAIN">指定ExampleActivity是应用程序的主入口，<category android:name="android.intent.category.LAUNCHER">这个Activity应该列入系统的应用启动器。</category></action></p>
-<h2><span id="启动-activity">启动 Activity</span></h2>
-<p>你可以调用startActivity()，传入Intent来启动Activity。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, SignInActivity.class);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
+<h2><span id="启动-activity">启动 Activity</span></h2><p>你可以调用startActivity()，传入Intent来启动Activity。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>, SignInActivity.class);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure></p>
 <p>这样就启动了一个SignInActivity。</p>
 <blockquote>
 <p>这种启动方式叫做显示启动</p>
 </blockquote>
-<p>当你想调用发送电子邮件的Activity怎么办，我现在想调用打电话的Activity怎么办？android提供了启动这样Activity的功能。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_SEND);</div><div class="line">intent.putExtra(Intent.EXTRA_EMAIL, recipientArray);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
+<p>当你想调用发送电子邮件的Activity怎么办，我现在想调用打电话的Activity怎么办？android提供了启动这样Activity的功能。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_SEND);</div><div class="line">intent.putExtra(Intent.EXTRA_EMAIL, recipientArray);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>这种启动方式叫做隐式启动</p>
 </blockquote>
 <p>添加到 Intent 中的 EXTRA_EMAIL extra 是一个字符串数组，其中包含应将电子邮件发送到的电子邮件地址。</p>
-<h3><span id="启动-activity-以获得结果">启动 Activity 以获得结果</span></h3>
-<p>当你想在A启动B，当B关闭时，把B的一些值传回给A，这个时候就用到了Activity的另一种启动方式，startActivityForResult()。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pickContact</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// Create an intent to "pick" a contact, as defined by the content provider URI</span></div><div class="line">    Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_PICK, Contacts.CONTENT_URI);</div><div class="line">    startActivityForResult(intent, PICK_CONTACT_REQUEST);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</div><div class="line">    <span class="comment">// If the request went well (OK) and the request was PICK_CONTACT_REQUEST</span></div><div class="line">    <span class="keyword">if</span> (resultCode == Activity.RESULT_OK &amp;&amp; requestCode == PICK_CONTACT_REQUEST) &#123;</div><div class="line">        <span class="comment">// Perform a query to the contact's content provider for the contact's name</span></div><div class="line">        Cursor cursor = getContentResolver().query(data.getData(),</div><div class="line">        <span class="keyword">new</span> String[] &#123;Contacts.DISPLAY_NAME&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">        <span class="keyword">if</span> (cursor.moveToFirst()) &#123; <span class="comment">// True if the cursor is not empty</span></div><div class="line">            <span class="keyword">int</span> columnIndex = cursor.getColumnIndex(Contacts.DISPLAY_NAME);</div><div class="line">            String name = cursor.getString(columnIndex);</div><div class="line">            <span class="comment">// Do something with the selected contact's name...</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><span id="启动-activity-以获得结果">启动 Activity 以获得结果</span></h3><p>当你想在A启动B，当B关闭时，把B的一些值传回给A，这个时候就用到了Activity的另一种启动方式，startActivityForResult()。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pickContact</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// Create an intent to "pick" a contact, as defined by the content provider URI</span></div><div class="line">    Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_PICK, Contacts.CONTENT_URI);</div><div class="line">    startActivityForResult(intent, PICK_CONTACT_REQUEST);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</div><div class="line">    <span class="comment">// If the request went well (OK) and the request was PICK_CONTACT_REQUEST</span></div><div class="line">    <span class="keyword">if</span> (resultCode == Activity.RESULT_OK &amp;&amp; requestCode == PICK_CONTACT_REQUEST) &#123;</div><div class="line">        <span class="comment">// Perform a query to the contact's content provider for the contact's name</span></div><div class="line">        Cursor cursor = getContentResolver().query(data.getData(),</div><div class="line">        <span class="keyword">new</span> String[] &#123;Contacts.DISPLAY_NAME&#125;, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</div><div class="line">        <span class="keyword">if</span> (cursor.moveToFirst()) &#123; <span class="comment">// True if the cursor is not empty</span></div><div class="line">            <span class="keyword">int</span> columnIndex = cursor.getColumnIndex(Contacts.DISPLAY_NAME);</div><div class="line">            String name = cursor.getString(columnIndex);</div><div class="line">            <span class="comment">// Do something with the selected contact's name...</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>上例显示的是，您在处理 Activity 结果时应该在 onActivityResult() 方法中使用的基本逻辑。第一个条件检查请求是否成功（如果成功，则resultCode 将为 RESULT_OK）以及此结果响应的请求是否已知 — 在此情况下，requestCode与随 startActivityForResult() 发送的第二个参数匹配。 代码通过查询 Intent 中返回的数据（data 参数）从该处开始处理 Activity 结果。</p>
-<h2><span id="结束-activity">结束 Activity</span></h2>
-<p>您可以通过调用 Activity 的 finish() 方法来结束该 Activity。您还可以通过调用 finishActivity() 结束您之前启动的另一个 Activity。</p>
+<h2><span id="结束-activity">结束 Activity</span></h2><p>您可以通过调用 Activity 的 finish() 方法来结束该 Activity。您还可以通过调用 finishActivity() 结束您之前启动的另一个 Activity。</p>
 
                 
 
@@ -319,9 +304,9 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Activity" title="Activity">Activity</a>
-                        
                           <a class="tag" href="/tags/#Android基础篇" title="Android基础篇">Android基础篇</a>
+                        
+                          <a class="tag" href="/tags/#Activity" title="Activity">Activity</a>
                         
                     </div>
                 </section>
