@@ -140,13 +140,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -155,6 +148,13 @@
                         
                         <li>
                             <a href="/categories/">categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -217,20 +217,25 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="gis只不过如此">GIS只不过如此</span></h2><blockquote>
+                <h2><span id="gis只不过如此">GIS只不过如此</span></h2>
+<blockquote>
 <p>GIS是个很复杂的综合学科，我也没有掌握GIS的精华，只懂皮毛，更不敢说GIS只不过如此的话。</p>
 <p>下面讲解的内容都是基于二维地图进行的。</p>
 </blockquote>
 <p>GIS是<strong>地理信息系统（Geographic Information System）</strong>,GIS是一个综合的学科，用于输入、存储、查询、分析和显示，包括了地理学和地图学。</p>
-<h3><span id="gis的历史">GIS的历史</span></h3><ul>
+<h3><span id="gis的历史">GIS的历史</span></h3>
+<ul>
 <li>15,000年前，洞穴壁画（不要扯了，信息系统唉，没有计算机）。</li>
 <li>20世纪60，加拿大测量学家罗杰•汤姆林森提出了将纸制地图有计算机存储并且展示，还能进行分析。这是真正意义上的GIS。</li>
 </ul>
 <p><img src="/2017/11/28/GIS只不过如此/f.jpg" alt=""></p>
 <p>情怀到处结束。</p>
-<h3><span id="如何将世界展示在屏幕上">如何将世界展示在屏幕上？</span></h3><p>把世界展示在屏幕上之前，我们先把地图展示在纸上，直接从GIS降维到地图学了。</p>
-<h4><span id="地球是圆的我们怎么怎么把它拍扁">地球是圆的，我们怎么怎么把它“拍扁”</span></h4><p>我们把地球“拍平”到纸上的过程叫做<strong>投影</strong>。</p>
-<h5><span id="最著名的投影墨卡托投影">最著名的投影墨卡托投影</span></h5><p><img src="/2017/11/28/GIS只不过如此/mkt.jpg" alt=""></p>
+<h3><span id="如何将世界展示在屏幕上">如何将世界展示在屏幕上？</span></h3>
+<p>把世界展示在屏幕上之前，我们先把地图展示在纸上，直接从GIS降维到地图学了。</p>
+<h4><span id="地球是圆的我们怎么怎么把它拍扁">地球是圆的，我们怎么怎么把它“拍扁”</span></h4>
+<p>我们把地球“拍平”到纸上的过程叫做<strong>投影</strong>。</p>
+<h5><span id="最著名的投影墨卡托投影">最著名的投影墨卡托投影</span></h5>
+<p><img src="/2017/11/28/GIS只不过如此/mkt.jpg" alt=""></p>
 <p>这投影是被最广泛使用的投影，为什么这个投影被最广泛使用呢。</p>
 <ul>
 <li>地球上的真实国家形状和地图形状很相近。</li>
@@ -243,33 +248,39 @@
 </ul>
 <p><img src="/2017/11/28/GIS只不过如此/s.png" alt=""></p>
 <p>那么有有没有等面积的投影呢，当然有了。</p>
-<h5><span id="高尔-彼得斯投影">高尔-彼得斯投影</span></h5><p><img src="/2017/11/28/GIS只不过如此/pt.jpg" alt=""></p>
-<h4><span id="我们一起说说投影吧">我们一起说说投影吧</span></h4><p>上面给出了两种地图投影，那么会不会有更多的地图投影呢，答案是肯定的，我们来说一下地图地图投影。</p>
+<h5><span id="高尔-彼得斯投影">高尔-彼得斯投影</span></h5>
+<p><img src="/2017/11/28/GIS只不过如此/pt.jpg" alt=""></p>
+<h4><span id="我们一起说说投影吧">我们一起说说投影吧</span></h4>
+<p>上面给出了两种地图投影，那么会不会有更多的地图投影呢，答案是肯定的，我们来说一下地图地图投影。</p>
 <blockquote>
-<p> <strong>地图投影</strong>，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0164feb686b19cf03dd7e94c15772be3d666b45d" alt="{\displaystyle (\phi ,\lambda )}">与平面直角坐标<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/41cf50e4a314ca8e2c30964baa8d26e5be7a9386" alt="(x, y)">建立起函数关系。</p>
+<p><strong>地图投影</strong>，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0164feb686b19cf03dd7e94c15772be3d666b45d" alt="{\displaystyle (\phi ,\lambda )}">与平面直角坐标<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/41cf50e4a314ca8e2c30964baa8d26e5be7a9386" alt="(x, y)">建立起函数关系。</p>
 </blockquote>
 <p>投影公式一般都是这样的：<img src="/2017/11/28/GIS只不过如此/hans.png" alt=""></p>
 <p>投影的方法有很多种：</p>
 <ul>
-<li><p>圆锥投影</p>
+<li>
+<p>圆锥投影</p>
 <p><img src="/2017/11/28/GIS只不过如此/yz.gif" alt=""></p>
 </li>
 </ul>
 <ul>
-<li><p>圆柱方位投影</p>
+<li>
+<p>圆柱方位投影</p>
 <p><img src="/2017/11/28/GIS只不过如此/yz1.gif" alt=""></p>
 </li>
-<li><p>平面方位投影</p>
+<li>
+<p>平面方位投影</p>
 <p><img src="/2017/11/28/GIS只不过如此/pm.gif" alt=""></p>
 </li>
 </ul>
-<h4><span id="但是地图不是一个完美的椭球体啊而且还有山川河流上岗下坡的怎么计算上面的地理坐标又是怎么个回事">但是地图不是一个完美的椭球体啊，而且还有山川河流，上岗下坡的，怎么计算，上面的地理坐标又是怎么个回事？</span></h4><blockquote>
+<h4><span id="但是地图不是一个完美的椭球体啊而且还有山川河流上岗下坡的怎么计算上面的地理坐标又是怎么个回事">但是地图不是一个完美的椭球体啊，而且还有山川河流，上岗下坡的，怎么计算，上面的地理坐标又是怎么个回事？</span></h4>
+<blockquote>
 <p><strong>地理坐标系（Geographic Coordinate System）</strong>，是使用三维球面来定义地球表面位置，以实现通过经纬度对地球表面点位引用的坐标系。一个地理坐标系包括角度测量单位、本初子午线和参考椭球体三部分。</p>
 </blockquote>
 <p><img src="/2017/11/28/GIS只不过如此/jw.gif" alt=""></p>
 <p>角度测量单位和本初子午线比较好理解，那么参考椭球体有是个啥？</p>
 <blockquote>
-<p> <strong>参考椭球体</strong>是一个数学上定义的地球表面，它近似于大地水准面。</p>
+<p><strong>参考椭球体</strong>是一个数学上定义的地球表面，它近似于大地水准面。</p>
 </blockquote>
 <p>大地水准面又是个啥？</p>
 <blockquote>
