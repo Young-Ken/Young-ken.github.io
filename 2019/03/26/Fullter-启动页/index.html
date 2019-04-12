@@ -14,7 +14,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Fullter 启动页 - cao BUGs
+          Fullter 启动页(闪屏页)具体实现和原理分析 - cao BUGs
         
     </title>
     <meta name="google-site-verification" content="4lEojadMk05JmJxw2v03NoCaQTnEGdGLxx3Ez5P9bSE" />
@@ -90,8 +90,12 @@
                             
                               <a class="tag" href="/tags/#启动页" title="启动页">启动页</a>
                             
+                              <a class="tag" href="/tags/#SplashActivity" title="SplashActivity">SplashActivity</a>
+                            
+                              <a class="tag" href="/tags/#闪屏页" title="闪屏页">闪屏页</a>
+                            
                         </div>
-                        <h1>Fullter 启动页</h1>
+                        <h1>Fullter 启动页(闪屏页)具体实现和原理分析</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Young Ken on
@@ -142,6 +146,13 @@
 
                         
                         <li>
+                            <a href="/categories/">categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -150,13 +161,6 @@
                         
                         <li>
                             <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/categories/">categories</a>
                         </li>
                         
                     
@@ -219,12 +223,51 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3><span id="为什么要有启动页">为什么要有启动页？</span></h3><p>现在大部分App都有启动页，那么为什么要有启动页？这是个值得思考的问题，如果没有启动页会怎样，大部分App会加载进度条，因为你在首页要调用网络请求。本质就是<strong>用启动页掩盖了App启动慢的事实</strong>。</p>
+                <h3><span id="为什么要有启动页">为什么要有启动页？</span></h3><blockquote>
+<p> <strong>在一下文章中，启动页就是闪屏页。</strong></p>
+</blockquote>
+<p>现在大部分App都有启动页，那么为什么要有启动页？这是个值得思考的问题，如果没有启动页会怎样，大部分的App会白屏（也有可能是黑屏，主题设置有关系）非常短的时间，然后才能展示App的内容。</p>
 <p>那么问题来了，一定要有启动页吗？答案：<strong>不是，而且是尽可能不要有启动页</strong>，因为启动页是让用户体验不连贯，甚至IOS在开发手册上就不推荐使用启动页。</p>
-<p>我们深入思考一下，既然不推荐为什么这样流行，答案非常简单，启动页的成本非常低，如果你想把的App启动优化到0.5秒之内，对后端和前段都是很大的挑战，也就是需要更多的成本投入。如果你有更多的思考，欢迎留言讨论。</p>
+<p>我们深入思考一下，既然不推荐为什么这样流行，答案非常简单，启动页的成本非常低，如果你想把的App启动优化到一个非常短的时间，还是有一定成本的。</p>
+<h3><span id="android启动流程">Android启动流程</span></h3><p>为什么要谈Android的启动流程呢？因为Flutter启动的时候，依赖的是Android的运行环境，其本质是Activity上添加了一个FlutterView，FlutterView继承SurfaceView，那么就容易理解了，Flutter的全部页面都是渲染到了FlutterView上，如果不熟悉Flutter的启动流程可以参考我写的<a href="http://caobugs.com/2019/03/28/Flutter%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B">Flutter启动流程 </a>这篇文章，下面是对Flutter启动的一个简单描述。</p>
+<p><img src="/2019/03/26/Fullter-启动页/flutter.png" alt=""></p>
+<p>在Flutter中，启动页的作用是在FlutterView显示第一帧之前，不要出现白屏，在FlutterView显示第一帧之前，我们分成两个阶段，Android启动阶段和Flutter启动阶段，Android加启过程添加动页非常容易，在主题xml中添加<code>android:windowBackground</code>属性，Flutter怎么添加启动页呢？其实框架已经帮助咱们做好了，我下面就给大家说一下原理。</p>
+<h3><span id="flutter启动页具体实现和原理">Flutter启动页具体实现和原理</span></h3><ol>
+<li><p>创建一个SplashActivity，这Activity继承FlutterActivity，重写onCreate()方法，在onCreate()方法中调用GeneratedPluginRegistrant.registerWith()，下面是启动页的代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SplashActivity</span> <span class="keyword">extends</span> <span class="title">FlutterActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        GeneratedPluginRegistrant.registerWith(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在Manifest中添加SplashActivity作为App的启动Activity，设置SplashActivity的主题是LaunchTheme。下面是Manifest的配置文件。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span></span></div><div class="line"><span class="tag">           <span class="attr">android:name</span>=<span class="string">".SplashActivity"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:configChanges</span>=<span class="string">"orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"</span></span></div><div class="line"><span class="tag">           <span class="attr">android:hardwareAccelerated</span>=<span class="string">"true"</span></span></div><div class="line"><span class="tag">           <span class="attr">android:launchMode</span>=<span class="string">"singleTop"</span></span></div><div class="line"><span class="tag">           <span class="attr">android:theme</span>=<span class="string">"@style/LaunchTheme"</span></span></div><div class="line"><span class="tag">           <span class="attr">android:windowSoftInputMode</span>=<span class="string">"adjustResize"</span>&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">meta-data</span></span></div><div class="line"><span class="tag">               <span class="attr">android:name</span>=<span class="string">"io.flutter.app.android.SplashScreenUntilFirstFrame"</span></span></div><div class="line"><span class="tag">               <span class="attr">android:value</span>=<span class="string">"true"</span> /&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span></div><div class="line">               <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span></div><div class="line">           <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>meta-data的name = “io.flutter.app.android.SplashScreenUntilFirstFrame”的value一定要设置成true，一定要设置成true，一定要设置成true重要的事情说三遍</strong>，如果这个属性设置成false，效果是这样的。</p>
+<p><img src="/2019/03/26/Fullter-启动页/start.gif" alt=""></p>
+</li>
+</ol>
+<p>   从现象观察，启动页中间有一段时间黑屏，这个为什么呢？前面我们说过，Flutter的启动流程分成两部分，一部分是Android启动阶段，一个是Flutter的启动阶段，这个黑屏就是Flutter的启动阶段没有启动页的所造成的。我们从源码入手，详细分析一下，下面是FlutterActivityDelegate的部分源码。</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">FlutterActivityDelegate</span></span></div><div class="line"><span class="class">        <span class="keyword">implements</span> <span class="title">FlutterActivityEvents</span>,</span></div><div class="line"><span class="class">                   <span class="title">FlutterView</span>.<span class="title">Provider</span>,</span></div><div class="line"><span class="class">                   <span class="title">PluginRegistry</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SPLASH_SCREEN_META_DATA_KEY = <span class="string">"io.flutter.app.android.SplashScreenUntilFirstFrame"</span>;</div><div class="line">  </div><div class="line">    <span class="keyword">private</span> View launchView;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        String[] args = getArgsFromIntent(activity.getIntent());</div><div class="line">        FlutterMain.ensureInitializationComplete(activity.getApplicationContext(), args);</div><div class="line">        flutterView = viewFactory.createFlutterView(activity);</div><div class="line">        <span class="keyword">if</span> (flutterView == <span class="keyword">null</span>) &#123;</div><div class="line">            FlutterNativeView nativeView = viewFactory.createFlutterNativeView();</div><div class="line">            flutterView = <span class="keyword">new</span> FlutterView(activity, <span class="keyword">null</span>, nativeView);</div><div class="line">            flutterView.setLayoutParams(matchParent);</div><div class="line">            activity.setContentView(flutterView);</div><div class="line">            launchView = createLaunchView();<span class="comment">//1</span></div><div class="line">            <span class="keyword">if</span> (launchView != <span class="keyword">null</span>) &#123;</div><div class="line">                addLaunchView();<span class="comment">//2</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">               </div><div class="line">    <span class="function"><span class="keyword">private</span> View <span class="title">createLaunchView</span><span class="params">()</span> </span>&#123;</div><div class="line">          <span class="keyword">if</span> (!showSplashScreenUntilFirstFrame()) &#123;<span class="comment">//3</span></div><div class="line">              <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">          &#125;</div><div class="line">          <span class="keyword">final</span> Drawable launchScreenDrawable = getLaunchScreenDrawableFromActivityTheme();</div><div class="line">          <span class="keyword">final</span> View view = <span class="keyword">new</span> View(activity);</div><div class="line">          view.setBackground(launchScreenDrawable);</div><div class="line">          <span class="keyword">return</span> view;</div><div class="line">      &#125;</div><div class="line">                     </div><div class="line">    <span class="function"><span class="keyword">private</span> Drawable <span class="title">getLaunchScreenDrawableFromActivityTheme</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">//省略了部分代码</span></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">return</span> activity.getResources().getDrawable(typedValue.resourceId);</div><div class="line">        &#125; <span class="keyword">catch</span> (NotFoundException e) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">   <span class="function"><span class="keyword">private</span> Boolean <span class="title">showSplashScreenUntilFirstFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            ActivityInfo activityInfo = activity.getPackageManager().getActivityInfo(</div><div class="line">                activity.getComponentName(),</div><div class="line">                PackageManager.GET_META_DATA|PackageManager.GET_ACTIVITIES);</div><div class="line">            Bundle metadata = activityInfo.metaData;</div><div class="line">            <span class="keyword">return</span> metadata != <span class="keyword">null</span> &amp;&amp; metadata.getBoolean(SPLASH_SCREEN_META_DATA_KEY);</div><div class="line">        &#125; <span class="keyword">catch</span> (NameNotFoundException e) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">                     </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addLaunchView</span><span class="params">()</span> </span>&#123;</div><div class="line">        activity.addContentView(launchView, matchParent);<span class="comment">//4</span></div><div class="line">        flutterView.addFirstFrameListener(<span class="keyword">new</span> FlutterView.FirstFrameListener() &#123;<span class="comment">//5</span></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFirstFrame</span><span class="params">()</span> </span>&#123;</div><div class="line">                FlutterActivityDelegate.<span class="keyword">this</span>.launchView.animate()</div><div class="line">                    .alpha(<span class="number">0f</span>)</div><div class="line">                    .setListener(<span class="keyword">new</span> AnimatorListenerAdapter() &#123;</div><div class="line">                        <span class="meta">@Override</span></div><div class="line">                        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimationEnd</span><span class="params">(Animator animation)</span> </span>&#123;</div><div class="line">                            ((ViewGroup) FlutterActivityDelegate.<span class="keyword">this</span>.launchView.getParent())</div><div class="line">                                .removeView(FlutterActivityDelegate.<span class="keyword">this</span>.launchView);<span class="comment">//5</span></div><div class="line">                        &#125;</div><div class="line">                    &#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        activity.setTheme(android.R.style.Theme_Black_NoTitleBar);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>注释1</p>
+<p>这个地方很容易理解，就是创建一个LaunchView，主要逻辑在createLaunchView()中，原理也很简单，根据主题中的R.attr.windowBackground属性，生成一个Drawable，然后创建了一个View，并且把这个View的背景设置成Drawable。</p>
+</li>
+<li><p>注释3</p>
+<p>showSplashScreenUntilFirstFrame()是得到Manifet中io.flutter.app.android.SplashScreenUntilFirstFrame的属性的值，如果是false，那么久返回一个空的的LaunchView，也就不会执行注释2的代码。这就是我们上面说的如果设置成false就显示黑屏的原因。</p>
+</li>
+<li><p>注释2</p>
+<p>调用addLaunchView()，这方法也很简单，首先看注释4，把LaunchView添加到当前的Activity中，然后添加了一个监听，在注释5处，这个监听是当FlutterView第一帧加载完成后回调，回调做了什么事情呢？很简单，把LaunchView删除了，显示FlutterView的第一帧。</p>
+</li>
+</ul>
+<p>总结一下，就是把Android的启动页生成一个Drawable，创建了一个View，把Drawable设置成LaunchView的背景，当前的Activity添加这LaunchView，如果FlutterView的第一帧显示出来了，把LaunchView删除。</p>
+<ol>
+<li><p>设置主题，下面是LaunchTheme的代码。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"LaunchTheme"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Theme.Black.NoTitleBar"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="xml">        <span class="comment">&lt;!-- Show a splash screen on the activity. Automatically removed when</span></span></div><div class="line"><span class="undefined">             Flutter draws its first frame --&gt;</span></div><div class="line"><span class="xml">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@drawable/launch_background<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></div><div class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>下面是launch_background的代码。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">layer-list</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></div><div class="line"><span class="tag">    <span class="attr">android:opacity</span>=<span class="string">"opaque"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">bitmap</span> <span class="attr">android:src</span>=<span class="string">"@mipmap/ic_launch_bg"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span></span></div><div class="line"><span class="tag">        <span class="attr">android:width</span>=<span class="string">"90dp"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:height</span>=<span class="string">"90dp"</span></span></div><div class="line"><span class="tag">        <span class="attr">android:gravity</span>=<span class="string">"center"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">bitmap</span> <span class="attr">android:src</span>=<span class="string">"@mipmap/ic_launch_logo"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">layer-list</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
 <h3><span id="参考">参考</span></h3><ul>
 <li><a href="https://www.zhihu.com/question/21686690" target="_blank" rel="external">App 为什么要有启动页</a></li>
 <li><a href="https://material.io/design/communication/launch-screen.html#branded-launch" target="_blank" rel="external">在 Material Design 的launch-screen规范 </a></li>
+<li><a href="http://caobugs.com/2019/03/28/Flutter%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B">Flutter启动流程 </a></li>
 </ul>
 
                 
@@ -234,7 +277,7 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2019/03/28/Flutter启动流程/" data-toggle="tooltip" data-placement="top" title="Flutter启动流程">&larr; Previous Post</a>
+                            <a href="/2019/03/28/Flutter启动流程/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -269,7 +312,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">为什么要有启动页？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">参考</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">为什么要有启动页？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Android启动流程</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Flutter启动页具体实现和原理</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">参考</span></a></li></ol>
         
         </div>
       </aside>
@@ -292,6 +335,10 @@
                           <a class="tag" href="/tags/#Flutter" title="Flutter">Flutter</a>
                         
                           <a class="tag" href="/tags/#启动页" title="启动页">启动页</a>
+                        
+                          <a class="tag" href="/tags/#SplashActivity" title="SplashActivity">SplashActivity</a>
+                        
+                          <a class="tag" href="/tags/#闪屏页" title="闪屏页">闪屏页</a>
                         
                     </div>
                 </section>
