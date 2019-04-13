@@ -142,6 +142,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -150,13 +157,6 @@
                         
                         <li>
                             <a href="/categories/">categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -219,41 +219,32 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="intent简介">Intent简介</span></h2>
-<p>Intent是一种消息传递机制，可以在应用程序内使用，也可以在应用程序之间使用。</p>
+                <h2><span id="intent简介">Intent简介</span></h2><p>Intent是一种消息传递机制，可以在应用程序内使用，也可以在应用程序之间使用。</p>
 <ul>
 <li>使用类名显示启动一个特定的Server或者是Activity。</li>
 <li>启动Server或Activity来执行一个动作的Intent。</li>
 <li>广播某个事件已经发生。</li>
 </ul>
-<h3><span id="使用intent来启动activity">使用Intent来启动Activity</span></h3>
-<ol>
-<li><strong>显示启动Activity</strong></li>
+<h3><span id="使用intent来启动activity">使用Intent来启动Activity</span></h3><ol>
+<li><strong>显示启动Activity</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(MyActivity.<span class="keyword">this</span>, OtherActivity.class);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
+</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(MyActivity.<span class="keyword">this</span>, OtherActivity.class);</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
 <p>在调用startActivity之后，新的Activity会被创建，启动，并移动到Activity栈的顶部。</p>
-<ol start="2">
-<li><strong>隐式的Intent和运行时迟绑定</strong><br>
-隐式的Intent提供了一种机制，可以让匿名的应用程序响应动作请求。这就意味着启动时不用指定那个Activity，系统会根据动作找相应的Activity。</li>
+<ol>
+<li><strong>隐式的Intent和运行时迟绑定</strong><br>隐式的Intent提供了一种机制，可以让匿名的应用程序响应动作请求。这就意味着启动时不用指定那个Activity，系统会根据动作找相应的Activity。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_DIAL, Uri.parse(<span class="string">"tel:111-111"</span>));</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
+</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_DIAL, Uri.parse(<span class="string">"tel:111-111"</span>));</div><div class="line">startActivity(intent);</div></pre></td></tr></table></figure>
 <p>这里没有指定Activity，而是指定了一个动作<strong>Intent.ACTION_DIAL</strong>，第二个参数是动作参数<strong>Uri.parse(“tel:111-111”)</strong>。</p>
-<ol start="3">
-<li><strong>从Activity 返回结果</strong><br>
-当我们用startActivity启动一个Activity的时候，关闭被启动的Activity不会有任何反馈，如果你需要反馈的时候，就得用另一种方式启动了<strong>startActivityForResult()</strong>。 主要分成三步</li>
-</ol>
-<p>第一步 :<strong>启动子Activity</strong><br>
-**startActivityForResult()<strong>和</strong>startActivity()<strong>相似，区别就是</strong>startActivityForResult()**要有一个请求码。</p>
+<ol>
+<li><p><strong>从Activity 返回结果</strong><br>当我们用startActivity启动一个Activity的时候，关闭被启动的Activity不会有任何反馈，如果你需要反馈的时候，就得用另一种方式启动了<strong>startActivityForResult()</strong>。 主要分成三步</p>
+<p>第一步 :<strong>启动子Activity</strong><br><strong>startActivityForResult()</strong>和<strong>startActivity()</strong>相似，区别就是<strong>startActivityForResult()</strong>要有一个请求码。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SHOW_SUBACTIVITY = <span class="number">1</span>;</div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startSubAcvity</span><span class="params">()</span></span></div><div class="line"><span class="function"> </span>&#123;</div><div class="line">     Intent intent = <span class="keyword">new</span> Intent(MyActivity.<span class="keyword">this</span>, OtherActivity.class);</div><div class="line">     startActivityForResult(intent,SHOW_SUBACTIVITY);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<pre><code>第二步 ：**返回结果**
-</code></pre>
-<p>当准备好返回子Activity的时候，在调用<strong>finash()<strong>之前，调用</strong>setResult()</strong>,以便像调用的Activity返回结果。</p>
+<p> 第二步 ：<strong>返回结果</strong><br>当准备好返回子Activity的时候，在调用<strong>finash()</strong>之前，调用<strong>setResult()</strong>,以便像调用的Activity返回结果。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBackPressed</span><span class="params">()</span></span></div><div class="line"><span class="function">   </span>&#123;</div><div class="line">       Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">       intent.putExtra(<span class="string">"key"</span>,<span class="string">"Result"</span>);</div><div class="line">       setResult(<span class="number">1</span>, intent);</div><div class="line">       finish();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<pre><code>**setResult()**有两个参数，一个是结果码，一个是Intent本身。
-第三步 ：**处理结果**
-</code></pre>
-<p>从写<strong>onActivityResult()</strong>，在**onActivityResult()**中处理结果。</p>
+<p> <strong>setResult()</strong>有两个参数，一个是结果码，一个是Intent本身。<br> 第三步 ：<strong>处理结果</strong><br>从写<strong>onActivityResult()</strong>，在<strong>onActivityResult()</strong>中处理结果。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span></span></div><div class="line"><span class="function">   </span>&#123;</div><div class="line">       <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);</div><div class="line">       <span class="keyword">if</span> (requestCode == <span class="number">1</span>) <span class="comment">//这返回码和setResult()中的第一个参数是一样的</span></div><div class="line">       &#123;</div><div class="line">           String result = data.getStringExtra(<span class="string">"key"</span>);</div><div class="line">           Log.i(<span class="string">"Demo"</span>, result);</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
 <p>这样就完成了我们Activity返回结果，由于这个实例比较简单，就不上传代码了。</p>
 
                 

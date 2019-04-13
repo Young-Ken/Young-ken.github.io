@@ -142,6 +142,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -150,13 +157,6 @@
                         
                         <li>
                             <a href="/categories/">categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -219,36 +219,26 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>通过实现回调方法管理 Activity 的生命周期对开发强大而又灵活的应用至关重要。 Activity 的生命周期会直接受到 Activity 与其他 Activity、其任务及返回栈的关联性的影响。<br>
-Activity基本有三种状态</p>
+                <p>通过实现回调方法管理 Activity 的生命周期对开发强大而又灵活的应用至关重要。 Activity 的生命周期会直接受到 Activity 与其他 Activity、其任务及返回栈的关联性的影响。<br>Activity基本有三种状态</p>
 <ul>
-<li>运行中<br>
-这个时候的Activity位于前，能得到用户的焦点。</li>
-<li>暂停<br>
-另一个Activity位于屏幕前，并且获得用户焦点，但是这个Activity还是看见的。也就是被透明的或者是半遮盖的情况，在内存极端不足的情况下，这个Activity可能被杀死。</li>
-<li>停止<br>
-这个Activity被另一个Activity完全遮盖。在内存不足的情况被杀死。</li>
+<li>运行中<br>这个时候的Activity位于前，能得到用户的焦点。</li>
+<li>暂停<br>另一个Activity位于屏幕前，并且获得用户焦点，但是这个Activity还是看见的。也就是被透明的或者是半遮盖的情况，在内存极端不足的情况下，这个Activity可能被杀死。</li>
+<li>停止<br>这个Activity被另一个Activity完全遮盖。在内存不足的情况被杀死。</li>
 </ul>
-<h3><span id="生命周期方法">生命周期方法</span></h3>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        <span class="comment">// The activity is being created.</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onStart();</div><div class="line">        <span class="comment">// The activity is about to become visible.</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        <span class="comment">// The activity has become visible (it is now "resumed").</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPause();</div><div class="line">        <span class="comment">// Another activity is taking focus (this activity is about to be "paused").</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStop</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onStop();</div><div class="line">        <span class="comment">// The activity is no longer visible (it is now "stopped")</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">        <span class="comment">// The activity is about to be destroyed.</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3><span id="生命周期方法">生命周期方法</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        <span class="comment">// The activity is being created.</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onStart();</div><div class="line">        <span class="comment">// The activity is about to become visible.</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        <span class="comment">// The activity has become visible (it is now "resumed").</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onPause();</div><div class="line">        <span class="comment">// Another activity is taking focus (this activity is about to be "paused").</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onStop</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onStop();</div><div class="line">        <span class="comment">// The activity is no longer visible (it is now "stopped")</span></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.onDestroy();</div><div class="line">        <span class="comment">// The activity is about to be destroyed.</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面是Activity的生命周期方法。</p>
 <ul>
 <li><strong>整个生命周期</strong>发生在onCreate()和onDestroy()中，在onCreate()中初始化Activity所需要的资源，在onDestroy()中进行释放。</li>
 <li><strong>可见生命周期</strong>发生在onStart()和onStop()中，在这回时期用户可以与其进行交互。</li>
-<li><strong>前台生命周期</strong>发生在onResume()和onPause()之间。这个期间用户一直能对这个Activity进行操作，也就是得到这Activity的焦点，当设备休眠或者弹出对话拉框的时候，调用onPuse()。<br>
-![](Activity 从生到死/activity_lifecycle.png)</li>
+<li><strong>前台生命周期</strong>发生在onResume()和onPause()之间。这个期间用户一直能对这个Activity进行操作，也就是得到这Activity的焦点，当设备休眠或者弹出对话拉框的时候，调用onPuse()。<br><img src="/2016/05/31/Activity-从生到死/activity_lifecycle.png" alt=""></li>
 </ul>
 <p>这个是非常经典的图示，展示的android的Activity的生命周期。</p>
-<h3><span id="保存-activity-状态">保存 Activity 状态</span></h3>
-<p>当Activity处于暂停或者是停止状态的时候，Activity对象仍保持在内存中，当Activity重新处于运行状态的时候，这样继续运行。但是如果内存不足的情况，Activity的内存被释放，这个是时候就没有办法恢复开始时候的状态了，这个时候你就要用到onSaveInstanceState()。<br>
-系统会先调用 onSaveInstanceState()，这样销毁Activity，系统会小该方法传递一个Bundle对象。当系统恢复这个Activity的时候，会被Bundle对象传递给onCreate()和onRestoreInstanceState()<br>
-![](Activity 从生到死/restore_instance.png)</p>
+<h3><span id="保存-activity-状态">保存 Activity 状态</span></h3><p>当Activity处于暂停或者是停止状态的时候，Activity对象仍保持在内存中，当Activity重新处于运行状态的时候，这样继续运行。但是如果内存不足的情况，Activity的内存被释放，这个是时候就没有办法恢复开始时候的状态了，这个时候你就要用到onSaveInstanceState()。<br>系统会先调用 onSaveInstanceState()，这样销毁Activity，系统会小该方法传递一个Bundle对象。当系统恢复这个Activity的时候，会被Bundle对象传递给onCreate()和onRestoreInstanceState()<br><img src="/2016/05/31/Activity-从生到死/restore_instance.png" alt=""></p>
 <blockquote>
 <p>注：无法保证系统会在销毁您的 Activity 前调用 onSaveInstanceState()，因为存在不需要保存状态的情况（例如用户使用“返回” 按钮离开您的 Activity 时，因为用户的行为是在显式关闭 Activity）。 如果系统调用 onSaveInstanceState()，它会在调用 onStop() 之前，并且可能会在调用 onPause() 之前进行调用,这个非常重要。</p>
 </blockquote>
 <p>当然了，你也可以设置不保存状态，可以通过android:saveEnabled = “false”，通常不这样设置。</p>
-<h3><span id="一个activity启动另一activity的生命周期">一个Activity启动另一Activity的生命周期</span></h3>
-<p>首先一个A启动B，这个时候这时候是A被B完全遮挡，B是一个新的Activity。经过这样的推理B的生命周期非常好预测。</p>
+<h3><span id="一个activity启动另一activity的生命周期">一个Activity启动另一Activity的生命周期</span></h3><p>首先一个A启动B，这个时候这时候是A被B完全遮挡，B是一个新的Activity。经过这样的推理B的生命周期非常好预测。</p>
 <ul>
 <li>B的生命周期是 onCreate(),onStart(),onResume(),这个是一个Activity启动的生命周期。</li>
 </ul>
@@ -257,8 +247,7 @@ Activity基本有三种状态</p>
 <li>A的生命周期是onPause(),onStop()。</li>
 </ul>
 <p>那问题来了，是在onPause()之前调用B的生命周期还是在之后，是在onPause()之后onStop()之前，这样有人问题A启动B的生命周期就明白了。</p>
-<p>既然都分析到这里了，那我们在增加点难度，这个时候按手机返回键，两个Activity的生命周期怎么走。<br>
-按返回键的时候B是一个习销毁过程，那么B的生命周期就是</p>
+<p>既然都分析到这里了，那我们在增加点难度，这个时候按手机返回键，两个Activity的生命周期怎么走。<br>按返回键的时候B是一个习销毁过程，那么B的生命周期就是</p>
 <ul>
 <li>B的生命周期onPause(),onStop(),onDestory()。</li>
 </ul>
@@ -270,8 +259,7 @@ Activity基本有三种状态</p>
 <blockquote>
 <p>总结一下：当A启动B的时候，先把A暂停（调用onPause()），调用B的剩余生命周期，在返回来调用A剩下的生命周期。</p>
 </blockquote>
-<h3><span id="旋转屏幕的生命周期">旋转屏幕的生命周期</span></h3>
-<p>其实旋转屏幕是一个销毁从新创建的过程，那么就简单了</p>
+<h3><span id="旋转屏幕的生命周期">旋转屏幕的生命周期</span></h3><p>其实旋转屏幕是一个销毁从新创建的过程，那么就简单了</p>
 <ul>
 <li>onPause()，onStope(),onDestory()。</li>
 </ul>

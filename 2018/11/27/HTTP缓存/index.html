@@ -140,6 +140,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -148,13 +155,6 @@
                         
                         <li>
                             <a href="/categories/">categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -217,54 +217,40 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="http缓存">HTTP缓存</span></h2>
-<h3><span id="http缓存的必要性">HTTP缓存的必要性</span></h3>
-<p>现在假设客户端想要加载一份文档，这个文档在Web服务器上，假设这个文档大小是10M，客户端需要经常加载这个文档，那么每次都需要10M的字节流从Web服务器上流到客户端，很多人就想了，这样每次的10M数据是不是没有必要每次都从Web服务器上取，把这个文档存储在客户端本地就好了，这样不但节省了流量也节省了时间（本地加载更快），于是HTTP缓存技术就诞生了。</p>
+                <h2><span id="http缓存">HTTP缓存</span></h2><h3><span id="http缓存的必要性">HTTP缓存的必要性</span></h3><p>现在假设客户端想要加载一份文档，这个文档在Web服务器上，假设这个文档大小是10M，客户端需要经常加载这个文档，那么每次都需要10M的字节流从Web服务器上流到客户端，很多人就想了，这样每次的10M数据是不是没有必要每次都从Web服务器上取，把这个文档存储在客户端本地就好了，这样不但节省了流量也节省了时间（本地加载更快），于是HTTP缓存技术就诞生了。</p>
 <p>上面 的例子有个局限性，因为互联网环境还是比较复杂的，上面的例子只假设了有客户端和服务器，其实中间还有很多的缓存代理（代理的意思就是既能发送请求也能接收响应）。现在假设一个爆炸新闻报出来，这有时候好多人都访问这个新闻，我们将用两个图表示有缓存和没有缓存的区别。</p>
-<p><img src="/2018/11/27/HTTP缓存/HTTP%E7%BC%93%E5%AD%98%5Cooh.png" alt=""></p>
+<p><img src="/2018/11/27/HTTP缓存/ooh.png" alt=""></p>
 <p>没有缓存代理，客户端会直接方法服务器，这样服务器会面对全部的压力。</p>
-<p><img src="/2018/11/27/HTTP缓存/HTTP%E7%BC%93%E5%AD%98%5Cch.png" alt=""></p>
+<p><img src="/2018/11/27/HTTP缓存/ch.png" alt=""></p>
 <p>有缓存代理如果缓存命中直接返回给客户端，如果没有命中再去请求服务器，这样服务器的压力就变小了。</p>
-<h3><span id="缓存的概念">缓存的概念</span></h3>
-<h4><span id="命中率">命中率</span></h4>
-<p>命中率是0到1之间，现在假设有一个文档，如果每个请求都命中了这文档那么命中率是1，也就是100%。但是现在有个问题，比如现在服务器上有两个文档，一个是1M，另一个是1G。即使1M的文档命中率很高，1G文档的命中率很低，但是1G文档一次不命中就需要1G的流量在客户端和服务端传输，1G的文档对整个网络的影响更大，这样人们更喜欢用<code>字节命中率</code>来表示作为衡量标准。<code>字节命中率</code>指的是命中字节占全部字节的比。</p>
-<h4><span id="私有缓存">私有缓存</span></h4>
-<p>就指的客户端的缓存。</p>
-<h4><span id="共有缓存">共有缓存</span></h4>
-<p>指的是缓存代理服务器。</p>
-<h3><span id="验证缓存过期">验证缓存过期</span></h3>
-<p>上面说了很多，大家都指的，缓存一定会过期的，因为文档总是有被修改的时候，一旦无文档被修改了就需要客户端请求新的文档，HTTP是怎么做到知道文档过期的呢。</p>
-<p><img src="/2018/11/27/HTTP缓存/HTTP%E7%BC%93%E5%AD%98%5Cyzxx.png" alt=""></p>
+<h3><span id="缓存的概念">缓存的概念</span></h3><h4><span id="命中率">命中率</span></h4><p>命中率是0到1之间，现在假设有一个文档，如果每个请求都命中了这文档那么命中率是1，也就是100%。但是现在有个问题，比如现在服务器上有两个文档，一个是1M，另一个是1G。即使1M的文档命中率很高，1G文档的命中率很低，但是1G文档一次不命中就需要1G的流量在客户端和服务端传输，1G的文档对整个网络的影响更大，这样人们更喜欢用<code>字节命中率</code>来表示作为衡量标准。<code>字节命中率</code>指的是命中字节占全部字节的比。</p>
+<h4><span id="私有缓存">私有缓存</span></h4><p>就指的客户端的缓存。</p>
+<h4><span id="共有缓存">共有缓存</span></h4><p>指的是缓存代理服务器。</p>
+<h3><span id="验证缓存过期">验证缓存过期</span></h3><p>上面说了很多，大家都指的，缓存一定会过期的，因为文档总是有被修改的时候，一旦无文档被修改了就需要客户端请求新的文档，HTTP是怎么做到知道文档过期的呢。</p>
+<p><img src="/2018/11/27/HTTP缓存/yzxx.png" alt=""></p>
 <p>客户端发起请求，先验证是否有缓存，没有缓存就要读取服务器，从服务器获取然后缓存起来，返回给客户端。如果有缓存验证这个缓存时候是没有过期的，如果没有过期就直接返回给客户端，如果过期了就要从新和服务器进行验证，如果没有变化更新过期时间，如果有变化就从新从服务器获取在进行缓存，最后返回到客户端。</p>
-<h3><span id="控制缓存的head">控制缓存的HEAD</span></h3>
-<h4><span id="expires">Expires</span></h4>
-<p>这个数HTTP Response Header中的首部，主要表达的意思就是文档在这个日期之前是没有过期的，都是可以使用的。</p>
+<h3><span id="控制缓存的head">控制缓存的HEAD</span></h3><h4><span id="expires">Expires</span></h4><p>这个数HTTP Response Header中的首部，主要表达的意思就是文档在这个日期之前是没有过期的，都是可以使用的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Expires: Wed, 28 Nov 2018 05:54:34 GMT</div></pre></td></tr></table></figure>
 <p>但是这个有一个大的问题，因为这个<code>Expires</code>是服务器给的时间，真正发请求是客户端，我把我电脑的日期修改成1980年，那么我本地缓存的文档很难过期了。因为这原因，<code>Expires</code>不经常用。</p>
-<h4><span id="cache-control-max-age">Cache-Control: max-age</span></h4>
-<p><code>Expires</code>在HTTTP / 1.0中就出现了，但是它存在时间的问题，在HTTTP / 1.1的HTTP Response Header中引入了新的首部，<code>Cache-Control: max-ag=100</code>，这个首部后会添加一个时间，这个时间的意思是这个相应之后的100秒内，都会返回缓存文档，在100之后会从新验证是否有变化。</p>
+<h4><span id="cache-control-max-age">Cache-Control: max-age</span></h4><p> <code>Expires</code>在HTTTP / 1.0中就出现了，但是它存在时间的问题，在HTTTP / 1.1的HTTP Response Header中引入了新的首部，<code>Cache-Control: max-ag=100</code>，这个首部后会添加一个时间，这个时间的意思是这个相应之后的100秒内，都会返回缓存文档，在100之后会从新验证是否有变化。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cache-Control: max-age=31536000</div></pre></td></tr></table></figure>
 <p>那么问题来了，我在相应头中都上面的两个过期时间都设置了，那个起作用呢？</p>
 <p>在HTTP /1.1中<code>Cache-Control: max-age</code>会覆盖<code>Expires</code>。</p>
 <p>在<strong>验证缓存过期</strong>的那个图中我们发现，如一个缓存过期了，会去服务器验证，这个缓存是否有变化，如没有变化我们将告诉客户端，你修改一些过期时间<code>Cache-Control: max-age</code>，继续用。我们怎么去验证这这个文档是否发生了变化呢？</p>
-<h4><span id="if-modified-since-和-last-modified">If-Modified-Since 和 Last-Modified</span></h4>
-<p><code>Last-Modified</code>是一个响应首部，意思是服务器文档最后修改的日期。</p>
+<h4><span id="if-modified-since-和-last-modified">If-Modified-Since 和 Last-Modified</span></h4><p><code>Last-Modified</code>是一个响应首部，意思是服务器文档最后修改的日期。</p>
 <p><code>If-Modified-Since</code>是一个请求首部，它的意思是这时间和服务器的文档最后修改时间是否一样，如果一样返回<code>304(Not Modified)</code>，如果不同就从新返回文档，并且状态是<code>200</code>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Last-Modified: Fri, 12 May 2017 20:45:00 GMT</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">GET /file</div><div class="line">If-Modified-Since: Fri, 12 May 2017 20:45:00 GMT</div></pre></td></tr></table></figure>
 <p>他们两个经常配合着使用，怎么用呢？那就很简单了，我现在发现这个文档过期了，我需要和服务器验证这文档当前时候还能用，我就拿上次服务器响应<code>Last-Modified</code>这首部的时间，比如是这个Fri, 12 May 2017 20:45:00 GMT，放到<code>If-Modified-Since</code>之后，也会是是发送这个请求If-Modified-Since: Fri, 12 May 2017 20:45:00 GMT，服务器判断这个文档的最后的修改时间等于<code>If-Modified-Since</code>首部给我的时间，我就给你返回<code>200</code>，并且告诉客户端<code>Cache-Control: max-age</code>新的过期时间。</p>
 <p>上面有一个很致命的问题，我们判断是文档的最后修改时间，当我打开一个文档的时候，什么都没有做，然后又保存了，这个时候最后修改时间变化了，而文档内容没发生变化，为了解决这个问题我们引入了新的头部。</p>
-<h4><span id="etag-和if-none-match">Etag 和If-None-Match</span></h4>
-<p><code>Etag</code>是一个响应首部，可以认为是文档生成的一个指纹，可以这样认为。只有文档内容发生变化的时候指纹才发生变化。</p>
+<h4><span id="etag-和if-none-match">Etag 和If-None-Match</span></h4><p><code>Etag</code>是一个响应首部，可以认为是文档生成的一个指纹，可以这样认为。只有文档内容发生变化的时候指纹才发生变化。</p>
 <p><code>If-None-Match</code>是一个请求首部，后面是<code>Etag</code>首部的指纹。</p>
 <p>那么和上面<strong>If-Modified-Since 和 Last-Modified</strong>是一样的我用一张图说明一下。</p>
-<p><img src="/2018/11/27/HTTP缓存/HTTP%E7%BC%93%E5%AD%98%5Ctag.png" alt=""></p>
+<p><img src="/2018/11/27/HTTP缓存/tag.png" alt=""></p>
 <p>如果请求的tag和服务器的相同就返回<code>304</code>。</p>
 <p>截止到这里，我们知道怎么和服务器验证这个文档是否过期，但是我不想用缓存怎么处理？下面需要学习的新的首部了。</p>
-<h4><span id="cache-control-no-store">Cache-Control: no-store</span></h4>
-<p><code>Cache-Control: no-store</code>是一个响应首部，它的意思就是我们不想用任何缓存。</p>
-<h4><span id="cache-control-no-cache">cache-control: no-cache</span></h4>
-<p><code>Cache-Control: no-cache</code>是一个响应首部，这首部的意思可不是不用缓存，这个首部理解起来稍微麻烦一点点。</p>
+<h4><span id="cache-control-no-store">Cache-Control: no-store</span></h4><p><code>Cache-Control: no-store</code>是一个响应首部，它的意思就是我们不想用任何缓存。</p>
+<h4><span id="cache-control-no-cache">cache-control: no-cache</span></h4><p><code>Cache-Control: no-cache</code>是一个响应首部，这首部的意思可不是不用缓存，这个首部理解起来稍微麻烦一点点。</p>
 <p><code>Cache-Control: no-cache</code> 很类似 <code>Cache-Control: max-age=0</code>，这个是什么意思呢？我们详细解释一下。no-cache是缓存数据，而且max-age是0。</p>
 <p>举个例子，现在HTTP响应中设置了<code>no-cache</code>，客户端会这个文档存储在本地，下次客户端请求的时候，直接用<code>If-Not-Modified</code>去后台验证，如果返回发现没有变化，服务端直接返回<code>304</code>，发生变化在更新。这样能做到节省流量的目的。</p>
 <p>但是<code>no-store</code>就不一样了，这个首部根本就不管有没有本地缓存，我每次都从新从服务器请求。</p>

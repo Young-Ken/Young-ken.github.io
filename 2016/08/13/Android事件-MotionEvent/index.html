@@ -140,6 +140,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -148,13 +155,6 @@
                         
                         <li>
                             <a href="/categories/">categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -217,15 +217,12 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="motionevent">MotionEvent</span></h2>
-<p>当你的手指按到屏幕的时候，这个时候就产生了一个事件，这个事件的属性封装在MotionEvent，包括事件的时间，事件的类型等等。</p>
-<h3><span id="手指的个数">手指的个数</span></h3>
-<ul>
+                <h2><span id="motionevent">MotionEvent</span></h2><p>当你的手指按到屏幕的时候，这个时候就产生了一个事件，这个事件的属性封装在MotionEvent，包括事件的时间，事件的类型等等。</p>
+<h3><span id="手指的个数">手指的个数</span></h3><ul>
 <li><strong>getPointerCount()</strong> 当前事件发生的时候有屏幕上有几个手指，这个数是大于等于1的。</li>
-<li><strong>getActionIndex()</strong> 这个方法非常有意思，这个是当前手指的索引。现在我们有一个手指按下，这个索引是0，当再有一个手指按下，这个索引是1，当再有一个手按下的时候这个索引是2，现在我们有三个手指按在屏幕上了。现在我们抬起第一个按下的手指，触发事件的索引是0，当我们再抬起第3个手指的的时候这个触发事件的索引是1，这个时候我们就明白了，总结一下上面的这段话。其实**getActionIndex()**就是一个数组。</li>
+<li><strong>getActionIndex()</strong> 这个方法非常有意思，这个是当前手指的索引。现在我们有一个手指按下，这个索引是0，当再有一个手指按下，这个索引是1，当再有一个手按下的时候这个索引是2，现在我们有三个手指按在屏幕上了。现在我们抬起第一个按下的手指，触发事件的索引是0，当我们再抬起第3个手指的的时候这个触发事件的索引是1，这个时候我们就明白了，总结一下上面的这段话。其实<strong>getActionIndex()</strong>就是一个数组。</li>
 </ul>
-<h3><span id="事件类型">事件类型</span></h3>
-<p>Android把事件分成不同情况，当手指按到屏幕上会触发一个<strong>ACTION_DOWN</strong>类型的事件。</p>
+<h3><span id="事件类型">事件类型</span></h3><p>Android把事件分成不同情况，当手指按到屏幕上会触发一个<strong>ACTION_DOWN</strong>类型的事件。</p>
 <ul>
 <li><strong>ACTION_DOWN</strong> 当第一个手指按下的时候回触发这个事件。</li>
 <li><strong>ACTION_MOVE</strong> 当第个手指按下，再移动就会触发移动事件。</li>
@@ -234,13 +231,11 @@
 <li><strong>ACTION_POINTER_UP</strong> 当屏幕手指数大于1，手指抬起的时候触发。</li>
 <li><strong>ACTION_CANCEL</strong> 取消事件</li>
 </ul>
-<h4><span id="getaction和getactionmasked的区别">getAction()和getActionMasked()的区别</span></h4>
-<p>先看看源代码</p>
+<h4><span id="getaction和getactionmasked的区别">getAction()和getActionMasked()的区别</span></h4><p>先看看源代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> ACTION_MASK             = <span class="number">0xff</span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAction</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="keyword">return</span> nativeGetAction(mNativePtr);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getActionMasked</span><span class="params">()</span> </span>&#123;</div><div class="line">   <span class="keyword">return</span> nativeGetAction(mNativePtr) &amp; ACTION_MASK;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>事件类型是0x00到0xff。<strong>ACTION_DOWN</strong>是0x00，<strong>ACTION_MOVE</strong>是0x01。这是一个手指，大家都知道Android是支持多个手指同时触发发的。那么多个手指怎么办呢，第一个手指按下是0x0000，第二个手指按下时0x0100。0x00ff到0xffff表示的是当前第几个手指。</p>
-<p>要想得到那个手指当前的事件可有用**getActionIndex()<strong>和</strong>getActionMasked()**相结合。</p>
-<h3><span id="当前的坐标位置">当前的坐标位置</span></h3>
-<ul>
+<p>要想得到那个手指当前的事件可有用<strong>getActionIndex()</strong>和<strong>getActionMasked()</strong>相结合。</p>
+<h3><span id="当前的坐标位置">当前的坐标位置</span></h3><ul>
 <li><strong>getRawY(),getRawX()</strong> 相对于屏幕的坐标。</li>
 <li><strong>getX(),getY()</strong> 相对于控件的坐标。</li>
 </ul>
